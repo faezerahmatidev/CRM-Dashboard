@@ -7,6 +7,7 @@ import { DashboardLayout } from './dashboard/dashboard-layout/dashboard-layout';
 import { DashSales } from './dashboard/sales/sales';
 import { DashOverview } from './dashboard/overview/overview';
 import { DashOrders } from './dashboard/orders/orders';
+import { DashEmpty } from './dashboard/empty/empty';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'signin' },
@@ -21,6 +22,7 @@ export const routes: Routes = [
       { path: '', pathMatch: 'full', component: DashSales },
       { path: 'overview', component: DashOverview },
       { path: 'orders', component: DashOrders },
+      { path: 'messages', component: DashEmpty },
     ],
   },
   { path: '**', redirectTo: 'signin' },
