@@ -37,3 +37,170 @@ body {
 button {
   font-family: inherit;
 }
+
+/* Shared auth form (matches Figma Login&Register underline fields) */
+.auth-title {
+  font-size: 27px;
+  line-height: 1.3;
+  font-weight: 900;
+  margin: 0 0 8px;
+  letter-spacing: -0.2px;
+}
+
+.auth-sub {
+  font-size: 11.5px;
+  color: var(--primary-grey);
+  margin: 0 0 44px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 26px;
+}
+
+.field label {
+  display: block;
+  font-size: 11px;
+  color: var(--primary-grey);
+  margin-bottom: 7px;
+}
+
+.field-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-bottom: 1.5px solid var(--outline);
+  padding-bottom: 9px;
+  transition: border-color 0.2s;
+}
+
+.field-control:focus-within {
+  border-color: var(--primary);
+}
+
+.field-control input,
+.field-control select {
+  flex: 1;
+  border: 0;
+  outline: none;
+  background: transparent;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--primary-dark);
+  font-family: inherit;
+  padding: 0;
+  appearance: none;
+}
+
+.field-control input::placeholder {
+  color: var(--primary-grey);
+  font-weight: 400;
+}
+
+.field-control select:invalid {
+  color: var(--primary-grey);
+  font-weight: 400;
+}
+
+.field-icon {
+  width: 15px;
+  height: 15px;
+  flex: 0 0 15px;
+  stroke: var(--primary-grey);
+  fill: none;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.btn-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+}
+
+.btn {
+  height: 44px;
+  border: 0;
+  border-radius: var(--radius-btn);
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  flex: 1;
+  transition: background 0.2s, transform 0.15s;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn:active {
+  transform: scale(0.99);
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+}
+
+.btn-rest {
+  background: var(--btn-rest-bg);
+  color: var(--primary);
+}
+
+.btn-rest:hover {
+  background: #e0e9fd;
+}
+
+.btn-full {
+  width: 100%;
+  flex: none;
+}
+
+.check-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.radio-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 1.5px solid var(--primary);
+  display: inline-grid;
+  place-items: center;
+  flex: 0 0 16px;
+}
+
+.radio-dot::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--primary);
+}
+
+.link-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.link {
+  font-size: 11.5px;
+  color: var(--primary);
+  text-decoration: none;
+  font-weight: 400;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
