@@ -101,9 +101,10 @@
 }
 
 .donut {
-  width: 190px;
-  flex: 0 0 190px;
-  height: auto;
+  height: 100%;
+  width: auto;
+  max-width: 46%;
+  flex: none;
   font-family: inherit;
 }
 
@@ -174,5 +175,11 @@
 @media (max-width: 640px) {
   .donut-wrap {
     flex-direction: column;
+  }
+
+  .donut {
+    height: auto;
+    width: min(220px, 80%);
+    max-width: none;
   }
 }
