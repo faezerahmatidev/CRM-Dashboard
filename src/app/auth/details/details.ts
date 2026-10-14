@@ -13,6 +13,6 @@ export class Details {
   constructor(private router: Router) {}
 
   onSubmit(): void {
-    this.router.navigate(['/signin']);
+    this.router.navigate(['/finish']);
   }
 }
