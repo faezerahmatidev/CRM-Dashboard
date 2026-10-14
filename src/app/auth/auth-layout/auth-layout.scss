@@ -39,49 +39,18 @@
   min-width: 0;
   background: #2e5fe9;
   overflow: hidden;
-  position: relative;
+  display: grid;
+  place-items: center;
+  padding: 48px;
 }
 
-.auth-side::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background: rgb(46 95 233 / 0.55);
-  pointer-events: none;
-}
-
-.auth-side-fg {
-  position: relative;
-  z-index: 2;
+.auth-side-art {
   width: 100%;
   height: 100%;
+  max-width: 560px;
+  max-height: 100%;
   object-fit: contain;
-  object-position: center;
   display: block;
-}
-
-.auth-side-bg {
-  display: block;
-  position: absolute;
-  z-index: 0;
-  inset: -32px;
-  width: calc(100% + 64px);
-  height: calc(100% + 64px);
-  object-fit: cover;
-  object-position: center;
-  filter: blur(36px);
-}
-
-/* Only fill-crop when the viewport is tall enough that almost nothing gets cut */
-@media (max-aspect-ratio: 18/10) {
-  .auth-side-bg {
-    display: none;
-  }
-
-  .auth-side-fg {
-    object-fit: cover;
-  }
 }
 
 /* Mid widths: tightening only (artwork fit is handled by aspect-ratio rules above) */
