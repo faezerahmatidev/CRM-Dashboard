@@ -6,6 +6,7 @@ import { Details } from './auth/details/details';
 import { DashboardLayout } from './dashboard/dashboard-layout/dashboard-layout';
 import { DashSales } from './dashboard/sales/sales';
 import { DashOverview } from './dashboard/overview/overview';
+import { DashOrders } from './dashboard/orders/orders';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'signin' },
@@ -19,6 +20,7 @@ export const routes: Routes = [
     children: [
       { path: '', pathMatch: 'full', component: DashSales },
       { path: 'overview', component: DashOverview },
+      { path: 'orders', component: DashOrders },
     ],
   },
   { path: '**', redirectTo: 'signin' },
