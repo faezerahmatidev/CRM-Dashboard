@@ -20,11 +20,11 @@ import { Component } from '@angular/core';
     </div>
   `,
   styles: [`
-    .social { margin-top: 40px; text-align: center; }
-    .social p { font-size: 11px; color: var(--primary-grey); margin: 0 0 14px; }
+    .social { margin-top: 48px; text-align: center; }
+    .social p { font-size: 12.5px; color: var(--primary-grey); margin: 0 0 14px; }
     .social-row { display: flex; gap: 10px; justify-content: center; }
     .social-row button {
-      width: 38px; height: 38px;
+      width: 44px; height: 44px;
       border: 1px solid var(--outline);
       border-radius: 7px;
       background: #fff;
@@ -33,11 +33,11 @@ import { Component } from '@angular/core';
       transition: border-color .2s, transform .15s;
     }
     .social-row button:hover { border-color: var(--primary); transform: translateY(-1px); }
-    .social-row svg { width: 15px; height: 15px; fill: var(--primary-grey); }
+    .social-row svg { width: 17px; height: 17px; fill: var(--primary-grey); }
     @media (max-height: 820px) {
       .social { margin-top: 24px; }
       .social p { margin-bottom: 10px; }
-      .social-row button { width: 34px; height: 34px; }
+      .social-row button { width: 38px; height: 38px; }
     }
   `],
 })
