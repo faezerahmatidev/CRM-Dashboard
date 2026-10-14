@@ -7,7 +7,6 @@ import { Component, Input } from '@angular/core';
   styleUrl: './auth-layout.scss',
 })
 export class AuthLayout {
-  @Input() brand = 'Sign Up';
   @Input() illustration = 'assets/auth-signup.png';
   @Input() illustrationAlt = 'CRM illustration';
 }
