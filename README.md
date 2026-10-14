@@ -23,7 +23,11 @@ Rail icons are placeholders for future Figma sections (no navigation yet).
 In-page behavior: Day/Week/Month tabs filter their chart or table.
 Card shortcuts: KPI cards jump to Sales (`/dashboard`) or Orders
 (`/dashboard/orders`); Latest sales rows and `View all` open
-`/dashboard/orders`. Navigation inside the section replaces the history
+`/dashboard/orders`. From the home view: card titles
+(Your Sales, Income Breakdown, Income Details) open
+`/dashboard/overview`; invoice event rows open `/dashboard/orders`;
+client and meeting event rows open `/dashboard/messages`.
+Navigation inside the section replaces the history
 entry, so browser Back exits the section instead of stepping views.
 
 Design tokens from `figma/UI-kit` (Primary `#5E81F4`, Lato font).

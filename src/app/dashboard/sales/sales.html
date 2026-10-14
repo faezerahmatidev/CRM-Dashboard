@@ -9,7 +9,7 @@
     <div class="cards-2">
       <section class="dash-card">
         <div class="dash-card-head">
-          <h2 class="dash-card-title">Your Sales</h2>
+          <h2 class="dash-card-title"><a class="card-link" routerLink="/dashboard/overview" replaceUrl title="Open Overview">Your Sales</a></h2>
           <div class="head-actions">
             <div class="tabs">
               @for (t of tabs; track t) {
@@ -46,7 +46,7 @@
         <div class="events-head"><span>Event</span><span>Details</span></div>
         <ul class="event-rows">
           @for (e of events; track e.title) {
-            <li>
+            <li class="clickable" [routerLink]="e.link" replaceUrl [title]="e.title">
               <span class="soft-icon">
                 @switch (e.icon) {
                   @case ('invoice') {
@@ -71,7 +71,7 @@
     <div class="cards-2">
       <section class="dash-card">
         <div class="dash-card-head">
-          <h2 class="dash-card-title">Income Breakdown</h2>
+          <h2 class="dash-card-title"><a class="card-link" routerLink="/dashboard/overview" replaceUrl title="Open Overview">Income Breakdown</a></h2>
           <div class="head-actions">
             <div class="tabs">
               @for (t of tabs; track t) {
@@ -104,7 +104,7 @@
 
       <section class="dash-card">
         <div class="dash-card-head">
-          <h2 class="dash-card-title">Income Details</h2>
+          <h2 class="dash-card-title"><a class="card-link" routerLink="/dashboard/overview" replaceUrl title="Open Overview">Income Details</a></h2>
           <div class="head-actions">
             <div class="tabs">
               @for (t of tabs; track t) {

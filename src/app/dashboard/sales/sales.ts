@@ -9,6 +9,7 @@ interface DashEvent {
   title: string;
   sub: string;
   value: string;
+  link: string;
 }
 
 interface ChartSet {
@@ -35,10 +36,10 @@ interface DonutSet {
 })
 export class DashSales {
   events: DashEvent[] = [
-    { icon: 'invoice', title: 'Invoice #AA-04-19-1890678', sub: 'New Madleton LLC.', value: '$118.00' },
-    { icon: 'client', title: 'Client Bernard Stanley', sub: 'bernard.stanley@gmail.com', value: '$208.00' },
-    { icon: 'meeting', title: 'Meeting with the client', sub: '24 Vandervort Springs.', value: '29 Oct 2019' },
-    { icon: 'invoice', title: 'Invoice #AA-04-19-1890243', sub: 'Tyrique mouth LLC.', value: '$578.00' },
+    { icon: 'invoice', title: 'Invoice #AA-04-19-1890678', sub: 'New Madleton LLC.', value: '$118.00', link: '/dashboard/orders' },
+    { icon: 'client', title: 'Client Bernard Stanley', sub: 'bernard.stanley@gmail.com', value: '$208.00', link: '/dashboard/messages' },
+    { icon: 'meeting', title: 'Meeting with the client', sub: '24 Vandervort Springs.', value: '29 Oct 2019', link: '/dashboard/messages' },
+    { icon: 'invoice', title: 'Invoice #AA-04-19-1890243', sub: 'Tyrique mouth LLC.', value: '$578.00', link: '/dashboard/orders' },
   ];
 
   tabs = ['Day', 'Week', 'Month'];
