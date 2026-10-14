@@ -72,12 +72,14 @@
   stroke-linejoin: round;
 }
 
-.rail-nav a.active {
+.rail-nav a.active,
+.rail-nav button.active {
   color: var(--primary);
   background: var(--btn-rest-bg);
 }
 
-.rail-nav a.active::before {
+.rail-nav a.active::before,
+.rail-nav button.active::before {
   content: '';
   position: absolute;
   left: 0;

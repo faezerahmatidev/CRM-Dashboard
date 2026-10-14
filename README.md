@@ -11,14 +11,14 @@ CRM dashboard — implementation from Figma, step by step, with **Angular** stan
 
 ## Dashboard (from `figma/Dashboard`)
 
-One **Dashboard section** (gauge rail icon, highlighted on every view below):
+One **Dashboard section** (gauge rail icon, always highlighted):
 
 - `/dashboard` — Section home: Sales, Latest Events, Income Breakdown, Income Details
-- `/dashboard/overview` — Business overview: KPIs, Orders chart, Planned Income, Latest sales (rail: briefcase)
-- `/dashboard/orders` — Fulfillment: Orders table, Invoices table (rail: clipboard)
-- `/dashboard/messages` — Messages side panel + empty-business state (rail: chat, green dot = unread)
+- `/dashboard/overview` — Business overview: KPIs, Orders chart, Planned Income, Latest sales
+- `/dashboard/orders` — Fulfillment: Orders table, Invoices table
+- `/dashboard/messages` — Messages side panel + empty-business state
 
-Remaining rail icons are placeholders for future sections.
+Rail icons are placeholders for future Figma sections (no navigation yet).
 
 In-page behavior: Day/Week/Month tabs filter their chart or table.
 Card shortcuts: KPI cards jump to Sales (`/dashboard`) or Orders
