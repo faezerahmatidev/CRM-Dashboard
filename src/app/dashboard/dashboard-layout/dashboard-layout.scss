@@ -1,0 +1,168 @@
+.dash {
+  display: flex;
+  height: 100vh;
+  height: 100dvh;
+  background: var(--bg-light);
+  overflow: hidden;
+}
+
+.rail {
+  width: 68px;
+  flex: 0 0 68px;
+  background: var(--bg-white);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 14px 0 16px;
+  gap: 8px;
+}
+
+.rail-logo {
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 900;
+  font-size: 15px;
+  display: grid;
+  place-items: center;
+  text-decoration: none;
+  margin-bottom: 14px;
+}
+
+.rail-nav {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+}
+
+.rail-nav a,
+.rail-nav button {
+  position: relative;
+  width: 100%;
+  height: 44px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  color: var(--primary-grey);
+  text-decoration: none;
+}
+
+.rail-nav a svg,
+.rail-nav button svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.rail-nav a.active {
+  color: var(--primary);
+  background: var(--btn-rest-bg);
+}
+
+.rail-nav a.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 10px;
+  bottom: 10px;
+  width: 3px;
+  border-radius: 0 3px 3px 0;
+  background: var(--primary);
+}
+
+.rail-nav button:hover {
+  color: var(--primary-dark);
+}
+
+.rail-avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #5e81f4, #9698d6);
+  color: #fff;
+  font-size: 12px;
+  font-weight: 900;
+  display: grid;
+  place-items: center;
+}
+
+.dash-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px 10px;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.topbar-left h1 {
+  font-size: 15px;
+  font-weight: 900;
+  margin: 0;
+}
+
+.topbar-right {
+  display: flex;
+  gap: 10px;
+}
+
+.icon-btn {
+  width: 34px;
+  height: 34px;
+  border: 0;
+  border-radius: 9px;
+  background: var(--bg-white);
+  color: var(--primary-grey);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.icon-btn svg {
+  width: 17px;
+  height: 17px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.icon-btn:hover {
+  color: var(--primary);
+}
+
+.dash-content {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 4px 24px 24px;
+}
+
+@media (max-width: 900px) {
+  .rail {
+    display: none;
+  }
+}
