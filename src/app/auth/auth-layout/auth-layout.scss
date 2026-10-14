@@ -42,11 +42,13 @@
   overflow: hidden;
   display: grid;
   place-items: center;
+  padding-top: 4%;
 }
 
 .auth-side img {
-  width: 100%;
-  height: 100%;
+  height: 84%;
+  width: auto;
+  max-width: 86%;
   object-fit: contain;
   display: block;
 }
