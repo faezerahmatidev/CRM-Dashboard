@@ -1,17 +1,15 @@
 .auth-page {
   height: 100vh;
   height: 100dvh;
-  padding: 14px;
-  background: var(--bg-page);
+  background: var(--bg-white);
   overflow: hidden;
 }
 
 .auth-shell {
   display: flex;
-  height: calc(100vh - 28px);
-  height: calc(100dvh - 28px);
+  height: 100vh;
+  height: 100dvh;
   background: var(--bg-white);
-  border-radius: var(--radius-card);
   overflow: hidden;
 }
 
@@ -24,24 +22,6 @@
   display: flex;
   flex-direction: column;
   overflow-y: auto;
-}
-
-.brand {
-  position: absolute;
-  top: 18px;
-  left: 24px;
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  font-size: 12.5px;
-  font-weight: 700;
-  color: var(--brand-purple);
-}
-
-.brand-mark {
-  width: 13px;
-  height: 13px;
-  fill: var(--brand-purple);
 }
 
 .auth-content {
@@ -57,15 +37,17 @@
 
 .auth-side {
   flex: 1;
-  background: var(--blue-panel);
+  min-width: 0;
+  background: linear-gradient(to right, #2a5ce8, #3161ea);
   overflow: hidden;
+  display: grid;
+  place-items: center;
 }
 
 .auth-side img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center;
+  object-fit: contain;
   display: block;
 }
 
@@ -92,7 +74,7 @@
 
   .auth-shell {
     height: auto;
-    min-height: calc(100dvh - 28px);
+    min-height: 100dvh;
   }
 
   .auth-main {
