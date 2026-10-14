@@ -15,9 +15,8 @@
 
 .auth-main {
   position: relative;
-  flex: 0 0 46%;
-  max-width: 640px;
-  min-width: 380px;
+  flex: 0 0 65%;
+  min-width: 0;
   background: var(--bg-white);
   display: flex;
   flex-direction: column;
@@ -36,7 +35,7 @@
 }
 
 .auth-side {
-  flex: 1;
+  flex: 0 0 35%;
   min-width: 0;
   background: linear-gradient(to right, #2a5ce8, #3161ea);
   overflow: hidden;
