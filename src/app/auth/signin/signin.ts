@@ -14,6 +14,6 @@ export class Signin {
   constructor(private router: Router) {}
 
   onSubmit(): void {
-    this.router.navigate(['/details']);
+    this.router.navigate(['/dashboard']);
   }
 }

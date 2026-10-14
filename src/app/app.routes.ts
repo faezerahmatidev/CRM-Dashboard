@@ -3,6 +3,8 @@ import { Signup } from './auth/signup/signup';
 import { Signin } from './auth/signin/signin';
 import { Recover } from './auth/recover/recover';
 import { Details } from './auth/details/details';
+import { DashboardLayout } from './dashboard/dashboard-layout/dashboard-layout';
+import { DashSales } from './dashboard/sales/sales';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'signin' },
@@ -10,5 +12,10 @@ export const routes: Routes = [
   { path: 'signin', component: Signin },
   { path: 'recover', component: Recover },
   { path: 'details', component: Details },
+  {
+    path: 'dashboard',
+    component: DashboardLayout,
+    children: [{ path: '', pathMatch: 'full', component: DashSales }],
+  },
   { path: '**', redirectTo: 'signin' },
 ];
