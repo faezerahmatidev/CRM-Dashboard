@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "crm-scaffold": {
+    "crm-dashboard": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -61,10 +61,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "crm-scaffold:build:production"
+              "buildTarget": "crm-dashboard:build:production"
             },
             "development": {
-              "buildTarget": "crm-scaffold:build:development"
+              "buildTarget": "crm-dashboard:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -96,3 +96,4 @@
     }
   }
 }
+
