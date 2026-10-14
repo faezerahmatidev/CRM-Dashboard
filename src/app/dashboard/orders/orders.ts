@@ -61,4 +61,24 @@ export class DashOrders {
     { number: 'Invoice #AA-04-19-1890123', client: 'Paxtonschester LLC.', amount: '$698.00', status: 'Processing', badge: 'badge-yellow' },
     { number: 'Invoice #AA-04-19-1890243', client: 'Tyriquemouth LLC.', amount: '$595.00', status: 'Paid', badge: 'badge-green' },
   ];
+
+  tabs = ['Day', 'Week', 'Month'];
+
+  orderTab = 'Day';
+  orderTotals: Record<string, string> = { Day: '480', Week: '1,240', Month: '2,480' };
+
+  invTab = 'Day';
+  invTotals: Record<string, string> = { Day: '320', Week: '860', Month: '1,520' };
+
+  visibleOrders() {
+    if (this.orderTab === 'Day') return this.orders.slice(0, 3);
+    if (this.orderTab === 'Week') return this.orders.slice(0, 5);
+    return this.orders;
+  }
+
+  visibleInvoices() {
+    if (this.invTab === 'Day') return this.invoices.slice(0, 3);
+    if (this.invTab === 'Week') return this.invoices.slice(0, 5);
+    return this.invoices;
+  }
 }

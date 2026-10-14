@@ -11,7 +11,11 @@
         <div class="dash-card-head">
           <h2 class="dash-card-title">Your Sales</h2>
           <div class="head-actions">
-            <div class="tabs"><button class="active">Day</button><button>Week</button><button>Month</button></div>
+            <div class="tabs">
+              @for (t of tabs; track t) {
+                <button [class.active]="salesTab === t" (click)="salesTab = t">{{ t }}</button>
+              }
+            </div>
             <button class="icon-btn sm" type="button" aria-label="Calendar">
               <svg viewBox="0 0 24 24"><rect x="4.5" y="6" width="15" height="13" rx="2"/><path d="M4.5 10h15M8.5 3.5V7M15.5 3.5V7"/></svg>
             </button>
@@ -20,13 +24,13 @@
         <p class="big-num">$142,000</p>
         <p class="big-sub">Total income</p>
         <svg class="chart" viewBox="0 0 560 230" role="img" aria-label="Sales from January to July">
-          <path d="M0 140 C 40 120, 60 178, 110 172 C 160 166, 168 66, 222 60 C 276 54, 286 124, 336 134 C 386 144, 404 112, 452 118 C 496 123, 522 84, 560 90"
+          <path [attr.d]="salesSets[salesTab].d"
             fill="none" stroke="#5e81f4" stroke-width="2.5" stroke-linecap="round" />
-          <circle cx="222" cy="60" r="5" fill="#5e81f4" stroke="#fff" stroke-width="2.5" />
+          <circle [attr.cx]="salesSets[salesTab].mx" [attr.cy]="salesSets[salesTab].my" r="5" fill="#5e81f4" stroke="#fff" stroke-width="2.5" />
           <g>
             <rect x="238" y="34" width="86" height="44" rx="6" fill="#fff" stroke="#f0f0f3" />
-            <text x="281" y="52" text-anchor="middle" font-size="10" fill="#8181a5">March</text>
-            <text x="281" y="68" text-anchor="middle" font-size="12" font-weight="bold" fill="#1c1d21">$48,200</text>
+            <text x="281" y="52" text-anchor="middle" font-size="10" fill="#8181a5">{{ salesSets[salesTab].label }}</text>
+            <text x="281" y="68" text-anchor="middle" font-size="12" font-weight="bold" fill="#1c1d21">{{ salesSets[salesTab].value }}</text>
           </g>
           @for (m of ['Jan','Feb','Mar','Apr','May','Jun','Jul']; track m) {
             <text [attr.x]="30 + $index * 83" y="214" text-anchor="middle" font-size="10" fill="#9a9ab0">{{ m }}</text>
@@ -37,7 +41,7 @@
       <section class="dash-card">
         <div class="dash-card-head">
           <h2 class="dash-card-title">Latest Events</h2>
-          <button class="mini-btn" type="button">View all</button>
+          <a class="mini-btn" routerLink="/dashboard/orders" replaceUrl>View all</a>
         </div>
         <div class="events-head"><span>Event</span><span>Details</span></div>
         <ul class="event-rows">
@@ -69,7 +73,11 @@
         <div class="dash-card-head">
           <h2 class="dash-card-title">Income Breakdown</h2>
           <div class="head-actions">
-            <div class="tabs"><button class="active">Day</button><button>Week</button><button>Month</button></div>
+            <div class="tabs">
+              @for (t of tabs; track t) {
+                <button [class.active]="donutTab === t" (click)="donutTab = t">{{ t }}</button>
+              }
+            </div>
             <button class="icon-btn sm" type="button" aria-label="Calendar">
               <svg viewBox="0 0 24 24"><rect x="4.5" y="6" width="15" height="13" rx="2"/><path d="M4.5 10h15M8.5 3.5V7M15.5 3.5V7"/></svg>
             </button>
@@ -78,19 +86,18 @@
         <div class="donut-wrap">
           <svg class="donut" viewBox="0 0 200 200" role="img" aria-label="Income breakdown donut chart">
             <g transform="rotate(-90 100 100)" fill="none" stroke-width="26">
-              <circle cx="100" cy="100" r="70" stroke="#f4be5e" stroke-dasharray="146.4 293.42" stroke-dashoffset="0" />
-              <circle cx="100" cy="100" r="70" stroke="#5e81f4" stroke-dasharray="123.1 316.72" stroke-dashoffset="-150.4" />
-              <circle cx="100" cy="100" r="70" stroke="#7ce7ac" stroke-dasharray="53.6 386.22" stroke-dashoffset="-277.5" />
-              <circle cx="100" cy="100" r="70" stroke="#ff808b" stroke-dasharray="100.7 339.12" stroke-dashoffset="-335.1" />
+              @for (s of donutSegs(donutSets[donutTab].values); track $index) {
+                <circle cx="100" cy="100" r="70" [attr.stroke]="donutColors[$index]"
+                  [attr.stroke-dasharray]="s.len + ' 439.823'" [attr.stroke-dashoffset]="s.off" />
+              }
             </g>
-            <text x="100" y="106" text-anchor="middle" font-size="22" font-weight="900" fill="#1c1d21">$85k</text>
-            <text x="148" y="72" font-size="10" font-weight="bold" fill="#5e81f4">14%</text>
+            <text x="100" y="106" text-anchor="middle" font-size="22" font-weight="900" fill="#1c1d21">{{ donutSets[donutTab].total }}</text>
+            <text x="148" y="72" font-size="10" font-weight="bold" fill="#5e81f4">{{ donutSets[donutTab].pct }}</text>
           </svg>
           <ul class="legend">
-            <li><i style="background:#5e81f4"></i><span>Marketing Channels</span><b>$22.0k</b></li>
-            <li><i style="background:#f4be5e"></i><span>Offline Channels</span><b>$18.6k</b></li>
-            <li><i style="background:#7ce7ac"></i><span>Direct Sales</span><b>$8.4k</b></li>
-            <li><i style="background:#ff808b"></i><span>Other Channels</span><b>$15.3k</b></li>
+            @for (n of donutNames; track n) {
+              <li><i [style.background]="legendColors[$index]"></i><span>{{ n }}</span><b>{{ donutSets[donutTab].legend[$index] }}</b></li>
+            }
           </ul>
         </div>
       </section>
@@ -99,7 +106,11 @@
         <div class="dash-card-head">
           <h2 class="dash-card-title">Income Details</h2>
           <div class="head-actions">
-            <div class="tabs"><button class="active">Day</button><button>Week</button><button>Month</button></div>
+            <div class="tabs">
+              @for (t of tabs; track t) {
+                <button [class.active]="incomeTab === t" (click)="incomeTab = t">{{ t }}</button>
+              }
+            </div>
             <button class="icon-btn sm" type="button" aria-label="Calendar">
               <svg viewBox="0 0 24 24"><rect x="4.5" y="6" width="15" height="13" rx="2"/><path d="M4.5 10h15M8.5 3.5V7M15.5 3.5V7"/></svg>
             </button>
@@ -108,19 +119,19 @@
         <p class="big-num">$142,000 <span class="trend">↗</span></p>
         <p class="big-sub">Total income</p>
         <svg class="chart" viewBox="0 0 560 190" role="img" aria-label="Income details chart">
-          <path d="M0 120 C 60 110, 90 60, 150 62 C 210 64, 230 110, 300 108 C 370 106, 400 60, 460 58 C 510 56, 530 80, 560 74"
+          <path [attr.d]="incomeSets[incomeTab].d"
             fill="none" stroke="#7ce7ac" stroke-width="2.5" stroke-linecap="round" />
-          <circle cx="300" cy="108" r="5" fill="#7ce7ac" stroke="#fff" stroke-width="2.5" />
+          <circle [attr.cx]="incomeSets[incomeTab].mx" [attr.cy]="incomeSets[incomeTab].my" r="5" fill="#7ce7ac" stroke="#fff" stroke-width="2.5" />
           <g>
             <rect x="316" y="82" width="86" height="44" rx="6" fill="#fff" stroke="#f0f0f3" />
-            <text x="359" y="100" text-anchor="middle" font-size="10" fill="#8181a5">March</text>
-            <text x="359" y="116" text-anchor="middle" font-size="12" font-weight="bold" fill="#1c1d21">$48,200</text>
+            <text x="359" y="100" text-anchor="middle" font-size="10" fill="#8181a5">{{ incomeSets[incomeTab].label }}</text>
+            <text x="359" y="116" text-anchor="middle" font-size="12" font-weight="bold" fill="#1c1d21">{{ incomeSets[incomeTab].value }}</text>
           </g>
         </svg>
         <div class="stats-3">
-          <div><b>$342,000</b><span>Total sales</span></div>
-          <div><b>$200,000</b><span>Spendings</span></div>
-          <div><b>$142,000</b><span>Income</span></div>
+          <div><b>{{ incomeStats[incomeTab][0] }}</b><span>Total sales</span></div>
+          <div><b>{{ incomeStats[incomeTab][1] }}</b><span>Spendings</span></div>
+          <div><b>{{ incomeStats[incomeTab][2] }}</b><span>Income</span></div>
         </div>
       </section>
     </div>

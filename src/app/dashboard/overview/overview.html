@@ -8,11 +8,11 @@
   <div class="dash-main">
     <div class="kpi-grid">
       @for (k of kpis; track k.label) {
-        <section class="dash-card kpi">
+        <a class="dash-card kpi" [routerLink]="k.link" replaceUrl>
           <div class="kpi-top"><span>{{ k.label }}</span><b>{{ k.value }}</b><span class="trend">↗</span></div>
           <p class="kpi-sub">{{ k.sub }}</p>
           <div class="progress"><i [style.width]="k.width" [style.background]="k.bar"></i></div>
-        </section>
+        </a>
       }
     </div>
 
@@ -21,22 +21,26 @@
         <div class="dash-card-head">
           <h2 class="dash-card-title">Orders</h2>
           <div class="head-actions">
-            <div class="tabs"><button class="active">Day</button><button>Week</button><button>Month</button></div>
+            <div class="tabs">
+              @for (t of tabs; track t) {
+                <button [class.active]="ordersTab === t" (click)="ordersTab = t">{{ t }}</button>
+              }
+            </div>
             <button class="icon-btn sm" type="button" aria-label="Calendar">
               <svg viewBox="0 0 24 24"><rect x="4.5" y="6" width="15" height="13" rx="2"/><path d="M4.5 10h15M8.5 3.5V7M15.5 3.5V7"/></svg>
             </button>
           </div>
         </div>
         <svg class="chart" viewBox="0 0 640 240" role="img" aria-label="Orders from January to December">
-          <path d="M0 150 C 30 145, 45 170, 75 168 C 105 166, 115 90, 150 88 C 185 86, 195 150, 230 148 C 265 146, 275 100, 310 104 C 345 108, 355 160, 390 158 C 425 156, 435 120, 470 122 C 505 124, 520 150, 555 146 C 590 142, 610 120, 640 124"
+          <path [attr.d]="ordersSets[ordersTab].blue"
             fill="none" stroke="#5e81f4" stroke-width="2.5" stroke-linecap="round" />
-          <path d="M0 120 C 40 118, 60 60, 100 62 C 140 64, 155 130, 195 132 C 235 134, 250 70, 290 66 C 330 62, 345 140, 385 142 C 425 144, 440 90, 480 92 C 520 94, 545 140, 585 138 C 610 137, 625 125, 640 128"
+          <path [attr.d]="ordersSets[ordersTab].green"
             fill="none" stroke="#7ce7ac" stroke-width="2.5" stroke-linecap="round" />
-          <circle cx="290" cy="66" r="5" fill="#7ce7ac" stroke="#fff" stroke-width="2.5" />
+          <circle [attr.cx]="ordersSets[ordersTab].mx" [attr.cy]="ordersSets[ordersTab].my" r="5" fill="#7ce7ac" stroke="#fff" stroke-width="2.5" />
           <g>
             <rect x="220" y="20" width="92" height="46" rx="6" fill="#fff" stroke="#f0f0f3" />
-            <text x="266" y="39" text-anchor="middle" font-size="10" fill="#8181a5">June 16</text>
-            <text x="266" y="55" text-anchor="middle" font-size="12" font-weight="bold" fill="#1c1d21">$48,200</text>
+            <text x="266" y="39" text-anchor="middle" font-size="10" fill="#8181a5">{{ ordersSets[ordersTab].label }}</text>
+            <text x="266" y="55" text-anchor="middle" font-size="12" font-weight="bold" fill="#1c1d21">{{ ordersSets[ordersTab].value }}</text>
           </g>
           @for (m of ['Jan','Feb','Mar','Apr','Jun','Jul','Aug','Sep','Oct','Nov','Dec']; track m) {
             <text [attr.x]="20 + $index * 60" y="224" text-anchor="middle" font-size="10" fill="#9a9ab0">{{ m }}</text>
@@ -81,7 +85,7 @@
           </thead>
           <tbody>
             @for (s of sales; track s.pid) {
-              <tr>
+              <tr class="clickable" routerLink="/dashboard/orders" replaceUrl title="View in Orders">
                 <td>
                   <span class="prod"><i [style.background]="s.color">{{ s.initial }}</i><span><b>{{ s.product }}</b><span class="sub">{{ s.pid }}</span></span></span>
                 </td>
