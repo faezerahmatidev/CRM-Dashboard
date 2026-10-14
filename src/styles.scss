@@ -1,1 +1,39 @@
-/* You can add global styles to this file, and also import other style files */
+/* Design tokens from figma/UI-kit */
+:root {
+  --primary: #5e81f4;
+  --primary-hover: #425eea;
+  --primary-dark: #1c1d21;
+  --primary-grey: #8181a5;
+  --muted: #9a9ab0;
+  --outline: #f0f0f3;
+  --bg-page: #efeff4;
+  --bg-light: #f5f5fa;
+  --bg-white: #ffffff;
+  --btn-rest-bg: #eef2fe;
+  --blue-panel: #3a5ff2;
+  --brand-purple: #6c47ff;
+  --radius-card: 14px;
+  --radius-btn: 7px;
+  --font-sans: 'Lato', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--bg-page);
+  color: var(--primary-dark);
+  -webkit-font-smoothing: antialiased;
+}
+
+button {
+  font-family: inherit;
+}
