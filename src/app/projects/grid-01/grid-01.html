@@ -9,7 +9,7 @@
     <section class="dash-card projects-card">
       <div class="projects-toolbar">
         <app-view-toggle mode="grid" (modeChange)="onViewChange($event)" />
-        <app-sort-control [value]="sortAsc ? 'A-Z' : 'Z-A'" (toggle)="sortAsc = !sortAsc" />
+        <app-sort-control [value]="sortAsc ? 'A-Z' : 'Z-A'" (toggled)="sortAsc = !sortAsc" />
       </div>
       <div class="plist-head">
         <span>Projects</span><span>Tasks <i>⇅</i></span><span>Due date <i>⇅</i></span><span>Members <i>⇅</i></span>

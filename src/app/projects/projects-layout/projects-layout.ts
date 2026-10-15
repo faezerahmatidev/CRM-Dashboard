@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
 import { AppShell } from '../../shared/app-shell/app-shell';
@@ -22,14 +22,12 @@ import { ProjectsStore } from '../projects-store';
   `,
 })
 export class ProjectsLayout implements OnInit {
+  private router = inject(Router);
+  private route = inject(ActivatedRoute);
+  protected store = inject(ProjectsStore);
+
   title = 'Projects';
   showBack = false;
-
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    protected store: ProjectsStore,
-  ) {}
 
   ngOnInit(): void {
     this.updateTitle();

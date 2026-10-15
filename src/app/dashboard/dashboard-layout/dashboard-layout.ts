@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
@@ -10,10 +10,9 @@ import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/rou
   styleUrl: './dashboard-layout.scss',
 })
 export class DashboardLayout {
-  constructor(
-    private location: Location,
-    private router: Router,
-  ) {}
+  private location = inject(Location);
+  private router = inject(Router);
+
 
   goBack(): void {
     if (window.history.length > 1) {

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { DashPage } from '../../shared/dash-page/dash-page';
 import { PanelHeader } from '../../shared/panel-header/panel-header';
@@ -21,14 +21,12 @@ import { ProjectsStore } from '../projects-store';
   styleUrl: './grid-01.scss',
 })
 export class ProjectsGrid01 {
+  private router = inject(Router);
+  private store = inject(ProjectsStore);
+
   messages = PROJECT_MESSAGES;
   sortAsc = true;
   page = 1;
-
-  constructor(
-    private router: Router,
-    private store: ProjectsStore,
-  ) {}
 
   sortedProjects(): Project[] {
     return [...this.store.projects()].sort((a, b) =>

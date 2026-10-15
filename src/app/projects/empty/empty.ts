@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { DashPage } from '../../shared/dash-page/dash-page';
 import { PanelHeader } from '../../shared/panel-header/panel-header';
@@ -15,9 +15,9 @@ import { PROJECT_MESSAGES } from '../projects-data';
   styleUrl: './empty.scss',
 })
 export class ProjectsEmpty {
-  messages = PROJECT_MESSAGES;
+  private router = inject(Router);
 
-  constructor(private router: Router) {}
+  messages = PROJECT_MESSAGES;
 
   onSetup(): void {
     this.router.navigate(['/projects/list-01']);

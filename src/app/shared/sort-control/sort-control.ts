@@ -5,7 +5,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   selector: 'app-sort-control',
   standalone: true,
   template: `
-    <button class="sort-btn" type="button" (click)="toggle.emit()">
+    <button class="sort-btn" type="button" (click)="toggled.emit()">
       <svg viewBox="0 0 24 24"><path d="M4 7h12M4 12h8M4 17h5" /><path d="m17 9 3 3 3-3M20 12v7" /></svg>
       <span>{{ prefix }} <b>{{ value }}</b></span>
       <svg viewBox="0 0 24 24"><path d="m6 9.5 6 6 6-6" /></svg>
@@ -26,5 +26,5 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 export class SortControl {
   @Input() prefix = 'SORT:';
   @Input() value = 'A-Z';
-  @Output() toggle = new EventEmitter<void>();
+  @Output() toggled = new EventEmitter<void>();
 }

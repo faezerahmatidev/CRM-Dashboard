@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, HostListener, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Output, inject } from '@angular/core';
 
 /** Dots button opening a small Edit/Delete popup (fixed-positioned, never clipped). */
 @Component({
@@ -59,13 +59,13 @@ import { Component, ElementRef, EventEmitter, HostListener, Output } from '@angu
   `],
 })
 export class DotsMenu {
+  private el = inject<ElementRef<HTMLElement>>(ElementRef);
+
   open = false;
   popX = 0;
   popY = 0;
   @Output() edit = new EventEmitter<void>();
   @Output() remove = new EventEmitter<void>();
-
-  constructor(private el: ElementRef<HTMLElement>) {}
 
   toggle(ev: MouseEvent): void {
     ev.stopPropagation();

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { DashWelcome } from '../widgets/welcome';
 import { MessagesList } from '../widgets/messages-list';
@@ -14,7 +14,8 @@ import { EmptyState } from '../../shared/empty-state/empty-state';
   styleUrl: './empty.scss',
 })
 export class DashEmpty {
-  constructor(private router: Router) {}
+  private router = inject(Router);
+
 
   onSetup(): void {
     this.router.navigate(['/details']);
