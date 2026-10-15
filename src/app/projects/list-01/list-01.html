@@ -1,0 +1,37 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-panel-header logo="C" title="CRAFTUI LLC" sub="8484 Ross Wells" />
+    <app-messages-list [count]="5" [viewAll]="true" [messages]="messages" />
+    <app-conversion-bars title="Progress history" sub="Week to week performance" />
+  </aside>
+
+  <div page-main class="dash-main">
+    <section class="dash-card projects-card">
+      <div class="projects-toolbar">
+        <app-view-toggle mode="list" (modeChange)="onViewChange($event)" />
+        <app-sort-control [value]="sortAsc ? 'A-Z' : 'Z-A'" (toggle)="sortAsc = !sortAsc" />
+      </div>
+      <div class="plist-head">
+        <span>Projects</span><span>Tasks <i>⇅</i></span><span>Budget <i>⇅</i></span><span>Due date <i>⇅</i></span><span>Members <i>⇅</i></span><span></span>
+      </div>
+      <ul class="plist-rows">
+        @for (p of sortedProjects(); track p.name) {
+          <li>
+            <span class="p-main">
+              <app-project-brand [glyph]="p.brand.glyph" [tint]="p.brand.tint" [color]="p.brand.color" />
+              <span class="p-titles"><b>{{ p.name }}</b><span>{{ p.category }}</span></span>
+            </span>
+            <span class="p-stat"><b>{{ p.tasksDone }} / {{ p.tasksTotal }}</b><span>Tasks</span></span>
+            <span class="p-stat"><b>{{ p.budget }}</b><span>Budget</span></span>
+            <span class="p-stat"><b>{{ p.due }}</b><span>Due date</span></span>
+            <span class="p-members">
+              <app-avatar-stack [members]="p.members" [extra]="p.extra" />
+            </span>
+            <button class="dots-btn" type="button" aria-label="More actions">···</button>
+          </li>
+        }
+      </ul>
+      <app-pagination [active]="page" (pageChange)="page = $event" />
+    </section>
+  </div>
+</div>

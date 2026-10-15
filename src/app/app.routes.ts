@@ -11,6 +11,8 @@ import { DashOrders } from './dashboard/orders/orders';
 import { DashEmpty } from './dashboard/empty/empty';
 import { ProjectsLayout } from './projects/projects-layout/projects-layout';
 import { ProjectsEmpty } from './projects/empty/empty';
+import { ProjectsList01 } from './projects/list-01/list-01';
+import { ProjectsGrid01 } from './projects/grid-01/grid-01';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'signin' },
@@ -32,7 +34,12 @@ export const routes: Routes = [
   {
     path: 'projects',
     component: ProjectsLayout,
-    children: [{ path: 'empty', component: ProjectsEmpty, data: { title: 'Projects' } }],
+    children: [
+      { path: '', pathMatch: 'full', redirectTo: 'list-01' },
+      { path: 'empty', component: ProjectsEmpty, data: { title: 'Projects' } },
+      { path: 'list-01', component: ProjectsList01, data: { title: 'Projects' } },
+      { path: 'grid-01', component: ProjectsGrid01, data: { title: 'Projects' } },
+    ],
   },
   { path: '**', redirectTo: 'signin' },
 ];
