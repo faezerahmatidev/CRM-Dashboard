@@ -1,56 +1,90 @@
 import { Routes } from '@angular/router';
-import { Signup } from './auth/signup/signup';
-import { Signin } from './auth/signin/signin';
-import { Recover } from './auth/recover/recover';
-import { Finish } from './auth/finish/finish';
-import { Details } from './auth/details/details';
-import { DashboardLayout } from './dashboard/dashboard-layout/dashboard-layout';
-import { DashSales } from './dashboard/sales/sales';
-import { DashOverview } from './dashboard/overview/overview';
-import { DashOrders } from './dashboard/orders/orders';
-import { DashEmpty } from './dashboard/empty/empty';
-import { ProjectsLayout } from './projects/projects-layout/projects-layout';
-import { ProjectsEmpty } from './projects/empty/empty';
-import { ProjectsList01 } from './projects/list-01/list-01';
-import { ProjectsGrid01 } from './projects/grid-01/grid-01';
-import { ProjectTasks } from './projects/details/tasks/tasks';
-import { ProjectDesk } from './projects/details/desk/desk';
-import { ProjectActivity } from './projects/details/activity/activity';
-import { ProjectFiles } from './projects/details/files/files';
-import { ProjectReports } from './projects/details/reports/reports';
-import { ProjectSettings } from './projects/details/settings/settings';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'signin' },
-  { path: 'signup', component: Signup },
-  { path: 'signin', component: Signin },
-  { path: 'recover', component: Recover },
-  { path: 'finish', component: Finish },
-  { path: 'details', component: Details },
+  { path: 'signup', loadComponent: () => import('./auth/signup/signup').then((m) => m.Signup) },
+  { path: 'signin', loadComponent: () => import('./auth/signin/signin').then((m) => m.Signin) },
+  { path: 'recover', loadComponent: () => import('./auth/recover/recover').then((m) => m.Recover) },
+  { path: 'finish', loadComponent: () => import('./auth/finish/finish').then((m) => m.Finish) },
+  { path: 'details', loadComponent: () => import('./auth/details/details').then((m) => m.Details) },
   {
     path: 'dashboard',
-    component: DashboardLayout,
+    loadComponent: () =>
+      import('./dashboard/dashboard-layout/dashboard-layout').then((m) => m.DashboardLayout),
     children: [
-      { path: '', pathMatch: 'full', component: DashSales },
-      { path: 'overview', component: DashOverview },
-      { path: 'orders', component: DashOrders },
-      { path: 'messages', component: DashEmpty },
+      {
+        path: '',
+        pathMatch: 'full',
+        loadComponent: () => import('./dashboard/sales/sales').then((m) => m.DashSales),
+      },
+      {
+        path: 'overview',
+        loadComponent: () => import('./dashboard/overview/overview').then((m) => m.DashOverview),
+      },
+      {
+        path: 'orders',
+        loadComponent: () => import('./dashboard/orders/orders').then((m) => m.DashOrders),
+      },
+      {
+        path: 'messages',
+        loadComponent: () => import('./dashboard/empty/empty').then((m) => m.DashEmpty),
+      },
     ],
   },
   {
     path: 'projects',
-    component: ProjectsLayout,
+    loadComponent: () =>
+      import('./projects/projects-layout/projects-layout').then((m) => m.ProjectsLayout),
     children: [
       { path: '', pathMatch: 'full', redirectTo: 'list-01' },
-      { path: 'empty', component: ProjectsEmpty, data: { title: 'Projects' } },
-      { path: 'list-01', component: ProjectsList01, data: { title: 'Projects' } },
-      { path: 'grid-01', component: ProjectsGrid01, data: { title: 'Projects' } },
-      { path: 'details/tasks', component: ProjectTasks, data: { title: 'Project Details' } },
-      { path: 'details/desk', component: ProjectDesk, data: { title: 'Project Details' } },
-      { path: 'details/activity', component: ProjectActivity, data: { title: 'Project Details' } },
-      { path: 'details/files', component: ProjectFiles, data: { title: 'Project Details' } },
-      { path: 'details/reports', component: ProjectReports, data: { title: 'Project Details' } },
-      { path: 'details/settings', component: ProjectSettings, data: { title: 'Project Details' } },
+      {
+        path: 'empty',
+        loadComponent: () => import('./projects/empty/empty').then((m) => m.ProjectsEmpty),
+        data: { title: 'Projects' },
+      },
+      {
+        path: 'list-01',
+        loadComponent: () => import('./projects/list-01/list-01').then((m) => m.ProjectsList01),
+        data: { title: 'Projects' },
+      },
+      {
+        path: 'grid-01',
+        loadComponent: () => import('./projects/grid-01/grid-01').then((m) => m.ProjectsGrid01),
+        data: { title: 'Projects' },
+      },
+      {
+        path: 'details/tasks',
+        loadComponent: () => import('./projects/details/tasks/tasks').then((m) => m.ProjectTasks),
+        data: { title: 'Project Details' },
+      },
+      {
+        path: 'details/desk',
+        loadComponent: () => import('./projects/details/desk/desk').then((m) => m.ProjectDesk),
+        data: { title: 'Project Details' },
+      },
+      {
+        path: 'details/activity',
+        loadComponent: () =>
+          import('./projects/details/activity/activity').then((m) => m.ProjectActivity),
+        data: { title: 'Project Details' },
+      },
+      {
+        path: 'details/files',
+        loadComponent: () => import('./projects/details/files/files').then((m) => m.ProjectFiles),
+        data: { title: 'Project Details' },
+      },
+      {
+        path: 'details/reports',
+        loadComponent: () =>
+          import('./projects/details/reports/reports').then((m) => m.ProjectReports),
+        data: { title: 'Project Details' },
+      },
+      {
+        path: 'details/settings',
+        loadComponent: () =>
+          import('./projects/details/settings/settings').then((m) => m.ProjectSettings),
+        data: { title: 'Project Details' },
+      },
     ],
   },
   { path: '**', redirectTo: 'signin' },
