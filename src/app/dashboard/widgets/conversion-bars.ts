@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-conversion-bars',
   standalone: true,
   template: `
     <section>
-      <h3 class="widget-title">Conversion history</h3>
-      <p class="conv-sub">Week to week performance</p>
+      <h3 class="widget-title">{{ title }}</h3>
+      <p class="conv-sub">{{ sub }}</p>
       <svg class="bars" viewBox="0 0 220 120" role="img" aria-label="Weekly conversion bar chart">
         @for (b of bars; track $index) {
           <rect [attr.x]="12 + $index * 17" [attr.y]="110 - b[0]" [attr.width]="5" [attr.height]="b[0]" rx="2.5" fill="#5e81f4" />
@@ -21,6 +21,8 @@ import { Component } from '@angular/core';
   `],
 })
 export class ConversionBars {
+  @Input() title = 'Conversion history';
+  @Input() sub = 'Week to week performance';
   // [blue height, green top height]
   bars: Array<[number, number]> = [
     [52, 0], [70, 18], [44, 30], [62, 12], [38, 22], [74, 16],

@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
-interface Message {
+export interface Message {
   name: string;
   text: string;
   time: string;
@@ -13,7 +13,14 @@ interface Message {
   standalone: true,
   template: `
     <section>
-      <h3 class="widget-title">Messages</h3>
+      <h3 class="widget-title">Messages
+        @if (count !== null) {
+          <span class="msg-count">{{ count }}</span>
+        }
+        @if (viewAll) {
+          <button class="msg-view-all" type="button">View all</button>
+        }
+      </h3>
       <ul class="messages-list">
         @for (m of messages; track m.name) {
           <li>
@@ -52,10 +59,21 @@ interface Message {
     .mhead b { font-size: 11px; }
     .mtime { color: var(--primary-grey); font-size: 10px; white-space: nowrap; }
     .mtext { display: block; color: var(--primary-grey); font-size: 10px; margin-top: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .widget-title { display: flex; align-items: center; gap: 8px; }
+    .msg-count {
+      font-size: 10px; font-weight: 700; color: #34b26b;
+      background: #e4f8ec; border-radius: 9px; padding: 2px 8px;
+    }
+    .msg-view-all {
+      margin-left: auto; border: 0; background: transparent; cursor: pointer;
+      font-size: 11px; color: var(--primary); padding: 0;
+    }
   `],
 })
 export class MessagesList {
-  messages: Message[] = [
+  @Input() count: number | null = null;
+  @Input() viewAll = false;
+  @Input() messages: Message[] = [
     { name: 'Nicholas Gordon', text: 'Moreover the striking, brilliant and vivid colors', time: '10m', initials: 'NG', color: 'linear-gradient(135deg,#f4be5e,#ff808b)' },
     { name: 'Nina Perkins', text: 'In the history of modern astronomy, there is small', time: '1hr', initials: 'NP', color: 'linear-gradient(135deg,#5e81f4,#9698d6)' },
     { name: 'Daniel Holland', text: 'Advertising on a budget with a monthly frequency', time: '2hr', initials: 'DH', color: 'linear-gradient(135deg,#34b26b,#7ce7ac)' },
