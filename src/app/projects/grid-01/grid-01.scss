@@ -105,6 +105,17 @@
   margin: 0;
 }
 
+.clickable-card {
+  cursor: pointer;
+  transition: box-shadow 0.2s, transform 0.15s, border-color 0.2s;
+}
+
+.clickable-card:hover {
+  border-color: var(--primary);
+  box-shadow: 0 6px 20px rgb(28 29 33 / 0.1);
+  transform: translateY(-1px);
+}
+
 .grid-card .complete {
   margin: 10px 0 8px;
   display: flex;

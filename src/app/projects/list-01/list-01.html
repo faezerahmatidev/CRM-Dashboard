@@ -16,7 +16,7 @@
       </div>
       <ul class="plist-rows">
         @for (p of sortedProjects(); track p.name) {
-          <li>
+          <li class="clickable" routerLink="/projects/details/tasks" replaceUrl [title]="p.name">
             <span class="p-main">
               <app-project-brand [glyph]="p.brand.glyph" [tint]="p.brand.tint" [color]="p.brand.color" />
               <span class="p-titles"><b>{{ p.name }}</b><span>{{ p.category }}</span></span>

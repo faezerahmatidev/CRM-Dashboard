@@ -16,7 +16,7 @@
       </div>
       <div class="grid-cards">
         @for (p of sortedProjects(); track p.name) {
-          <article class="grid-card">
+          <article class="grid-card clickable-card" routerLink="/projects/details/tasks" replaceUrl [title]="p.name">
             <span class="mini-bar"><i [style.width.%]="p.progress" [style.background]="p.progressColor"></i></span>
             <button class="dots-btn corner" type="button" aria-label="More actions">···</button>
             <app-project-brand [glyph]="p.brand.glyph" [tint]="p.brand.tint" [color]="p.brand.color" />

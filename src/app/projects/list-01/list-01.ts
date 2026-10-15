@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { DashPage } from '../../shared/dash-page/dash-page';
 import { PanelHeader } from '../../shared/panel-header/panel-header';
 import { MessagesList } from '../../dashboard/widgets/messages-list';
@@ -14,7 +14,7 @@ import { LIST_PROJECTS, PROJECT_MESSAGES, Project } from '../projects-data';
 @Component({
   selector: 'app-projects-list-01',
   standalone: true,
-  imports: [DashPage, PanelHeader, MessagesList, ConversionBars, ViewToggle, SortControl, Pagination, ProjectBrand, AvatarStack],
+  imports: [DashPage, PanelHeader, MessagesList, ConversionBars, ViewToggle, SortControl, Pagination, ProjectBrand, AvatarStack, RouterLink],
   templateUrl: './list-01.html',
   styleUrl: './list-01.scss',
 })
