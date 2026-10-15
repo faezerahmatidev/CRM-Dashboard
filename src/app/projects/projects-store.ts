@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, effect, signal } from '@angular/core';
 import { LIST_PROJECTS, Project } from './projects-data';
 
 const GRID_EXTRAS: Record<string, { complete: string; progress: number; progressColor: string; gridExtra: number }> = {
@@ -50,7 +50,9 @@ function seed(): Project[] {
 /** In-memory project list shared by the list views, grid views and the Add/Edit dialog. */
 @Injectable({ providedIn: 'root' })
 export class ProjectsStore {
-  private readonly _projects = signal<Project[]>(seed());
+  private static readonly STORAGE_KEY = 'crm-dashboard-projects-v1';
+
+  private readonly _projects = signal<Project[]>(ProjectsStore.load());
   readonly projects = this._projects.asReadonly();
 
   private readonly _modalOpen = signal(false);
@@ -59,14 +61,29 @@ export class ProjectsStore {
   private readonly _editing = signal<Project | null>(null);
   readonly editing = this._editing.asReadonly();
 
-  remove(name: string): void {
-    this._projects.update((ps) => ps.filter((p) => p.name !== name));
+  constructor() {
+    effect(() => {
+      try {
+        localStorage.setItem(ProjectsStore.STORAGE_KEY, JSON.stringify(this._projects()));
+      } catch {
+        // Storage unavailable (private mode) — keep in-memory state.
+      }
+    });
   }
 
-  rename(oldName: string, name: string): void {
-    const next = name.trim();
-    if (!next || next === oldName) return;
-    this._projects.update((ps) => ps.map((p) => (p.name === oldName ? { ...p, name: next } : p)));
+  private static load(): Project[] {
+    try {
+      const raw = localStorage.getItem(ProjectsStore.STORAGE_KEY);
+      if (!raw) return seed();
+      const parsed = JSON.parse(raw) as Project[];
+      return Array.isArray(parsed) && parsed.length ? parsed : seed();
+    } catch {
+      return seed();
+    }
+  }
+
+  remove(name: string): void {
+    this._projects.update((ps) => ps.filter((p) => p.name !== name));
   }
 
   update(oldName: string, patch: Project): void {

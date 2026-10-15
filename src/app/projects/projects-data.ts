@@ -1,13 +1,5 @@
 import { Message } from '../dashboard/widgets/messages-list';
-
-const AVATAR_COLORS = [
-  'linear-gradient(135deg,#5e81f4,#9698d6)',
-  'linear-gradient(135deg,#f4be5e,#ff808b)',
-  'linear-gradient(135deg,#34b26b,#7ce7ac)',
-  'linear-gradient(135deg,#ff808b,#f4be5e)',
-  'linear-gradient(135deg,#9698d6,#5e81f4)',
-  'linear-gradient(135deg,#7ce7ac,#34b26b)',
-];
+import { avatar, members } from '../shared/avatar';
 
 export interface ProjectMember {
   initials: string;
@@ -54,19 +46,12 @@ export function blankProject(name: string): Project {
   };
 }
 
-function members(initials: string[]): ProjectMember[] {
-  return initials.map((name, i) => ({
-    initials: name,
-    color: AVATAR_COLORS[i % AVATAR_COLORS.length],
-  }));
-}
-
 export const PROJECT_MESSAGES: Message[] = [
-  { name: 'Nicholas Gordon', text: 'Moreover the striking, brilliant and vivid colors', time: '10m', initials: 'NG', color: AVATAR_COLORS[1] },
-  { name: 'Douglas Payne', text: 'In the history of modern astronomy, there is small', time: '1hr', initials: 'DP', color: AVATAR_COLORS[0] },
-  { name: 'Harriett Robbins', text: 'Advertising on a budget with a monthly frequency', time: '2hr', initials: 'HR', color: AVATAR_COLORS[2] },
-  { name: 'Polly Robbins', text: 'Search Engine Optimization And Advertising', time: '1hr', initials: 'PR', color: AVATAR_COLORS[3] },
-  { name: 'Willie Holloway', text: 'Effective forms advertising internet web site performance', time: '2hr', initials: 'WH', color: AVATAR_COLORS[4] },
+  { name: 'Nicholas Gordon', text: 'Moreover the striking, brilliant and vivid colors', time: '10m', initials: 'NG', color: avatar('NG', 1).color },
+  { name: 'Douglas Payne', text: 'In the history of modern astronomy, there is small', time: '1hr', initials: 'DP', color: avatar('DP', 0).color },
+  { name: 'Harriett Robbins', text: 'Advertising on a budget with a monthly frequency', time: '2hr', initials: 'HR', color: avatar('HR', 2).color },
+  { name: 'Polly Robbins', text: 'Search Engine Optimization And Advertising', time: '1hr', initials: 'PR', color: avatar('PR', 3).color },
+  { name: 'Willie Holloway', text: 'Effective forms advertising internet web site performance', time: '2hr', initials: 'WH', color: avatar('WH', 4).color },
 ];
 
 export const LIST_PROJECTS: Project[] = [

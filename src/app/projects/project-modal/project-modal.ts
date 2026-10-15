@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, HostListener, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AvatarStack, StackMember } from '../../shared/avatar-stack/avatar-stack';
-import { Project } from '../projects-data';
-import { avatar } from '../details-data';
+import { UserAvatar } from '../../shared/user-avatar/user-avatar';
+import { Project, blankProject } from '../projects-data';
+import { avatar } from '../../shared/avatar';
 
 export interface SavePayload {
   original: string | null;
@@ -25,7 +26,7 @@ interface PickedFile {
 @Component({
   selector: 'app-project-modal',
   standalone: true,
-  imports: [FormsModule, AvatarStack],
+  imports: [FormsModule, AvatarStack, UserAvatar],
   templateUrl: './project-modal.html',
   styleUrl: './project-modal.scss',
 })
@@ -85,6 +86,11 @@ export class ProjectModal implements OnChanges {
     this.openChange.emit(false);
   }
 
+  @HostListener('document:keydown.escape')
+  onEscape(): void {
+    if (this.open) this.close();
+  }
+
   submit(): void {
     const name = this.name.trim() || 'New Project';
     if (this.editProject) {
@@ -96,19 +102,9 @@ export class ProjectModal implements OnChanges {
       this.save.emit({
         original: null,
         project: {
-          name,
-          category: 'Development',
-          tasksDone: 0,
-          tasksTotal: 1,
-          budget: '$0.0',
+          ...blankProject(name),
           due: this.dueLabel,
-          brand: { glyph: (name.charAt(0) || 'N').toUpperCase(), tint: '#e9eefe', color: '#5e81f4' },
           members: this.assignees,
-          extra: 0,
-          complete: '0 / 1',
-          progress: 0,
-          progressColor: '#5e81f4',
-          gridExtra: 0,
         },
       });
     }
