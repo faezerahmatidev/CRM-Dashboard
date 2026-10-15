@@ -1,0 +1,63 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-project-info-panel [info]="info" />
+  </aside>
+
+  <div page-main class="dash-main">
+    <section class="dash-card desk-card">
+      <app-details-tabs>
+        <app-sort-control prefix="SORT:" value="A-Z" />
+      </app-details-tabs>
+
+      <div class="kanban">
+        @for (col of columns; track col.title) {
+          <div class="kanban-col">
+            <div class="kanban-head">
+              <span>{{ col.title }}</span>
+              <button class="add-task-btn" type="button">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 8.5v7M8.5 12h7"/></svg>
+                ADD NEW TASK
+              </button>
+            </div>
+            @for (c of col.cards; track c.title) {
+              <article class="task-card">
+                <div class="task-card-top">
+                  <div>
+                    <h3>{{ c.title }}</h3>
+                    <p>{{ c.project }}</p>
+                  </div>
+                  <button class="dots-btn" type="button" aria-label="More actions">···</button>
+                </div>
+                <div class="task-prog">
+                  <span class="task-prog-label">
+                    <svg viewBox="0 0 24 24"><path d="M8.5 6.5H20M8.5 12H20M8.5 17.5H20" /><circle cx="5" cy="6.5" r="1" /><circle cx="5" cy="12" r="1" /><circle cx="5" cy="17.5" r="1" /></svg>
+                    Progress
+                  </span>
+                  <b>{{ c.prog }}</b>
+                </div>
+                <div class="progress"><i [style.width.%]="c.bar" [style.background]="c.barColor"></i></div>
+                <div class="task-foot">
+                  <span class="date-pill" [class]="c.dateTone">{{ c.date }}</span>
+                  @if (c.members.length) {
+                    <app-avatar-stack [members]="c.members" [extra]="c.extra" [size]="26" />
+                  } @else {
+                    <span class="task-meta">
+                      <span>
+                        <svg viewBox="0 0 24 24"><path d="M4.5 7A1.5 1.5 0 0 1 6 5.5h12A1.5 1.5 0 0 1 19.5 7v8a1.5 1.5 0 0 1-1.5 1.5H12l-3.5 3v-3H6A1.5 1.5 0 0 1 4.5 15V7Z" /></svg>
+                        {{ c.comments }}
+                      </span>
+                      <span>
+                        <svg viewBox="0 0 24 24"><path d="M21 11.5l-8.5 8.5a5.5 5.5 0 0 1-7.8-7.8L13 4a3.7 3.7 0 0 1 5.2 5.2l-8.2 8.2a1.85 1.85 0 0 1-2.6-2.6L15 7.5" /></svg>
+                        {{ c.attach }}
+                      </span>
+                    </span>
+                  }
+                </div>
+              </article>
+            }
+          </div>
+        }
+      </div>
+    </section>
+  </div>
+</div>

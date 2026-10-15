@@ -1,0 +1,42 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-project-info-panel [info]="info" />
+  </aside>
+
+  <div page-main class="dash-main">
+    <section class="dash-card tasks-card">
+      <app-details-tabs>
+        <app-sort-control prefix="SORT:" value="A-Z" />
+      </app-details-tabs>
+
+      <div class="add-task">
+        <span class="box" aria-hidden="true"></span>
+        <input [(ngModel)]="draft" (keyup.enter)="addTask()" placeholder="Type to add a new task ..." aria-label="Add a new task" />
+      </div>
+
+      <ul class="task-rows">
+        @for (t of tasks; track $index) {
+          <li>
+            <button class="check" type="button" [class.done]="t.done" (click)="t.done = !t.done" [attr.aria-label]="'Toggle ' + t.title">
+              @if (t.done) {
+                <svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>
+              }
+            </button>
+            <b class="t-title">{{ t.title }}</b>
+            <span class="t-meta">
+              <span><svg viewBox="0 0 24 24"><path d="M8.5 6.5H20M8.5 12H20M8.5 17.5H20" /><circle cx="5" cy="6.5" r="1" /><circle cx="5" cy="12" r="1" /><circle cx="5" cy="17.5" r="1" /></svg>{{ t.sub }}</span>
+              <span><svg viewBox="0 0 24 24"><path d="M21 11.5l-8.5 8.5a5.5 5.5 0 0 1-7.8-7.8L13 4a3.7 3.7 0 0 1 5.2 5.2l-8.2 8.2a1.85 1.85 0 0 1-2.6-2.6L15 7.5" /></svg>{{ t.attach }}</span>
+              <span><svg viewBox="0 0 24 24"><path d="M4.5 7A1.5 1.5 0 0 1 6 5.5h12A1.5 1.5 0 0 1 19.5 7v8a1.5 1.5 0 0 1-1.5 1.5H12l-3.5 3v-3H6A1.5 1.5 0 0 1 4.5 15V7Z" /></svg>{{ t.comments }}</span>
+            </span>
+            <span class="badge" [class]="badgeOf(t)">{{ labelOf(t) }}</span>
+            <span class="t-avatar" [style.background]="t.member.color">{{ t.member.initials }}</span>
+          </li>
+        }
+      </ul>
+
+      <button class="fab" type="button" aria-label="Refresh">
+        <svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 3.5V8h-4.5" /></svg>
+      </button>
+    </section>
+  </div>
+</div>
