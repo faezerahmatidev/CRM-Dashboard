@@ -45,6 +45,7 @@
   display: none;
 }
 
+.rail-nav a,
 .rail-nav button {
   position: relative;
   width: 100%;
@@ -56,8 +57,10 @@
   display: grid;
   place-items: center;
   color: var(--primary-grey);
+  text-decoration: none;
 }
 
+.rail-nav a svg,
 .rail-nav button svg {
   width: 22px;
   height: 22px;
@@ -68,11 +71,13 @@
   stroke-linejoin: round;
 }
 
+.rail-nav a.active,
 .rail-nav button.active {
   color: var(--primary);
   background: var(--btn-rest-bg);
 }
 
+.rail-nav a.active::before,
 .rail-nav button.active::before {
   content: '';
   position: absolute;
@@ -84,6 +89,7 @@
   background: var(--primary);
 }
 
+.rail-nav a:hover,
 .rail-nav button:hover {
   color: var(--primary-dark);
 }

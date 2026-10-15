@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 export type ShellIcon =
   | 'dashboard' | 'briefcase' | 'tasks' | 'files' | 'calendar'
@@ -8,6 +9,7 @@ export type ShellIcon =
 @Component({
   selector: 'app-shell',
   standalone: true,
+  imports: [RouterLink],
   templateUrl: './app-shell.html',
   styleUrl: './app-shell.scss',
 })

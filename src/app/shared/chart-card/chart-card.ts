@@ -27,6 +27,7 @@ export interface ChartSet {
   imports: [DashCard],
   templateUrl: './chart-card.html',
   styleUrl: './chart-card.scss',
+  styles: [':host{display:block;height:100%}', 'app-dash-card{display:flex;flex-direction:column;height:100%;min-height:0}'],
 })
 export class ChartCard {
   @Input() title = '';
