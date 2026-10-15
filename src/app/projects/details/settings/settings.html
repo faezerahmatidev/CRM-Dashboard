@@ -1,0 +1,82 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-project-info-panel [info]="info" />
+  </aside>
+
+  <div page-main class="dash-main">
+    <section class="dash-card settings-card">
+      <app-details-tabs />
+
+      <div class="settings-grid">
+        <div class="settings-form">
+          <div class="upload-box">
+            <svg viewBox="0 0 24 24"><path d="M7 18a4.5 4.5 0 1 1 .6-8.96A5.5 5.5 0 0 1 18.3 10H18a3.5 3.5 0 0 1 .5 6.96" /><path d="M12 12v8M8.5 15.5 12 12l3.5 3.5" /></svg>
+            <span>UPLOAD IMAGE</span>
+          </div>
+
+          <app-auth-field label="Project name" fieldId="sp-name" icon="briefcase">
+            <input id="sp-name" name="projectName" type="text" [(ngModel)]="projectName" autocomplete="off" />
+          </app-auth-field>
+
+          <div class="form-2col">
+            <app-auth-field label="Email" fieldId="sp-email" icon="mail">
+              <input id="sp-email" name="email" type="email" placeholder="Start typing..." [(ngModel)]="email" autocomplete="email" />
+            </app-auth-field>
+            <app-auth-field label="Phone" fieldId="sp-phone" icon="phone">
+              <input id="sp-phone" name="phone" type="tel" placeholder="Start typing..." [(ngModel)]="phone" autocomplete="tel" />
+            </app-auth-field>
+          </div>
+
+          <app-auth-field label="Assigned to" fieldId="sp-assignee" icon="users">
+            <input id="sp-assignee" name="assignee" type="text" placeholder="Start typing..." [(ngModel)]="assignee" autocomplete="off" />
+          </app-auth-field>
+
+          <div class="btn-row settings-actions">
+            <button class="btn btn-primary" type="button">Update Settings</button>
+            <button class="btn btn-rest" type="button">Cancel</button>
+          </div>
+        </div>
+
+        <div class="settings-side">
+          <ul class="settings-menu">
+            @for (s of sections; track s.title) {
+              <li>
+                <button type="button" [class.active]="s.title === activeSection" (click)="activeSection = s.title">
+                  <span class="soft-icon">
+                    <svg viewBox="0 0 24 24">
+                      @switch (s.icon) {
+                        @case ('user') {
+                          <circle cx="12" cy="8.5" r="3.2"/><path d="M5.5 19.5c1.4-3 3.7-4.5 6.5-4.5s5.1 1.5 6.5 4.5"/>
+                        }
+                        @case ('apps') {
+                          <circle cx="12" cy="12" r="3"/><path d="M12 3.5v2.5M12 18v2.5M3.5 12H6M18 12h2.5M6 6l1.8 1.8M16.2 16.2 18 18M18 6l-1.8 1.8M7.8 16.2 6 18"/>
+                        }
+                        @case ('privacy') {
+                          <path d="M12 3.5 5 6v5.5c0 4.5 3 8 7 9.5 4-1.5 7-5 7-9.5V6L12 3.5Z"/><path d="M12 3.5V21"/>
+                        }
+                        @case ('billing') {
+                          <rect x="3.5" y="6" width="17" height="13" rx="2"/><path d="M3.5 10h17M7 14.5h4"/>
+                        }
+                        @case ('bell') {
+                          <path d="M6 16v-5a6 6 0 0 1 12 0v5l1.5 2.5h-15L6 16Z"/><path d="M10 21a2.2 2.2 0 0 0 4 0"/>
+                        }
+                      }
+                    </svg>
+                  </span>
+                  <span class="sm-titles"><b>{{ s.title }}</b><span>{{ s.sub }}</span></span>
+                </button>
+              </li>
+            }
+          </ul>
+
+          <div class="delete-card">
+            <span class="soft-icon danger">
+              <svg viewBox="0 0 24 24"><path d="M4.5 6.5h15M9.5 6V4.5A1 1 0 0 1 10.5 3.5h3a1 1 0 0 1 1 1V6M6.5 6.5 7.4 19a1.5 1.5 0 0 0 1.5 1.4h6.2a1.5 1.5 0 0 0 1.5-1.4l.9-12.5"/></svg>
+            </span>
+            <span class="sm-titles"><b>Delete Project</b><span>Hide &amp; disable current project</span></span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

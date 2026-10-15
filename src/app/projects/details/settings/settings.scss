@@ -1,0 +1,132 @@
+.settings-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+  flex: 1;
+  gap: 12px;
+}
+
+.settings-grid {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: 24px;
+  padding-bottom: 4px;
+}
+
+.upload-box {
+  border: 1.5px dashed var(--outline);
+  border-radius: 12px;
+  min-height: 170px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  color: var(--primary-dark);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.6px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.upload-box svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.settings-form {
+  min-width: 0;
+}
+
+.form-2col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 24px;
+}
+
+.settings-actions {
+  margin-top: 28px;
+  max-width: 420px;
+}
+
+.settings-side {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.settings-menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--outline);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.settings-menu li + li {
+  border-top: 1px solid var(--outline);
+}
+
+.settings-menu button {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 16px;
+  text-align: left;
+}
+
+.settings-menu button.active .sm-titles b {
+  color: var(--primary);
+}
+
+.sm-titles {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.sm-titles b {
+  font-size: 12px;
+}
+
+.sm-titles span {
+  font-size: 10px;
+  color: var(--primary-grey);
+}
+
+.delete-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--outline);
+  border-radius: 12px;
+  padding: 13px 16px;
+}
+
+.soft-icon.danger {
+  background: #ffe9ec;
+  color: #f0566b;
+}
+
+@media (max-width: 1100px) {
+  .settings-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}

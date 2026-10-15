@@ -13,6 +13,12 @@ import { ProjectsLayout } from './projects/projects-layout/projects-layout';
 import { ProjectsEmpty } from './projects/empty/empty';
 import { ProjectsList01 } from './projects/list-01/list-01';
 import { ProjectsGrid01 } from './projects/grid-01/grid-01';
+import { ProjectTasks } from './projects/details/tasks/tasks';
+import { ProjectDesk } from './projects/details/desk/desk';
+import { ProjectActivity } from './projects/details/activity/activity';
+import { ProjectFiles } from './projects/details/files/files';
+import { ProjectReports } from './projects/details/reports/reports';
+import { ProjectSettings } from './projects/details/settings/settings';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'signin' },
@@ -39,6 +45,12 @@ export const routes: Routes = [
       { path: 'empty', component: ProjectsEmpty, data: { title: 'Projects' } },
       { path: 'list-01', component: ProjectsList01, data: { title: 'Projects' } },
       { path: 'grid-01', component: ProjectsGrid01, data: { title: 'Projects' } },
+      { path: 'details/tasks', component: ProjectTasks, data: { title: 'Project Details' } },
+      { path: 'details/desk', component: ProjectDesk, data: { title: 'Project Details' } },
+      { path: 'details/activity', component: ProjectActivity, data: { title: 'Project Details' } },
+      { path: 'details/files', component: ProjectFiles, data: { title: 'Project Details' } },
+      { path: 'details/reports', component: ProjectReports, data: { title: 'Project Details' } },
+      { path: 'details/settings', component: ProjectSettings, data: { title: 'Project Details' } },
     ],
   },
   { path: '**', redirectTo: 'signin' },

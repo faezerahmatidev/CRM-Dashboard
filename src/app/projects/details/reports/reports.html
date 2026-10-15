@@ -1,0 +1,57 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-project-info-panel [info]="info" />
+  </aside>
+
+  <div page-main class="dash-main">
+    <app-details-tabs />
+
+    <div class="cards-2">
+      <app-chart-card
+        title="Orders"
+        [sets]="ordersSets"
+        [xLabels]="['Jan','Feb','Mar','Apr','Jun','Jul','Aug','Sep','Oct','Nov','Dec']"
+        viewBox="0 0 640 240"
+        [labelY]="224"
+        [labelStartX]="20"
+        [labelStepX]="60"
+        [tipX]="220"
+        [tipWidth]="92"
+      />
+
+      <app-chart-card
+        title="Planned Income"
+        [sets]="{ '': plannedSet }"
+        [xLabels]="['Jan','Feb','Mar','Apr','Jun']"
+        viewBox="0 0 340 210"
+        [labelY]="196"
+        [labelStartX]="20"
+        [labelStepX]="70"
+      />
+    </div>
+
+    <section class="dash-card" app-dash-card title="Latest sales" [tabs]="tabs" [calendar]="true">
+      <div class="table-scroll">
+        <table class="dash-table">
+          <thead>
+            <tr><th>Product</th><th>Customer</th><th>Delivery</th><th>Shipping</th><th>Total</th><th>Status</th></tr>
+          </thead>
+          <tbody>
+            @for (s of sales; track s.pid) {
+              <tr>
+                <td>
+                  <span class="prod"><i [style.background]="s.color">{{ s.initial }}</i><span><b>{{ s.product }}</b><span class="sub">{{ s.pid }}</span></span></span>
+                </td>
+                <td><span class="cell"><b>{{ s.customer }}</b><span class="sub">{{ s.email }}</span></span></td>
+                <td><span class="cell"><b>{{ s.country }}</b><span class="sub">{{ s.address }}</span></span></td>
+                <td class="num">{{ s.shipping }}</td>
+                <td class="num">{{ s.total }}</td>
+                <td><span class="badge" [class]="s.badge">{{ s.status }}</span></td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+</div>
