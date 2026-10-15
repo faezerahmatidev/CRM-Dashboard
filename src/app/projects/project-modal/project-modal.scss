@@ -17,6 +17,10 @@
   padding: 26px 28px;
 }
 
+.modal-card:focus {
+  outline: none;
+}
+
 .modal-head {
   display: flex;
   align-items: center;

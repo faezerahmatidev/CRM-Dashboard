@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AvatarStack, StackMember } from '../../shared/avatar-stack/avatar-stack';
 import { UserAvatar } from '../../shared/user-avatar/user-avatar';
@@ -45,6 +45,9 @@ export class ProjectModal implements OnChanges {
   dueIso = DEFAULT_DUE_ISO;
   files: PickedFile[] = [];
   private originalName: string | null = null;
+  private lastFocused: Element | null = null;
+
+  @ViewChild('dialog') dialog?: ElementRef<HTMLElement>;
 
   get isEdit(): boolean {
     return this.editProject !== null;
@@ -84,6 +87,27 @@ export class ProjectModal implements OnChanges {
   close(): void {
     this.open = false;
     this.openChange.emit(false);
+    if (this.lastFocused instanceof HTMLElement) this.lastFocused.focus();
+  }
+
+  trapTab(ev: Event): void {
+    if (!(ev instanceof KeyboardEvent)) return;
+    const root = this.dialog?.nativeElement;
+    if (!root) return;
+    const items = [...root.querySelectorAll<HTMLElement>('button, input, select, textarea, a[href]')].filter(
+      (el) => !el.hasAttribute('disabled') && el.tabIndex >= 0,
+    );
+    if (!items.length) return;
+    const first = items[0];
+    const last = items[items.length - 1];
+    const active = document.activeElement as HTMLElement | null;
+    if (ev.shiftKey && (active === first || active === root)) {
+      last.focus();
+      ev.preventDefault();
+    } else if (!ev.shiftKey && active === last) {
+      first.focus();
+      ev.preventDefault();
+    }
   }
 
   @HostListener('document:keydown.escape')
@@ -113,6 +137,8 @@ export class ProjectModal implements OnChanges {
   }
 
   private prefill(): void {
+    this.lastFocused = document.activeElement;
+    setTimeout(() => this.dialog?.nativeElement.focus());
     this.files = [];
     this.comment = '';
     this.pickerOpen = false;
