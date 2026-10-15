@@ -2,6 +2,13 @@
   overflow: auto;
 }
 
+.tabs-bar {
+  background: var(--bg-white);
+  border-radius: 12px;
+  padding: 18px 20px;
+  flex: none;
+}
+
 .prod {
   display: flex;
   align-items: center;
