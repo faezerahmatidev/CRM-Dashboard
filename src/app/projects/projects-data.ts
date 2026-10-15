@@ -1,10 +1,6 @@
 import { Message } from '../dashboard/widgets/messages-list';
+import { StackMember } from '../shared/avatar-stack/avatar-stack';
 import { avatar, members } from '../shared/avatar';
-
-export interface ProjectMember {
-  initials: string;
-  color: string;
-}
 
 export interface Project {
   name: string;
@@ -14,7 +10,7 @@ export interface Project {
   budget: string;
   due: string;
   brand: { glyph: string; tint: string; color: string };
-  members: ProjectMember[];
+  members: StackMember[];
   extra: number;
   /** "Tasks complete" pair shown on grid cards. */
   complete?: string;

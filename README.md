@@ -1,36 +1,37 @@
 # CRM-Dashboard (Angular)
 
-CRM dashboard — implementation from Figma, step by step, with **Angular** standalone + SCSS + Angular Router.
+CRM dashboard — Figma implementation with **Angular 20** (standalone components + SCSS + Angular Router). All data is local mock data; there is no backend.
 
-## Auth (Login & Register)
+## Features
 
-- `/signup` — Sign Up
-- `/signin` — Sign In
-- `/recover` — Recover password
-- `/details` — Company details step
+- **Auth flow** (`/signup`, `/signin`, `/recover`, `/details`, `/finish`) with split-screen layout and client-side navigation between steps.
+- **Dashboard section** (`/dashboard`, `/dashboard/overview`, `/dashboard/orders`, `/dashboard/messages`): sales/income charts with Day/Week/Month filtering, KPI cards, orders/invoices tables, messages panel, empty state.
+- **Projects section** (`/projects/empty`, `/projects/list-01`, `/projects/grid-01`, `/projects/details/tasks|desk|activity|files|reports|settings`): project list/grid with sorting and pagination, working Edit/Delete row menus, Add/Edit project modal, task checklist, kanban desk, activity feed, files table, reports, settings form. Project changes persist to `localStorage`.
+- **Shared component library** (`src/app/shared`, 20+ components): cards, charts, tables controls, menus, dialogs, avatars, auth primitives. See below.
 
-## Dashboard (from `figma/Dashboard`)
+## Tech stack
 
-One **Dashboard section** (gauge rail icon, always highlighted):
+- Angular 20.3 (standalone) + TypeScript 5.9 (strict + strictTemplates) + SCSS
+- Angular Router (eager routes), signals-based `ProjectsStore`, Reactive/Template-driven forms
+- Jasmine + Karma for unit tests; GitHub Actions deploys a demo to GitHub Pages
 
-- `/dashboard` — Section home: Sales, Latest Events, Income Breakdown, Income Details
-- `/dashboard/overview` — Business overview: KPIs, Orders chart, Planned Income, Latest sales
-- `/dashboard/orders` — Fulfillment: Orders table, Invoices table
-- `/dashboard/messages` — Messages side panel + empty-business state
+## Prerequisites
 
-Rail icons are placeholders for future Figma sections (no navigation yet).
+- Node.js 20+ and npm
 
-In-page behavior: Day/Week/Month tabs filter their chart or table.
-Card shortcuts: KPI cards jump to Sales (`/dashboard`) or Orders
-(`/dashboard/orders`); Latest sales rows and `View all` open
-`/dashboard/orders`. From the home view: card titles
-(Your Sales, Income Breakdown, Income Details) open
-`/dashboard/overview`; invoice event rows open `/dashboard/orders`;
-client and meeting event rows open `/dashboard/messages`.
-Navigation inside the section replaces the history
-entry, so browser Back exits the section instead of stepping views.
+## Run
 
-Design tokens from `figma/UI-kit` (Primary `#5E81F4`, Lato font).
+```bash
+npm install
+npm start        # dev server at http://localhost:4200
+```
+
+Build and test:
+
+```bash
+npm run build                     # production build
+npx ng test --watch=false         # unit tests (needs Chrome)
+```
 
 ## Shared components (`src/app/shared`)
 
@@ -50,15 +51,19 @@ Reusable building blocks used across sections:
 
 Projects state lives in `ProjectsStore` (signals, persisted to localStorage).
 
-## Run
+Design tokens from `figma/UI-kit` (Primary `#5E81F4`, Lato font).
 
-```bash
-npm install
-npm start
-```
+## Routes
 
-Build:
+Auth: `/signup`, `/signin`, `/recover`, `/details`, `/finish`.
+Dashboard section (gauge rail icon): `/dashboard`, `/dashboard/overview`, `/dashboard/orders`, `/dashboard/messages`.
+Projects section (briefcase rail icon): `/projects/empty`, `/projects/list-01`, `/projects/grid-01`, `/projects/details/tasks|desk|activity|files|reports|settings`.
+Dashboard rail icons other than gauge/briefcase are placeholders for future Figma sections. In-page shortcuts (KPI cards, table rows, event rows, View all) navigate within the current section and replace the history entry, so browser Back exits the section.
 
-```bash
-npm run build
-```
+## Known limitations
+
+- All data is static mock data; there is no backend. Auth accepts any input, and project CRUD lives only in `localStorage`.
+- Member/product photos from Figma are represented by initial-based placeholders until real image assets arrive.
+- Pagination controls switch the active page indicator; tables show the demo dataset.
+- Icon-only buttons without a target section are intentionally non-navigating.
+
