@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
     <section>
       <h3 class="widget-title">Conversion history</h3>
       <p class="conv-sub">Week to week performance</p>
-      <img class="area" src="assets/dash-wave.png" alt="Week to week performance chart" />
+      <img class="area" src="assets/dash-wave.png" width="656" height="364" alt="Week to week performance chart" />
     </section>
   `,
   styles: [`
