@@ -32,6 +32,24 @@ entry, so browser Back exits the section instead of stepping views.
 
 Design tokens from `figma/UI-kit` (Primary `#5E81F4`, Lato font).
 
+## Shared components (`src/app/shared`)
+
+Reusable building blocks used across sections:
+
+- `AppShell` — rail sidebar + topbar shell (dashboard uses its own copy)
+- `DashPage` / `DashCard` / `CardTabs` — dashboard page skeleton, cards, Day/Week/Month tabs
+- `ChartCard` — line-chart card with per-tab datasets, marker tooltip, footer slot
+- `StatCard` / `SparkCard` — KPI card and sparkline card
+- `ProjectBrand` / `AvatarStack` / `UserAvatar` — brand glyph, member avatars
+- `PanelHeader` / `ProjectInfoPanel` / `DetailsTabs` — project side panels and tabs
+- `Pagination` / `ViewToggle` / `SortControl` / `Toggle` — list controls
+- `DotsMenu` — row Edit/Delete popup menu
+- `AuthLayout` / `AuthField` / `AuthSocial` — auth split layout, form fields, social buttons
+- `EmptyState` — empty-page hero (illustration + text + action)
+- `Fab` — floating action button
+
+Projects state lives in `ProjectsStore` (signals, persisted to localStorage).
+
 ## Run
 
 ```bash
