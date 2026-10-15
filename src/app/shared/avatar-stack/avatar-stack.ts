@@ -12,10 +12,10 @@ export interface StackMember {
   template: `
     <span class="stack">
       @for (m of members; track $index) {
-        <i [style.background]="m.color" [title]="m.initials">{{ m.initials }}</i>
+        <i [style.background]="m.color" [style.width.px]="size" [style.height.px]="size" [style.flex-basis.px]="size" [style.font-size.px]="size * 0.34" [title]="m.initials">{{ m.initials }}</i>
       }
       @if (extra > 0) {
-        <em>+{{ extra }}</em>
+        <em [style.height.px]="size" [style.min-width.px]="size">+{{ extra }}</em>
       }
     </span>
   `,
@@ -39,4 +39,5 @@ export interface StackMember {
 export class AvatarStack {
   @Input() members: StackMember[] = [];
   @Input() extra = 0;
+  @Input() size = 30;
 }

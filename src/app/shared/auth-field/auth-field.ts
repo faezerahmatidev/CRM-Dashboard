@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-export type FieldIcon = 'user' | 'mail' | 'lock' | 'building' | 'users' | 'phone' | 'chevron';
+export type FieldIcon = 'user' | 'mail' | 'lock' | 'building' | 'users' | 'phone' | 'chevron' | 'briefcase';
 
 @Component({
   selector: 'app-auth-field',

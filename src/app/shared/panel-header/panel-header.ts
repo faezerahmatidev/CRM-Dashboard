@@ -6,7 +6,7 @@ import { Component, Input } from '@angular/core';
   standalone: true,
   template: `
     <div class="panel-header">
-      <span class="panel-logo" [style.background]="logoTint">{{ logo }}</span>
+      <span class="panel-logo" [style.background]="logoTint || null" [style.color]="logoColor || null">{{ logo }}</span>
       <span class="panel-titles">
         <b>{{ title }}</b>
         <span>{{ sub }}</span>
@@ -38,6 +38,7 @@ import { Component, Input } from '@angular/core';
 export class PanelHeader {
   @Input() logo = 'C';
   @Input() logoTint = '';
+  @Input() logoColor = '';
   @Input() title = '';
   @Input() sub = '';
 }
