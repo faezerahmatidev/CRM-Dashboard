@@ -20,5 +20,8 @@ export class AppShell {
   @Input() activeIcon: ShellIcon = 'dashboard';
   /** Topbar action button glyph. */
   @Input() actionIcon: 'user' | 'plus' = 'user';
+  /** Show a back button before the title. */
+  @Input() showBack = false;
   @Output() action = new EventEmitter<void>();
+  @Output() back = new EventEmitter<void>();
 }

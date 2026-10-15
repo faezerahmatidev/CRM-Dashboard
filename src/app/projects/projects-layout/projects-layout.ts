@@ -11,7 +11,7 @@ import { blankProject } from '../projects-data';
   standalone: true,
   imports: [RouterOutlet, AppShell, ProjectModal],
   template: `
-    <app-shell title="{{ title }}" activeIcon="briefcase" actionIcon="plus" (action)="modalOpen = true">
+    <app-shell title="{{ title }}" activeIcon="briefcase" actionIcon="plus" (action)="modalOpen = true" [showBack]="showBack" (back)="goList()">
       <router-outlet />
     </app-shell>
     <app-project-modal [(open)]="modalOpen" (create)="onCreate($event)" />
@@ -20,6 +20,7 @@ import { blankProject } from '../projects-data';
 export class ProjectsLayout implements OnInit {
   title = 'Projects';
   modalOpen = false;
+  showBack = false;
 
   constructor(
     private router: Router,
@@ -46,5 +47,10 @@ export class ProjectsLayout implements OnInit {
       if (typeof dataTitle === 'string') this.title = dataTitle;
       snap = snap.firstChild;
     }
+    this.showBack = this.router.url.startsWith('/projects/details');
+  }
+
+  goList(): void {
+    this.router.navigate(['/projects/list-01'], { replaceUrl: true });
   }
 }
