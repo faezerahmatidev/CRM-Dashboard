@@ -90,19 +90,8 @@
   margin: 0;
 }
 
-.dots-btn {
-  border: 1px solid var(--outline);
-  background: #fff;
-  border-radius: 8px;
-  width: 30px;
-  height: 30px;
+.task-card-top .dots-btn {
   flex: 0 0 30px;
-  font-size: 13px;
-  font-weight: 900;
-  letter-spacing: 1px;
-  color: var(--primary-grey);
-  cursor: pointer;
-  padding: 0 0 4px 1px;
 }
 
 .task-prog {

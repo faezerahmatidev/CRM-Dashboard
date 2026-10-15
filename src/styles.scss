@@ -360,6 +360,25 @@ tr.clickable:hover td {
   background: #fff;
 }
 
+.dots-btn {
+  border: 1px solid var(--outline);
+  background: #fff;
+  border-radius: 8px;
+  min-width: 30px;
+  height: 30px;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  color: var(--primary-grey);
+  cursor: pointer;
+  padding: 0 6px 4px;
+}
+
+.dots-btn:hover {
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
 .card-link {
   text-decoration: none;
   color: inherit;

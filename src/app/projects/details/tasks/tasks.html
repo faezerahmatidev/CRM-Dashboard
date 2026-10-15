@@ -29,14 +29,14 @@
               <span><svg viewBox="0 0 24 24"><path d="M4.5 7A1.5 1.5 0 0 1 6 5.5h12A1.5 1.5 0 0 1 19.5 7v8a1.5 1.5 0 0 1-1.5 1.5H12l-3.5 3v-3H6A1.5 1.5 0 0 1 4.5 15V7Z" /></svg>{{ t.comments }}</span>
             </span>
             <span class="badge" [class]="badgeOf(t)">{{ labelOf(t) }}</span>
-            <span class="t-avatar" [style.background]="t.member.color">{{ t.member.initials }}</span>
+            <app-user-avatar [initials]="t.member.initials" [color]="t.member.color" [size]="32" />
           </li>
         }
       </ul>
 
-      <button class="fab" type="button" aria-label="Refresh">
+      <app-fab>
         <svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 3.5V8h-4.5" /></svg>
-      </button>
+      </app-fab>
     </section>
   </div>
 </div>

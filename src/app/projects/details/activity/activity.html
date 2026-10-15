@@ -30,7 +30,7 @@
                 </div>
               }
               <p class="activity-author">
-                <span class="t-avatar">AT</span>
+                <app-user-avatar initials="AT" color="linear-gradient(135deg,#5e81f4,#9698d6)" [size]="30" />
                 {{ item.author }}
               </p>
             </article>
@@ -38,9 +38,9 @@
         }
       </div>
 
-      <button class="fab" type="button" aria-label="Refresh">
+      <app-fab>
         <svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 3.5V8h-4.5" /></svg>
-      </button>
+      </app-fab>
     </section>
   </div>
 </div>

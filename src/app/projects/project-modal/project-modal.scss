@@ -26,20 +26,6 @@
   margin-bottom: 18px;
 }
 
-.dots-btn {
-  border: 1px solid var(--outline);
-  background: #fff;
-  border-radius: 8px;
-  width: 30px;
-  height: 30px;
-  font-size: 13px;
-  font-weight: 900;
-  letter-spacing: 1px;
-  color: var(--primary-grey);
-  cursor: pointer;
-  padding: 0 0 4px 1px;
-}
-
 .close-btn {
   border: 1px solid var(--outline);
   background: #fff;
@@ -322,17 +308,6 @@
 
 .member-picker button:hover {
   background: var(--bg-light);
-}
-
-.pick-avatar {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  color: #fff;
-  font-size: 9px;
-  font-weight: 900;
-  display: grid;
-  place-items: center;
 }
 
 .pick-check {

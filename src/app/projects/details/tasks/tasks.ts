@@ -4,6 +4,8 @@ import { DashPage } from '../../../shared/dash-page/dash-page';
 import { ProjectInfoPanel } from '../../../shared/project-info-panel/project-info-panel';
 import { DetailsTabs } from '../../../shared/details-tabs/details-tabs';
 import { SortControl } from '../../../shared/sort-control/sort-control';
+import { UserAvatar } from '../../../shared/user-avatar/user-avatar';
+import { Fab } from '../../../shared/fab/fab';
 import { DETAILS_INFO, DETAILS_TASKS, DetailTask } from '../../details-data';
 
 interface TaskRow extends DetailTask {
@@ -13,7 +15,7 @@ interface TaskRow extends DetailTask {
 @Component({
   selector: 'app-project-tasks',
   standalone: true,
-  imports: [FormsModule, DashPage, ProjectInfoPanel, DetailsTabs, SortControl],
+  imports: [FormsModule, DashPage, ProjectInfoPanel, DetailsTabs, SortControl, UserAvatar, Fab],
   templateUrl: './tasks.html',
   styleUrl: './tasks.scss',
 })

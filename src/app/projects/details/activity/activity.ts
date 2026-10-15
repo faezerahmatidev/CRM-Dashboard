@@ -3,12 +3,14 @@ import { DashPage } from '../../../shared/dash-page/dash-page';
 import { ProjectInfoPanel } from '../../../shared/project-info-panel/project-info-panel';
 import { DetailsTabs } from '../../../shared/details-tabs/details-tabs';
 import { SortControl } from '../../../shared/sort-control/sort-control';
+import { UserAvatar } from '../../../shared/user-avatar/user-avatar';
+import { Fab } from '../../../shared/fab/fab';
 import { DETAILS_INFO, ACTIVITY_GROUPS } from '../../details-data';
 
 @Component({
   selector: 'app-project-activity',
   standalone: true,
-  imports: [DashPage, ProjectInfoPanel, DetailsTabs, SortControl],
+  imports: [DashPage, ProjectInfoPanel, DetailsTabs, SortControl, UserAvatar, Fab],
   templateUrl: './activity.html',
   styleUrl: './activity.scss',
 })

@@ -28,7 +28,7 @@
               @for (m of roster; track m.initials) {
                 <li>
                   <button type="button" [class.picked]="isAssigned(m)" (click)="toggleAssignee(m)">
-                    <span class="pick-avatar" [style.background]="m.color">{{ m.initials }}</span>
+                    <app-user-avatar [initials]="m.initials" [color]="m.color" [size]="26" />
                     <span class="pick-check">{{ isAssigned(m) ? '✓' : '' }}</span>
                   </button>
                 </li>
