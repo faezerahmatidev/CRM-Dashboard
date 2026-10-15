@@ -1,0 +1,15 @@
+<div class="dash-card-head">
+  <h2 class="dash-card-title">{{ title }}</h2>
+  <div class="head-actions">
+    <ng-content select="[card-action]" />
+    @if (tabs?.length) {
+      <app-card-tabs [options]="tabs!" [active]="tab || tabs![0]" (activeChange)="onTabChange($event)" />
+    }
+    @if (calendar) {
+      <button class="icon-btn sm" type="button" aria-label="Calendar">
+        <svg viewBox="0 0 24 24"><rect x="4.5" y="6" width="15" height="13" rx="2"/><path d="M4.5 10h15M8.5 3.5V7M15.5 3.5V7"/></svg>
+      </button>
+    }
+  </div>
+</div>
+<ng-content />

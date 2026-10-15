@@ -1,0 +1,46 @@
+<app-dash-card
+  [title]="title"
+  [tabs]="tabs"
+  [tab]="tab"
+  (tabChange)="tabChange.emit($event)"
+  [calendar]="calendar"
+>
+  @if (bigNumber) {
+    <p class="big-num">{{ bigNumber }} @if (showTrend) { <span class="trend">↗</span> }</p>
+  }
+  @if (bigSub) {
+    <p class="big-sub">{{ bigSub }}</p>
+  }
+  <svg class="chart" [attr.viewBox]="viewBox" role="img" [attr.aria-label]="title + ' chart'">
+    @for (line of set.lines; track $index) {
+      <path
+        [attr.d]="line.d"
+        fill="none"
+        [attr.stroke]="line.color"
+        [attr.stroke-width]="line.width ?? 2.5"
+        [attr.stroke-dasharray]="line.dash"
+        stroke-linecap="round"
+      />
+    }
+    @if (set.marker; as m) {
+      <circle [attr.cx]="m.x" [attr.cy]="m.y" r="5" [attr.fill]="m.color" stroke="#fff" stroke-width="2.5" />
+      @if (m.label) {
+        <g>
+          <rect [attr.x]="tipX" [attr.y]="tipY" [attr.width]="tipWidth" height="44" rx="6" fill="#fff" stroke="#f0f0f3" />
+          <text [attr.x]="tipX + tipWidth / 2" [attr.y]="tipY + 18" text-anchor="middle" font-size="10" fill="#8181a5">{{ m.label }}</text>
+          <text [attr.x]="tipX + tipWidth / 2" [attr.y]="tipY + 34" text-anchor="middle" font-size="12" font-weight="bold" fill="#1c1d21">{{ m.value }}</text>
+        </g>
+      }
+    }
+    @for (label of xLabels; track $index) {
+      <text
+        [attr.x]="labelStartX + $index * labelStepX"
+        [attr.y]="labelY"
+        text-anchor="middle"
+        font-size="10"
+        fill="#9a9ab0"
+      >{{ label }}</text>
+    }
+  </svg>
+  <ng-content />
+</app-dash-card>

@@ -1,0 +1,4 @@
+<img class="empty-art" [src]="image" [alt]="imageAlt" />
+<h2>{{ title }}@if (subtitle) { <br />{{ subtitle }} }</h2>
+<p>{{ text }}</p>
+<button class="btn btn-primary setup-btn" type="button" (click)="action.emit()">{{ actionLabel }}</button>

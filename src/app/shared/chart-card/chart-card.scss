@@ -1,0 +1,23 @@
+.big-num {
+  font-size: 22px;
+  font-weight: 900;
+  margin: 14px 0 2px;
+}
+
+.big-sub {
+  font-size: 11px;
+  color: var(--primary-grey);
+  margin: 0 0 6px;
+}
+
+.trend {
+  color: #34b26b;
+  font-size: 14px;
+}
+
+.chart {
+  width: 100%;
+  height: auto;
+  display: block;
+  font-family: inherit;
+}

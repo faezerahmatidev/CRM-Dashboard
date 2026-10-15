@@ -1,0 +1,7 @@
+<div class="spark-body"><b>{{ value }}</b><p>{{ sub }}</p></div>
+<svg class="spark-line" viewBox="0 0 128 32" role="img" [attr.aria-label]="sub + ' sparkline'">
+  <path [attr.d]="path" fill="none" stroke="#5e81f4" stroke-width="2" stroke-linecap="round" />
+  @if (dot) {
+    <circle [attr.cx]="dotX" [attr.cy]="dotY" r="3" fill="#ff808b" stroke="#fff" stroke-width="1.5" />
+  }
+</svg>

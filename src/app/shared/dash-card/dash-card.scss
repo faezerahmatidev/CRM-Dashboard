@@ -1,0 +1,12 @@
+.head-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.icon-btn.sm {
+  width: 30px;
+  height: 30px;
+  background: var(--bg-light);
+  border-radius: 8px;
+}
