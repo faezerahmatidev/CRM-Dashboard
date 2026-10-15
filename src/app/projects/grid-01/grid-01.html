@@ -1,0 +1,33 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-panel-header logo="C" title="CRAFTUI LLC" sub="8484 Ross Wells" />
+    <app-messages-list [count]="5" [viewAll]="true" [messages]="messages" />
+    <app-conversion-bars title="Progress history" sub="Week to week performance" />
+  </aside>
+
+  <div page-main class="dash-main">
+    <section class="dash-card projects-card">
+      <div class="projects-toolbar">
+        <app-view-toggle mode="grid" (modeChange)="onViewChange($event)" />
+        <app-sort-control [value]="sortAsc ? 'A-Z' : 'Z-A'" (toggle)="sortAsc = !sortAsc" />
+      </div>
+      <div class="plist-head">
+        <span>Projects</span><span>Tasks <i>⇅</i></span><span>Due date <i>⇅</i></span><span>Members <i>⇅</i></span>
+      </div>
+      <div class="grid-cards">
+        @for (p of sortedProjects(); track p.name) {
+          <article class="grid-card">
+            <span class="mini-bar"><i [style.width.%]="p.progress" [style.background]="p.progressColor"></i></span>
+            <button class="dots-btn corner" type="button" aria-label="More actions">···</button>
+            <app-project-brand [glyph]="p.brand.glyph" [tint]="p.brand.tint" [color]="p.brand.color" />
+            <h3>{{ p.name }}</h3>
+            <p>{{ p.category }}</p>
+            <p class="complete"><b>{{ p.complete }}</b><span>Tasks complete</span></p>
+            <app-avatar-stack [members]="p.members" [extra]="p.extra" />
+          </article>
+        }
+      </div>
+      <app-pagination [active]="page" (pageChange)="page = $event" />
+    </section>
+  </div>
+</div>
