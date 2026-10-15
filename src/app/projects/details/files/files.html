@@ -1,0 +1,33 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-project-info-panel [info]="info" />
+  </aside>
+
+  <div page-main class="dash-main">
+    <section class="dash-card files-card">
+      <app-details-tabs />
+
+      <div class="files-head">
+        <span>Name</span><span>Size</span><span>Tag</span><span>Members</span><span></span>
+      </div>
+      <ul class="files-rows">
+        @for (f of files; track f.name) {
+          <li>
+            <span class="f-main">
+              <app-project-brand [glyph]="f.glyph" [tint]="f.tint" [color]="f.color" />
+              <b>{{ f.name }}</b>
+            </span>
+            <span class="f-size">{{ f.size }}</span>
+            <span class="f-tag">
+              <svg viewBox="0 0 24 24"><path d="M3.5 12V4.5A1 1 0 0 1 4.5 3.5H12L20.5 12a1.4 1.4 0 0 1 0 2L14 20.5a1.4 1.4 0 0 1-2 0L3.5 12Z"/><circle cx="8.5" cy="8.5" r="1.2"/></svg>
+              {{ f.tag }}
+            </span>
+            <app-avatar-stack [members]="f.members" [extra]="f.extra" />
+            <button class="dots-btn" type="button" aria-label="More actions">···</button>
+          </li>
+        }
+      </ul>
+      <app-pagination [active]="page" (pageChange)="page = $event" />
+    </section>
+  </div>
+</div>
