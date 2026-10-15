@@ -15,7 +15,11 @@
           <li>
             <span class="f-main">
               <app-project-brand [glyph]="f.glyph" [tint]="f.tint" [color]="f.color" />
-              <b>{{ f.name }}</b>
+              @if (editing === f.name) {
+                <input class="edit-input" [(ngModel)]="draft" (keyup.enter)="commitEdit()" (blur)="commitEdit()" [attr.aria-label]="'Edit ' + f.name" />
+              } @else {
+                <b>{{ f.name }}</b>
+              }
             </span>
             <span class="f-size">{{ f.size }}</span>
             <span class="f-tag">
@@ -23,7 +27,7 @@
               {{ f.tag }}
             </span>
             <app-avatar-stack [members]="f.members" [extra]="f.extra" />
-            <button class="dots-btn" type="button" aria-label="More actions">···</button>
+            <app-dots-menu (edit)="onEdit(f)" (remove)="onRemove(f)" />
           </li>
         }
       </ul>

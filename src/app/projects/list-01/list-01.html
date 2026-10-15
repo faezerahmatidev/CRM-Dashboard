@@ -19,7 +19,14 @@
           <li class="clickable" routerLink="/projects/details/tasks" replaceUrl [title]="p.name">
             <span class="p-main">
               <app-project-brand [glyph]="p.brand.glyph" [tint]="p.brand.tint" [color]="p.brand.color" />
-              <span class="p-titles"><b>{{ p.name }}</b><span>{{ p.category }}</span></span>
+              <span class="p-titles">
+                @if (editing === p.name) {
+                  <input class="edit-input" [(ngModel)]="draft" (click)="$event.stopPropagation()" (keyup.enter)="commitEdit()" (blur)="commitEdit()" [attr.aria-label]="'Edit ' + p.name" />
+                } @else {
+                  <b>{{ p.name }}</b>
+                }
+                <span>{{ p.category }}</span>
+              </span>
             </span>
             <span class="p-stat"><b>{{ p.tasksDone }} / {{ p.tasksTotal }}</b><span>Tasks</span></span>
             <span class="p-stat"><b>{{ p.budget }}</b><span>Budget</span></span>
@@ -27,7 +34,7 @@
             <span class="p-members">
               <app-avatar-stack [members]="p.members" [extra]="p.extra" />
             </span>
-            <button class="dots-btn" type="button" aria-label="More actions">···</button>
+            <app-dots-menu (edit)="onEdit(p)" (remove)="onRemove(p)" />
           </li>
         }
       </ul>

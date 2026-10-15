@@ -94,22 +94,3 @@
   min-width: 0;
   overflow: hidden;
 }
-
-.dots-btn {
-  border: 1px solid var(--outline);
-  background: #fff;
-  border-radius: 8px;
-  width: 34px;
-  height: 34px;
-  font-size: 14px;
-  font-weight: 900;
-  letter-spacing: 1px;
-  color: var(--primary-grey);
-  cursor: pointer;
-  padding: 0 0 4px 1px;
-}
-
-.dots-btn:hover {
-  color: var(--primary);
-  border-color: var(--primary);
-}
