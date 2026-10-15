@@ -31,6 +31,21 @@ export interface Project {
   progressColor?: string;
 }
 
+export function blankProject(name: string): Project {
+  const title = name.trim() || 'New Project';
+  return {
+    name: title,
+    category: 'Development',
+    tasksDone: 0,
+    tasksTotal: 1,
+    budget: '$0.0',
+    due: '—',
+    brand: { glyph: (title.charAt(0) || 'N').toUpperCase(), tint: '#e9eefe', color: '#5e81f4' },
+    members: [],
+    extra: 0,
+  };
+}
+
 function members(initials: string[]): ProjectMember[] {
   return initials.map((name, i) => ({
     initials: name,

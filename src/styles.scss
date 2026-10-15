@@ -346,6 +346,20 @@ tr.clickable:hover td {
   background: #f7f9ff;
 }
 
+.edit-input {
+  border: 1.5px solid var(--primary);
+  border-radius: 8px;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary-dark);
+  padding: 6px 10px;
+  outline: none;
+  width: 100%;
+  min-width: 0;
+  background: #fff;
+}
+
 .card-link {
   text-decoration: none;
   color: inherit;
