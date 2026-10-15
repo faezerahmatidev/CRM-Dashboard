@@ -3,6 +3,9 @@ import { RouterLink } from '@angular/router';
 import { DashWelcome } from '../widgets/welcome';
 import { LatestUpdates } from '../widgets/latest-updates';
 import { UpcomingEvents } from '../widgets/upcoming-events';
+import { DashCard } from '../../shared/dash-card/dash-card';
+import { DashPage } from '../../shared/dash-page/dash-page';
+import { ChartCard, ChartSet } from '../../shared/chart-card/chart-card';
 
 interface DashEvent {
   icon: 'invoice' | 'client' | 'meeting';
@@ -10,14 +13,6 @@ interface DashEvent {
   sub: string;
   value: string;
   link: string;
-}
-
-interface ChartSet {
-  d: string;
-  mx: number;
-  my: number;
-  label: string;
-  value: string;
 }
 
 interface DonutSet {
@@ -30,7 +25,7 @@ interface DonutSet {
 @Component({
   selector: 'app-dash-sales',
   standalone: true,
-  imports: [DashWelcome, LatestUpdates, UpcomingEvents, RouterLink],
+  imports: [DashWelcome, LatestUpdates, UpcomingEvents, RouterLink, DashCard, DashPage, ChartCard],
   templateUrl: './sales.html',
   styleUrl: './sales.scss',
 })
@@ -47,32 +42,32 @@ export class DashSales {
   salesTab = 'Day';
   salesSets: Record<string, ChartSet> = {
     Day: {
-      d: 'M0 140 C 40 120, 60 178, 110 172 C 160 166, 168 66, 222 60 C 276 54, 286 124, 336 134 C 386 144, 404 112, 452 118 C 496 123, 522 84, 560 90',
-      mx: 222, my: 60, label: 'March', value: '$48,200',
+      lines: [{ d: 'M0 140 C 40 120, 60 178, 110 172 C 160 166, 168 66, 222 60 C 276 54, 286 124, 336 134 C 386 144, 404 112, 452 118 C 496 123, 522 84, 560 90', color: '#5e81f4' }],
+      marker: { x: 222, y: 60, color: '#5e81f4', label: 'March', value: '$48,200' },
     },
     Week: {
-      d: 'M0 118 C 45 100, 70 152, 120 146 C 170 140, 185 72, 242 68 C 299 64, 308 128, 358 126 C 408 124, 428 92, 482 98 C 522 102, 540 72, 560 78',
-      mx: 300, my: 96, label: 'April', value: '$52,400',
+      lines: [{ d: 'M0 118 C 45 100, 70 152, 120 146 C 170 140, 185 72, 242 68 C 299 64, 308 128, 358 126 C 408 124, 428 92, 482 98 C 522 102, 540 72, 560 78', color: '#5e81f4' }],
+      marker: { x: 300, y: 96, color: '#5e81f4', label: 'April', value: '$52,400' },
     },
     Month: {
-      d: 'M0 152 C 50 136, 75 182, 125 176 C 175 170, 190 88, 245 84 C 300 80, 318 142, 372 136 C 426 130, 448 78, 502 84 C 530 87, 545 64, 560 70',
-      mx: 378, my: 72, label: 'May', value: '$61,800',
+      lines: [{ d: 'M0 152 C 50 136, 75 182, 125 176 C 175 170, 190 88, 245 84 C 300 80, 318 142, 372 136 C 426 130, 448 78, 502 84 C 530 87, 545 64, 560 70', color: '#5e81f4' }],
+      marker: { x: 378, y: 72, color: '#5e81f4', label: 'May', value: '$61,800' },
     },
   };
 
   incomeTab = 'Day';
   incomeSets: Record<string, ChartSet> = {
     Day: {
-      d: 'M0 120 C 60 110, 90 60, 150 62 C 210 64, 230 110, 300 108 C 370 106, 400 60, 460 58 C 510 56, 530 80, 560 74',
-      mx: 300, my: 108, label: 'March', value: '$48,200',
+      lines: [{ d: 'M0 120 C 60 110, 90 60, 150 62 C 210 64, 230 110, 300 108 C 370 106, 400 60, 460 58 C 510 56, 530 80, 560 74', color: '#7ce7ac' }],
+      marker: { x: 300, y: 108, color: '#7ce7ac', label: 'March', value: '$48,200' },
     },
     Week: {
-      d: 'M0 128 C 60 120, 95 70, 155 72 C 215 74, 235 118, 305 116 C 375 114, 405 66, 465 64 C 515 62, 535 88, 560 82',
-      mx: 340, my: 92, label: 'April', value: '$51,300',
+      lines: [{ d: 'M0 128 C 60 120, 95 70, 155 72 C 215 74, 235 118, 305 116 C 375 114, 405 66, 465 64 C 515 62, 535 88, 560 82', color: '#7ce7ac' }],
+      marker: { x: 340, y: 92, color: '#7ce7ac', label: 'April', value: '$51,300' },
     },
     Month: {
-      d: 'M0 110 C 60 100, 90 52, 150 54 C 210 56, 235 104, 305 100 C 375 96, 400 50, 465 48 C 515 46, 535 72, 560 66',
-      mx: 420, my: 62, label: 'June', value: '$64,900',
+      lines: [{ d: 'M0 110 C 60 100, 90 52, 150 54 C 210 56, 235 104, 305 100 C 375 96, 400 50, 465 48 C 515 46, 535 72, 560 66', color: '#7ce7ac' }],
+      marker: { x: 420, y: 62, color: '#7ce7ac', label: 'June', value: '$64,900' },
     },
   };
   incomeStats: Record<string, string[]> = {

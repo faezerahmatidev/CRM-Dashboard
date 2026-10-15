@@ -1,40 +1,21 @@
-<div class="dash-grid">
-  <aside class="info-panel">
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
     <app-dash-welcome />
     <app-upcoming-events />
     <app-conversion-bars />
   </aside>
 
-  <div class="dash-main">
+  <div page-main class="dash-main">
     <div class="kpi-grid">
       @for (s of sparks; track s.value) {
-        <section class="dash-card spark">
-          <div><b>{{ s.value }}</b><p>{{ s.sub }}</p></div>
-          <svg viewBox="0 0 128 32" role="img" [attr.aria-label]="s.sub + ' sparkline'">
-            <path [attr.d]="s.path" fill="none" stroke="#5e81f4" stroke-width="2" stroke-linecap="round" />
-            @if (s.dot) {
-              <circle [attr.cx]="s.dot.split(',')[0]" [attr.cy]="s.dot.split(',')[1]" r="3" fill="#ff808b" stroke="#fff" stroke-width="1.5" />
-            }
-          </svg>
+        <section class="dash-card spark" app-spark-card
+          [value]="s.value" [sub]="s.sub" [path]="s.path" [dot]="s.dot">
         </section>
       }
     </div>
 
     <div class="cards-2">
-      <section class="dash-card">
-        <div class="dash-card-head">
-          <h2 class="dash-card-title">Orders</h2>
-          <div class="head-actions">
-            <div class="tabs">
-              @for (t of tabs; track t) {
-                <button [class.active]="orderTab === t" (click)="orderTab = t">{{ t }}</button>
-              }
-            </div>
-            <button class="icon-btn sm" type="button" aria-label="Calendar">
-              <svg viewBox="0 0 24 24"><rect x="4.5" y="6" width="15" height="13" rx="2"/><path d="M4.5 10h15M8.5 3.5V7M15.5 3.5V7"/></svg>
-            </button>
-          </div>
-        </div>
+      <section class="dash-card" app-dash-card title="Orders" [tabs]="tabs" [(tab)]="orderTab" [calendar]="true">
         <div class="table-head"><span>Product</span><span>Details</span></div>
         <ul class="rows">
           @for (o of visibleOrders(); track o.product) {
@@ -51,17 +32,7 @@
         </div>
       </section>
 
-      <section class="dash-card">
-        <div class="dash-card-head">
-          <h2 class="dash-card-title">Invoices</h2>
-          <div class="head-actions">
-            <div class="tabs">
-              @for (t of tabs; track t) {
-                <button [class.active]="invTab === t" (click)="invTab = t">{{ t }}</button>
-              }
-            </div>
-          </div>
-        </div>
+      <section class="dash-card" app-dash-card title="Invoices" [tabs]="tabs" [(tab)]="invTab">
         <div class="table-head"><span>Number</span><span>Details</span></div>
         <ul class="rows">
           @for (i of visibleInvoices(); track $index) {

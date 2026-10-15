@@ -1,16 +1,21 @@
-<div class="dash-grid">
-  <aside class="info-panel">
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
     <app-dash-welcome />
     <app-messages-list />
     <app-conversion-area />
   </aside>
 
-  <div class="dash-main">
+  <div page-main class="dash-main">
     <section class="dash-card empty-card">
-      <img class="empty-art" src="assets/dash-empty.png" alt="No data illustration" />
-      <h2>There is no data to display.<br />Setup your business.</h2>
-      <p>Enter your details to proceed further</p>
-      <button class="btn btn-primary setup-btn" type="button" (click)="onSetup()">Setup</button>
+      <app-empty-state
+        image="assets/dash-empty.png"
+        imageAlt="No data illustration"
+        title="There is no data to display."
+        subtitle="Setup your business."
+        text="Enter your details to proceed further"
+        actionLabel="Setup"
+        (action)="onSetup()"
+      />
     </section>
   </div>
 </div>

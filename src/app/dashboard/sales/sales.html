@@ -1,48 +1,29 @@
-<div class="dash-grid">
-  <aside class="info-panel">
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
     <app-dash-welcome />
     <app-latest-updates />
     <app-upcoming-events />
   </aside>
 
-  <div class="dash-main">
+  <div page-main class="dash-main">
     <div class="cards-2">
-      <section class="dash-card">
-        <div class="dash-card-head">
-          <h2 class="dash-card-title"><a class="card-link" routerLink="/dashboard/overview" replaceUrl title="Open Overview">Your Sales</a></h2>
-          <div class="head-actions">
-            <div class="tabs">
-              @for (t of tabs; track t) {
-                <button [class.active]="salesTab === t" (click)="salesTab = t">{{ t }}</button>
-              }
-            </div>
-            <button class="icon-btn sm" type="button" aria-label="Calendar">
-              <svg viewBox="0 0 24 24"><rect x="4.5" y="6" width="15" height="13" rx="2"/><path d="M4.5 10h15M8.5 3.5V7M15.5 3.5V7"/></svg>
-            </button>
-          </div>
-        </div>
-        <p class="big-num">$142,000</p>
-        <p class="big-sub">Total income</p>
-        <svg class="chart" viewBox="0 0 560 230" role="img" aria-label="Sales from January to July">
-          <path [attr.d]="salesSets[salesTab].d"
-            fill="none" stroke="#5e81f4" stroke-width="2.5" stroke-linecap="round" />
-          <circle [attr.cx]="salesSets[salesTab].mx" [attr.cy]="salesSets[salesTab].my" r="5" fill="#5e81f4" stroke="#fff" stroke-width="2.5" />
-          <g>
-            <rect x="238" y="34" width="86" height="44" rx="6" fill="#fff" stroke="#f0f0f3" />
-            <text x="281" y="52" text-anchor="middle" font-size="10" fill="#8181a5">{{ salesSets[salesTab].label }}</text>
-            <text x="281" y="68" text-anchor="middle" font-size="12" font-weight="bold" fill="#1c1d21">{{ salesSets[salesTab].value }}</text>
-          </g>
-          @for (m of ['Jan','Feb','Mar','Apr','May','Jun','Jul']; track m) {
-            <text [attr.x]="30 + $index * 83" y="214" text-anchor="middle" font-size="10" fill="#9a9ab0">{{ m }}</text>
-          }
-        </svg>
-      </section>
+      <app-chart-card
+        title="Your Sales"
+        [tabs]="tabs"
+        [(tab)]="salesTab"
+        [calendar]="true"
+        bigNumber="$142,000"
+        bigSub="Total income"
+        [sets]="salesSets"
+        [xLabels]="['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']"
+        viewBox="0 0 560 230"
+        [labelY]="214"
+        [labelStartX]="30"
+        [labelStepX]="83"
+      />
 
-      <section class="dash-card">
-        <div class="dash-card-head">
-          <h2 class="dash-card-title">Latest Events</h2>
-          <a class="mini-btn" routerLink="/dashboard/orders" replaceUrl>View all</a>
-        </div>
+      <section class="dash-card" app-dash-card title="Latest Events">
+        <a card-action class="mini-btn" routerLink="/dashboard/orders" replaceUrl>View all</a>
         <div class="events-head"><span>Event</span><span>Details</span></div>
         <ul class="event-rows">
           @for (e of events; track e.title) {
@@ -69,20 +50,7 @@
     </div>
 
     <div class="cards-2">
-      <section class="dash-card">
-        <div class="dash-card-head">
-          <h2 class="dash-card-title"><a class="card-link" routerLink="/dashboard/overview" replaceUrl title="Open Overview">Income Breakdown</a></h2>
-          <div class="head-actions">
-            <div class="tabs">
-              @for (t of tabs; track t) {
-                <button [class.active]="donutTab === t" (click)="donutTab = t">{{ t }}</button>
-              }
-            </div>
-            <button class="icon-btn sm" type="button" aria-label="Calendar">
-              <svg viewBox="0 0 24 24"><rect x="4.5" y="6" width="15" height="13" rx="2"/><path d="M4.5 10h15M8.5 3.5V7M15.5 3.5V7"/></svg>
-            </button>
-          </div>
-        </div>
+      <section class="dash-card" app-dash-card title="Income Breakdown" [tabs]="tabs" [(tab)]="donutTab" [calendar]="true">
         <div class="donut-wrap">
           <svg class="donut" viewBox="0 0 200 200" role="img" aria-label="Income breakdown donut chart">
             <g transform="rotate(-90 100 100)" fill="none" stroke-width="26">
@@ -102,38 +70,23 @@
         </div>
       </section>
 
-      <section class="dash-card">
-        <div class="dash-card-head">
-          <h2 class="dash-card-title"><a class="card-link" routerLink="/dashboard/overview" replaceUrl title="Open Overview">Income Details</a></h2>
-          <div class="head-actions">
-            <div class="tabs">
-              @for (t of tabs; track t) {
-                <button [class.active]="incomeTab === t" (click)="incomeTab = t">{{ t }}</button>
-              }
-            </div>
-            <button class="icon-btn sm" type="button" aria-label="Calendar">
-              <svg viewBox="0 0 24 24"><rect x="4.5" y="6" width="15" height="13" rx="2"/><path d="M4.5 10h15M8.5 3.5V7M15.5 3.5V7"/></svg>
-            </button>
-          </div>
-        </div>
-        <p class="big-num">$142,000 <span class="trend">↗</span></p>
-        <p class="big-sub">Total income</p>
-        <svg class="chart" viewBox="0 0 560 190" role="img" aria-label="Income details chart">
-          <path [attr.d]="incomeSets[incomeTab].d"
-            fill="none" stroke="#7ce7ac" stroke-width="2.5" stroke-linecap="round" />
-          <circle [attr.cx]="incomeSets[incomeTab].mx" [attr.cy]="incomeSets[incomeTab].my" r="5" fill="#7ce7ac" stroke="#fff" stroke-width="2.5" />
-          <g>
-            <rect x="316" y="82" width="86" height="44" rx="6" fill="#fff" stroke="#f0f0f3" />
-            <text x="359" y="100" text-anchor="middle" font-size="10" fill="#8181a5">{{ incomeSets[incomeTab].label }}</text>
-            <text x="359" y="116" text-anchor="middle" font-size="12" font-weight="bold" fill="#1c1d21">{{ incomeSets[incomeTab].value }}</text>
-          </g>
-        </svg>
+      <app-chart-card
+        title="Income Details"
+        [tabs]="tabs"
+        [(tab)]="incomeTab"
+        [calendar]="true"
+        bigNumber="$142,000"
+        [showTrend]="true"
+        bigSub="Total income"
+        [sets]="incomeSets"
+        viewBox="0 0 560 190"
+      >
         <div class="stats-3">
           <div><b>{{ incomeStats[incomeTab][0] }}</b><span>Total sales</span></div>
           <div><b>{{ incomeStats[incomeTab][1] }}</b><span>Spendings</span></div>
           <div><b>{{ incomeStats[incomeTab][2] }}</b><span>Income</span></div>
         </div>
-      </section>
+      </app-chart-card>
     </div>
   </div>
 </div>

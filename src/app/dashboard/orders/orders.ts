@@ -2,6 +2,9 @@ import { Component } from '@angular/core';
 import { DashWelcome } from '../widgets/welcome';
 import { UpcomingEvents } from '../widgets/upcoming-events';
 import { ConversionBars } from '../widgets/conversion-bars';
+import { DashCard } from '../../shared/dash-card/dash-card';
+import { DashPage } from '../../shared/dash-page/dash-page';
+import { SparkCard } from '../../shared/spark-card/spark-card';
 
 interface Spark {
   value: string;
@@ -31,7 +34,7 @@ interface Invoice {
 @Component({
   selector: 'app-dash-orders',
   standalone: true,
-  imports: [DashWelcome, UpcomingEvents, ConversionBars],
+  imports: [DashWelcome, UpcomingEvents, ConversionBars, DashCard, DashPage, SparkCard],
   templateUrl: './orders.html',
   styleUrl: './orders.scss',
 })

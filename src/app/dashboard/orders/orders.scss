@@ -1,45 +1,8 @@
-.dash-main {
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  min-width: 0;
-}
-
-.head-actions {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.icon-btn.sm {
-  width: 30px;
-  height: 30px;
-  background: var(--bg-light);
-  border-radius: 8px;
-}
-
 .spark {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px;
-}
-
-.spark b {
-  font-size: 20px;
-  font-weight: 900;
-}
-
-.spark p {
-  font-size: 10.5px;
-  color: var(--primary-grey);
-  margin: 4px 0 0;
-}
-
-.spark svg {
-  width: 128px;
-  flex: 0 0 128px;
-  height: auto;
 }
 
 .table-head {
