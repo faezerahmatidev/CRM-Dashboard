@@ -40,6 +40,32 @@
   padding: 0 0 4px 1px;
 }
 
+.close-btn {
+  border: 1px solid var(--outline);
+  background: #fff;
+  border-radius: 8px;
+  width: 30px;
+  height: 30px;
+  color: var(--primary-grey);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.close-btn:hover {
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.close-btn svg {
+  width: 13px;
+  height: 13px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+}
+
 .modal-title-row {
   display: flex;
   align-items: center;
@@ -136,6 +162,19 @@
   border: 1px solid var(--outline);
   border-radius: 8px;
   padding: 8px 12px;
+}
+
+.date-pill {
+  position: relative;
+  cursor: pointer;
+}
+
+.date-pill input[type='date'] {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  width: 100%;
 }
 
 .pill svg {
@@ -246,4 +285,106 @@
 .send-btn {
   flex: none;
   min-width: 110px;
+}
+
+.assign-col {
+  position: relative;
+}
+
+.member-picker {
+  position: absolute;
+  z-index: 10;
+  top: calc(100% + 6px);
+  left: 0;
+  min-width: 190px;
+  list-style: none;
+  margin: 0;
+  padding: 6px;
+  background: #fff;
+  border: 1px solid var(--outline);
+  border-radius: 10px;
+  box-shadow: 0 12px 32px rgb(28 29 33 / 0.16);
+}
+
+.member-picker button {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border-radius: 7px;
+  padding: 6px 8px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.member-picker button:hover {
+  background: var(--bg-light);
+}
+
+.pick-avatar {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 9px;
+  font-weight: 900;
+  display: grid;
+  place-items: center;
+}
+
+.pick-check {
+  margin-left: auto;
+  color: var(--primary);
+  font-weight: 900;
+  width: 14px;
+}
+
+.file-list {
+  list-style: none;
+  margin: 0 0 4px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.file-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11.5px;
+  background: var(--bg-light);
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+.file-name {
+  flex: 1;
+  min-width: 0;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.file-size {
+  color: var(--primary-grey);
+  white-space: nowrap;
+}
+
+.file-list button {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: var(--primary-grey);
+  font-size: 15px;
+  line-height: 1;
+  padding: 2px 4px;
+}
+
+.file-list button:hover {
+  color: #f0566b;
 }

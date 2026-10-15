@@ -1,34 +1,49 @@
 @if (open) {
   <div class="modal-overlay" (click)="close()">
-    <div class="modal-card" role="dialog" aria-label="Create New Project" (click)="$event.stopPropagation()">
+    <div class="modal-card" role="dialog" [attr.aria-label]="isEdit ? 'Edit Project' : 'Create New Project'" (click)="$event.stopPropagation()">
       <div class="modal-head">
-        <span>Create New Project</span>
-        <button class="dots-btn" type="button" aria-label="More actions">···</button>
+        <span>{{ isEdit ? 'Edit Project' : 'Create New Project' }}</span>
+        <button class="close-btn" type="button" aria-label="Close" (click)="close()">
+          <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" /></svg>
+        </button>
       </div>
 
       <div class="modal-title-row">
         <span class="add-box">+</span>
         <div class="modal-title-text">
-          <input [(ngModel)]="name" (keyup.enter)="submit()" placeholder="Type new project's name" aria-label="New project's name" />
+          <input #nameInput [(ngModel)]="name" (keyup.enter)="submit()" [placeholder]="isEdit ? '' : 'Type new project\'s name'" aria-label="Project's name" />
           <span>Created on 07 Jun 2019</span>
         </div>
       </div>
 
       <div class="modal-cols">
-        <div>
+        <div class="assign-col">
           <p class="modal-label">Assigned to</p>
           <div class="modal-assigned">
             <app-avatar-stack [members]="assignees" [size]="32" />
-            <button class="add-btn" type="button" aria-label="Add member">+</button>
+            <button class="add-btn" type="button" aria-label="Choose members" (click)="pickerOpen = !pickerOpen">+</button>
           </div>
+          @if (pickerOpen) {
+            <ul class="member-picker">
+              @for (m of roster; track m.initials) {
+                <li>
+                  <button type="button" [class.picked]="isAssigned(m)" (click)="toggleAssignee(m)">
+                    <span class="pick-avatar" [style.background]="m.color">{{ m.initials }}</span>
+                    <span class="pick-check">{{ isAssigned(m) ? '✓' : '' }}</span>
+                  </button>
+                </li>
+              }
+            </ul>
+          }
         </div>
         <div>
           <p class="modal-label">Due to</p>
           <div class="modal-due">
-            <span class="pill">
+            <label class="pill date-pill">
               <svg viewBox="0 0 24 24"><rect x="4.5" y="6" width="15" height="13" rx="2"/><path d="M4.5 10h15M8.5 3.5V7M15.5 3.5V7"/></svg>
-              14 Aug 2018
-            </span>
+              {{ dueLabel }}
+              <input type="date" [(ngModel)]="dueIso" aria-label="Due date" />
+            </label>
             <span class="pill accent">Spotify</span>
           </div>
         </div>
@@ -43,14 +58,26 @@
       </p>
 
       <h3>Attachments</h3>
-      <button class="upload-row" type="button">
+      @if (files.length) {
+        <ul class="file-list">
+          @for (f of files; track $index) {
+            <li>
+              <span class="file-name">{{ f.name }}</span>
+              <span class="file-size">{{ f.size }}</span>
+              <button type="button" aria-label="Remove attachment" (click)="removeFile($index)">×</button>
+            </li>
+          }
+        </ul>
+      }
+      <button class="upload-row" type="button" (click)="fileInput.click()">
         <svg viewBox="0 0 24 24"><path d="M7 18a4.5 4.5 0 1 1 .6-8.96A5.5 5.5 0 0 1 18.3 10H18a3.5 3.5 0 0 1 .5 6.96" /><path d="M12 12v8M8.5 15.5 12 12l3.5 3.5" /></svg>
         Upload your attachment
       </button>
+      <input #fileInput type="file" multiple hidden (change)="pickFiles($event)" />
 
       <div class="comment-row">
         <input [(ngModel)]="comment" placeholder="Add your comment" aria-label="Add your comment" />
-        <button class="icon-ghost" type="button" aria-label="Attach">
+        <button class="icon-ghost" type="button" aria-label="Attach a file" (click)="fileInput.click()">
           <svg viewBox="0 0 24 24"><path d="M21 11.5l-8.5 8.5a5.5 5.5 0 0 1-7.8-7.8L13 4a3.7 3.7 0 0 1 5.2 5.2l-8.2 8.2a1.85 1.85 0 0 1-2.6-2.6L15 7.5" /></svg>
         </button>
         <button class="icon-ghost" type="button" aria-label="Send comment" (click)="submit()">
