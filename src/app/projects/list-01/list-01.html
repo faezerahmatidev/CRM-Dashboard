@@ -20,11 +20,7 @@
             <span class="p-main">
               <app-project-brand [glyph]="p.brand.glyph" [tint]="p.brand.tint" [color]="p.brand.color" />
               <span class="p-titles">
-                @if (editing === p.name) {
-                  <input class="edit-input" [(ngModel)]="draft" (click)="$event.stopPropagation()" (keyup.enter)="commitEdit()" (blur)="commitEdit()" [attr.aria-label]="'Edit ' + p.name" />
-                } @else {
-                  <b>{{ p.name }}</b>
-                }
+                <b>{{ p.name }}</b>
                 <span>{{ p.category }}</span>
               </span>
             </span>

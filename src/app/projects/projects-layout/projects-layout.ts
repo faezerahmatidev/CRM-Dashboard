@@ -2,30 +2,33 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
 import { AppShell } from '../../shared/app-shell/app-shell';
-import { ProjectModal } from '../project-modal/project-modal';
+import { ProjectModal, SavePayload } from '../project-modal/project-modal';
 import { ProjectsStore } from '../projects-store';
-import { blankProject } from '../projects-data';
 
 @Component({
   selector: 'app-projects-layout',
   standalone: true,
   imports: [RouterOutlet, AppShell, ProjectModal],
   template: `
-    <app-shell title="{{ title }}" activeIcon="briefcase" actionIcon="plus" (action)="modalOpen = true" [showBack]="showBack" (back)="goList()">
+    <app-shell title="{{ title }}" activeIcon="briefcase" actionIcon="plus" (action)="store.openNew()" [showBack]="showBack" (back)="goList()">
       <router-outlet />
     </app-shell>
-    <app-project-modal [(open)]="modalOpen" (create)="onCreate($event)" />
+    <app-project-modal
+      [open]="store.modalOpen()"
+      (openChange)="store.setModalOpen($event)"
+      [editProject]="store.editing()"
+      (save)="onSave($event)"
+    />
   `,
 })
 export class ProjectsLayout implements OnInit {
   title = 'Projects';
-  modalOpen = false;
   showBack = false;
 
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private store: ProjectsStore,
+    protected store: ProjectsStore,
   ) {}
 
   ngOnInit(): void {
@@ -35,9 +38,14 @@ export class ProjectsLayout implements OnInit {
       .subscribe(() => this.updateTitle());
   }
 
-  onCreate(name: string): void {
-    this.store.add(blankProject(name));
-    this.router.navigate(['/projects/list-01'], { replaceUrl: true });
+  onSave(payload: SavePayload): void {
+    if (payload.original) {
+      this.store.update(payload.original, payload.project);
+    } else {
+      this.store.add(payload.project);
+      this.router.navigate(['/projects/list-01'], { replaceUrl: true });
+    }
+    this.store.setModalOpen(false);
   }
 
   private updateTitle(): void {

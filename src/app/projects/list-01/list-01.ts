@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { DashPage } from '../../shared/dash-page/dash-page';
 import { PanelHeader } from '../../shared/panel-header/panel-header';
@@ -17,7 +16,7 @@ import { ProjectsStore } from '../projects-store';
 @Component({
   selector: 'app-projects-list-01',
   standalone: true,
-  imports: [DashPage, PanelHeader, MessagesList, ConversionBars, ViewToggle, SortControl, Pagination, ProjectBrand, AvatarStack, RouterLink, FormsModule, DotsMenu],
+  imports: [DashPage, PanelHeader, MessagesList, ConversionBars, ViewToggle, SortControl, Pagination, ProjectBrand, AvatarStack, RouterLink, DotsMenu],
   templateUrl: './list-01.html',
   styleUrl: './list-01.scss',
 })
@@ -25,8 +24,6 @@ export class ProjectsList01 {
   messages = PROJECT_MESSAGES;
   sortAsc = true;
   page = 1;
-  editing: string | null = null;
-  draft = '';
 
   constructor(
     private router: Router,
@@ -34,25 +31,19 @@ export class ProjectsList01 {
   ) {}
 
   sortedProjects(): Project[] {
-    return [...this.store.projects()].sort((a, b) =>
-      this.sortAsc ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name),
-    );
+    return [...this.store.projects()]
+      .filter((p) => !p.hiddenFromList)
+      .sort((a, b) =>
+        this.sortAsc ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name),
+      );
   }
 
   onEdit(p: Project): void {
-    this.editing = p.name;
-    this.draft = p.name;
+    this.store.openEdit(p);
   }
 
   onRemove(p: Project): void {
-    if (this.editing === p.name) this.editing = null;
     this.store.remove(p.name);
-  }
-
-  commitEdit(): void {
-    if (this.editing === null) return;
-    this.store.rename(this.editing, this.draft);
-    this.editing = null;
   }
 
   onViewChange(mode: ProjectViewMode): void {

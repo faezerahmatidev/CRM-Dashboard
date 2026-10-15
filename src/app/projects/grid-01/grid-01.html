@@ -20,14 +20,10 @@
             <span class="mini-bar"><i [style.width.%]="p.progress" [style.background]="p.progressColor"></i></span>
             <span class="grid-menu"><app-dots-menu (edit)="onEdit(p)" (remove)="onRemove(p)" /></span>
             <app-project-brand [glyph]="p.brand.glyph" [tint]="p.brand.tint" [color]="p.brand.color" />
-            @if (editing === p.name) {
-              <input class="edit-input grid-edit" [(ngModel)]="draft" (click)="$event.stopPropagation()" (keyup.enter)="commitEdit()" (blur)="commitEdit()" [attr.aria-label]="'Edit ' + p.name" />
-            } @else {
-              <h3>{{ p.name }}</h3>
-            }
+            <h3>{{ p.name }}</h3>
             <p>{{ p.category }}</p>
             <p class="complete"><b>{{ p.complete }}</b><span>Tasks complete</span></p>
-            <app-avatar-stack [members]="p.members" [extra]="p.extra" />
+            <app-avatar-stack [members]="p.members" [extra]="p.gridExtra ?? p.extra" />
           </article>
         }
       </div>
