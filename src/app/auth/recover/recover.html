@@ -3,13 +3,9 @@
   <p class="auth-sub">Enter your details to proceed further</p>
 
   <form class="auth-form" (ngSubmit)="onSubmit()">
-    <div class="field">
-      <label for="rc-email">Email</label>
-      <div class="field-control">
-        <input id="rc-email" name="email" type="email" placeholder="Start typing..." autocomplete="email" />
-        <svg class="field-icon" viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="m4.5 7.5 7.5 5 7.5-5"/></svg>
-      </div>
-    </div>
+    <app-auth-field label="Email" fieldId="rc-email" icon="mail">
+      <input id="rc-email" name="email" type="email" placeholder="Start typing..." autocomplete="email" />
+    </app-auth-field>
 
     <div class="btn-row">
       <button class="btn btn-primary btn-full" type="submit">Recover</button>

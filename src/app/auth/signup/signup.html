@@ -3,29 +3,17 @@
   <p class="auth-sub">Enter your details to proceed further</p>
 
   <form class="auth-form" (ngSubmit)="onSubmit()">
-    <div class="field">
-      <label for="su-name">Full name</label>
-      <div class="field-control">
-        <input id="su-name" name="name" type="text" placeholder="Craft UI" autocomplete="name" />
-        <svg class="field-icon" viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 19c1.5-3.2 4-4.8 7-4.8s5.5 1.6 7 4.8"/></svg>
-      </div>
-    </div>
+    <app-auth-field label="Full name" fieldId="su-name" icon="user">
+      <input id="su-name" name="name" type="text" placeholder="Craft UI" autocomplete="name" />
+    </app-auth-field>
 
-    <div class="field">
-      <label for="su-email">Email</label>
-      <div class="field-control">
-        <input id="su-email" name="email" type="email" placeholder="support@craftui.com" autocomplete="email" />
-        <svg class="field-icon" viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="m4.5 7.5 7.5 5 7.5-5"/></svg>
-      </div>
-    </div>
+    <app-auth-field label="Email" fieldId="su-email" icon="mail">
+      <input id="su-email" name="email" type="email" placeholder="support@craftui.com" autocomplete="email" />
+    </app-auth-field>
 
-    <div class="field">
-      <label for="su-pass">Password</label>
-      <div class="field-control">
-        <input id="su-pass" name="password" type="password" placeholder="Start typing..." autocomplete="new-password" />
-        <svg class="field-icon" viewBox="0 0 24 24"><rect x="5.5" y="10" width="13" height="9" rx="2"/><path d="M8.5 10V7.8a3.5 3.5 0 0 1 7 0V10"/></svg>
-      </div>
-    </div>
+    <app-auth-field label="Password" fieldId="su-pass" icon="lock">
+      <input id="su-pass" name="password" type="password" placeholder="Start typing..." autocomplete="new-password" />
+    </app-auth-field>
 
     <div class="check-row">
       <span class="radio-dot" aria-hidden="true"></span>

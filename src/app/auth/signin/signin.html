@@ -3,21 +3,13 @@
   <p class="auth-sub">Enter your details to proceed further</p>
 
   <form class="auth-form" (ngSubmit)="onSubmit()">
-    <div class="field">
-      <label for="si-email">Email</label>
-      <div class="field-control">
-        <input id="si-email" name="email" type="email" placeholder="john.doe@gmail.com" autocomplete="email" />
-        <svg class="field-icon" viewBox="0 0 24 24"><rect x="4" y="6" width="16" height="12" rx="2"/><path d="m4.5 7.5 7.5 5 7.5-5"/></svg>
-      </div>
-    </div>
+    <app-auth-field label="Email" fieldId="si-email" icon="mail">
+      <input id="si-email" name="email" type="email" placeholder="john.doe@gmail.com" autocomplete="email" />
+    </app-auth-field>
 
-    <div class="field">
-      <label for="si-pass">Password</label>
-      <div class="field-control">
-        <input id="si-pass" name="password" type="password" placeholder="Start typing..." autocomplete="current-password" />
-        <svg class="field-icon" viewBox="0 0 24 24"><rect x="5.5" y="10" width="13" height="9" rx="2"/><path d="M8.5 10V7.8a3.5 3.5 0 0 1 7 0V10"/></svg>
-      </div>
-    </div>
+    <app-auth-field label="Password" fieldId="si-pass" icon="lock">
+      <input id="si-pass" name="password" type="password" placeholder="Start typing..." autocomplete="current-password" />
+    </app-auth-field>
 
     <div class="link-row">
       <div class="check-row">
