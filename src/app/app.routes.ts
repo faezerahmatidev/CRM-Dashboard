@@ -9,6 +9,8 @@ import { DashSales } from './dashboard/sales/sales';
 import { DashOverview } from './dashboard/overview/overview';
 import { DashOrders } from './dashboard/orders/orders';
 import { DashEmpty } from './dashboard/empty/empty';
+import { ProjectsLayout } from './projects/projects-layout/projects-layout';
+import { ProjectsEmpty } from './projects/empty/empty';
 
 export const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'signin' },
@@ -26,6 +28,11 @@ export const routes: Routes = [
       { path: 'orders', component: DashOrders },
       { path: 'messages', component: DashEmpty },
     ],
+  },
+  {
+    path: 'projects',
+    component: ProjectsLayout,
+    children: [{ path: 'empty', component: ProjectsEmpty, data: { title: 'Projects' } }],
   },
   { path: '**', redirectTo: 'signin' },
 ];
