@@ -1,0 +1,84 @@
+.empty-card {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.overview .conv-sub {
+  font-size: 10px;
+  color: var(--primary-grey);
+  margin: 2px 0 12px;
+}
+
+.ov-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ov-list li {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 4px 12px;
+  background: var(--bg-light);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.ov-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 10.5px;
+  color: var(--primary-grey);
+}
+
+.ov-text b {
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--primary-dark);
+}
+
+.ov-pct {
+  font-size: 10.5px;
+  color: var(--primary-dark);
+  align-self: start;
+}
+
+.ov-bar {
+  grid-column: 1 / -1;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--outline);
+  overflow: hidden;
+}
+
+.ov-bar span {
+  display: block;
+  height: 100%;
+  border-radius: 2px;
+}
+
+.conversion {
+  .sales-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--outline);
+  }
+
+  .sales-row > span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+
+  .sales-row b { font-size: 13px; }
+  .sales-row span span { font-size: 10px; color: var(--primary-grey); }
+}

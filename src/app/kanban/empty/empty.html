@@ -1,0 +1,40 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-panel-header logo="C" title="CRAFTUI LLC" sub="8484 Ross Wells" />
+
+    <section class="overview">
+      <h3 class="widget-title">Tasks overview</h3>
+      <p class="conv-sub">Overall tasks performance</p>
+      <ul class="ov-list">
+        @for (o of overview; track o.label) {
+          <li>
+            <span class="ov-text"><span>{{ o.label }}</span><b>{{ o.value }}</b></span>
+            <span class="ov-pct">{{ o.pct }}%</span>
+            <span class="ov-bar"><span [style.width.%]="o.pct" [style.background]="o.color"></span></span>
+          </li>
+        }
+      </ul>
+    </section>
+
+    <section class="conversion">
+      <app-conversion-area />
+      <div class="sales-row">
+        <span><b>$342.000</b><span>Total sales</span></span>
+        <span><b>$200.000</b><span>Spendings</span></span>
+      </div>
+    </section>
+  </aside>
+
+  <div page-main class="dash-main">
+    <section class="dash-card empty-card">
+      <app-empty-state
+        image="assets/projects-empty.svg"
+        imageAlt="No kanban desks illustration"
+        title="No desks & tasks found?"
+        text="Try to assign more tasks to your employees or create a new project and setup it from scratch"
+        actionLabel="Setup"
+        (action)="onSetup()"
+      />
+    </section>
+  </div>
+</div>

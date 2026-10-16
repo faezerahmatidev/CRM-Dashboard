@@ -1,0 +1,97 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-panel-header logo="C" title="CRAFTUI LLC" sub="8484 Ross Wells" />
+
+    <section class="overview">
+      <h3 class="widget-title">Tasks overview</h3>
+      <p class="conv-sub">Overall tasks performance</p>
+      <ul class="ov-list">
+        @for (o of overview; track o.label) {
+          <li>
+            <span class="ov-text"><span>{{ o.label }}</span><b>{{ o.value }}</b></span>
+            <span class="ov-pct">{{ o.pct }}%</span>
+            <span class="ov-bar"><span [style.width.%]="o.pct" [style.background]="o.color"></span></span>
+          </li>
+        }
+      </ul>
+    </section>
+
+    <section class="conversion">
+      <app-conversion-area />
+      <div class="sales-row">
+        <span><b>$342.000</b><span>Total sales</span></span>
+        <span><b>$200.000</b><span>Spendings</span></span>
+      </div>
+    </section>
+  </aside>
+
+  <div page-main class="dash-main">
+    <section class="dash-card board-card">
+      <div class="board">
+        @for (col of columns; track col.key) {
+          <div
+            class="column"
+            [class.drop-target]="dragOverCol === col.key"
+            (dragover)="onDragOver($event, col.key)"
+            (dragleave)="dragOverCol = null"
+            (drop)="onDrop(col.key)"
+          >
+            <div class="col-head">
+              <span>{{ col.label }}</span>
+              <button class="add-col" type="button" (click)="store.openNew(col.key)" [attr.aria-label]="'Add new task to ' + col.label">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" /><path d="M12 8.5v7M8.5 12h7" /></svg>
+                ADD NEW TASK
+              </button>
+            </div>
+
+            <ul class="cards">
+              @for (c of store.inColumn(col.key); track c.id) {
+                <li
+                  class="kcard"
+                  [class.dragging]="draggingId === c.id"
+                  draggable="true"
+                  (dragstart)="onDragStart(c.id)"
+                  (dragend)="onDragEnd()"
+                  (click)="store.openDetails(c)"
+                  (keyup.enter)="store.openDetails(c)"
+                  tabindex="0"
+                >
+                  <div class="kcard-head">
+                    <span class="kcard-titles">
+                      <b>{{ c.title }}</b>
+                      <span>{{ c.sub }}</span>
+                    </span>
+                    <button class="dots-btn" type="button" aria-label="Card options" (click)="$event.stopPropagation()">...</button>
+                  </div>
+                  <div class="kprog-row">
+                    <span class="kprog-label">
+                      <svg viewBox="0 0 24 24"><path d="M8.5 6.5H20M8.5 12H20M8.5 17.5H20" /><circle cx="5" cy="6.5" r="1" /><circle cx="5" cy="12" r="1" /><circle cx="5" cy="17.5" r="1" /></svg>
+                      Progress
+                    </span>
+                    <span class="kprog-count">{{ c.done }}/{{ c.total }}</span>
+                  </div>
+                  <div class="kprog-bar"><span [style.width.%]="pct(c)" [style.background]="c.barColor"></span></div>
+                  <div class="kcard-foot">
+                    <span class="date-pill" [class]="'date-pill tint-' + c.dateTint">{{ c.date }}</span>
+                    @if (c.members.length || c.extra) {
+                      <app-avatar-stack [members]="c.members" [extra]="c.extra" [size]="28" />
+                    } @else {
+                      <span class="kmeta">
+                        <span><svg viewBox="0 0 24 24"><path d="M4.5 7A1.5 1.5 0 0 1 6 5.5h12A1.5 1.5 0 0 1 19.5 7v8a1.5 1.5 0 0 1-1.5 1.5H12l-3.5 3v-3H6A1.5 1.5 0 0 1 4.5 15V7Z" /></svg>{{ c.comments }}</span>
+                        <span><svg viewBox="0 0 24 24"><path d="M21 11.5l-8.5 8.5a5.5 5.5 0 0 1-7.8-7.8L13 4a3.7 3.7 0 0 1 5.2 5.2l-8.2 8.2a1.85 1.85 0 0 1-2.6-2.6L15 7.5" /></svg>{{ c.attach }}</span>
+                      </span>
+                    }
+                  </div>
+                </li>
+              }
+            </ul>
+
+            @if (dragOverCol === col.key && draggingId) {
+              <div class="drop-hint">Drag your task here</div>
+            }
+          </div>
+        }
+      </div>
+    </section>
+  </div>
+</div>
