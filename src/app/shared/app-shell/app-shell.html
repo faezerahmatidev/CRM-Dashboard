@@ -11,9 +11,9 @@
       <a routerLink="/tasks" title="Tasks" aria-label="Tasks" [class.active]="activeIcon === 'tasks'">
         <svg viewBox="0 0 24 24"><rect x="6" y="5" width="12" height="15" rx="2"/><rect x="9.5" y="3" width="5" height="3.5" rx="1"/><path d="m10.5 13 2 2 3.5-4"/></svg>
       </a>
-      <button type="button" title="Files" aria-label="Files" [class.active]="activeIcon === 'files'">
-        <svg viewBox="0 0 24 24"><path d="M5 15V6a2 2 0 0 1 2-2h9"/><rect x="7" y="7" width="12" height="12" rx="2"/></svg>
-      </button>
+      <a routerLink="/kanban" title="Kanban" aria-label="Kanban" [class.active]="activeIcon === 'kanban'">
+        <svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="14" rx="2"/><path d="M9.5 5v14M15 5v14"/></svg>
+      </a>
       <button type="button" title="Calendar" aria-label="Calendar" [class.active]="activeIcon === 'calendar'">
         <svg viewBox="0 0 24 24"><rect x="4.5" y="6" width="15" height="13" rx="2"/><path d="M4.5 10h15M8.5 3.5V7M15.5 3.5V7M8.5 13.8h.01M12 13.8h.01M15.5 13.8h.01M8.5 16.8h.01M12 16.8h.01"/></svg>
       </button>

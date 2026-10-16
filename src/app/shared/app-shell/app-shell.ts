@@ -2,7 +2,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 export type ShellIcon =
-  | 'dashboard' | 'briefcase' | 'tasks' | 'files' | 'calendar'
+  | 'dashboard' | 'briefcase' | 'tasks' | 'kanban' | 'files' | 'calendar'
   | 'team' | 'messages' | 'products' | 'reports' | 'map'
   | 'goals' | 'activity' | 'help';
 

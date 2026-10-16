@@ -105,5 +105,23 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'kanban',
+    loadComponent: () =>
+      import('./kanban/kanban-layout').then((m) => m.KanbanLayout),
+    children: [
+      { path: '', pathMatch: 'full', redirectTo: 'desk' },
+      {
+        path: 'empty',
+        loadComponent: () => import('./kanban/empty/empty').then((m) => m.KanbanEmpty),
+        data: { title: 'Kanban Desk' },
+      },
+      {
+        path: 'desk',
+        loadComponent: () => import('./kanban/desk/desk').then((m) => m.KanbanDesk),
+        data: { title: 'Kanban Desk' },
+      },
+    ],
+  },
   { path: '**', redirectTo: 'signin' },
 ];
