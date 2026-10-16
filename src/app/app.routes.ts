@@ -146,5 +146,93 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'contacts',
+    loadComponent: () =>
+      import('./contacts/contacts-layout').then((m) => m.ContactsLayout),
+    children: [
+      { path: '', pathMatch: 'full', redirectTo: 'list-01' },
+      {
+        path: 'empty',
+        loadComponent: () => import('./contacts/empty/empty').then((m) => m.ContactsEmpty),
+        data: { title: 'Contacts' },
+      },
+      {
+        path: 'list-01',
+        loadComponent: () => import('./contacts/list-01/list-01').then((m) => m.ContactsList01),
+        data: { title: 'Contacts' },
+      },
+      {
+        path: 'list-02',
+        loadComponent: () => import('./contacts/list-02/list-02').then((m) => m.ContactsList02),
+        data: { title: 'Contacts' },
+      },
+      {
+        path: 'list-03',
+        loadComponent: () => import('./contacts/list-03/list-03').then((m) => m.ContactsList03),
+        data: { title: 'Contacts' },
+      },
+      {
+        path: 'grid-01',
+        loadComponent: () => import('./contacts/grid-01/grid-01').then((m) => m.ContactsGrid01),
+        data: { title: 'Contacts' },
+      },
+      {
+        path: 'grid-02',
+        loadComponent: () => import('./contacts/grid-02/grid-02').then((m) => m.ContactsGrid02),
+        data: { title: 'Contacts' },
+      },
+      {
+        path: 'grid-03',
+        loadComponent: () => import('./contacts/grid-03/grid-03').then((m) => m.ContactsGrid03),
+        data: { title: 'Contacts' },
+      },
+      {
+        path: 'profile/overview',
+        loadComponent: () =>
+          import('./contacts/profile/overview/overview').then((m) => m.ProfileOverview),
+        data: { title: 'Profile Overview' },
+      },
+      {
+        path: 'profile/sales',
+        loadComponent: () => import('./contacts/profile/sales/sales').then((m) => m.ProfileSales),
+        data: { title: 'Profile Overview' },
+      },
+      {
+        path: 'settings',
+        loadComponent: () =>
+          import('./contacts/settings/settings-layout').then((m) => m.ContactSettings),
+        data: { title: 'Account Settings' },
+        children: [
+          { path: '', pathMatch: 'full', redirectTo: 'general' },
+          {
+            path: 'general',
+            loadComponent: () =>
+              import('./contacts/settings/settings-tabs').then((m) => m.SettingsGeneral),
+          },
+          {
+            path: 'accounts',
+            loadComponent: () =>
+              import('./contacts/settings/settings-tabs').then((m) => m.SettingsAccounts),
+          },
+          {
+            path: 'security',
+            loadComponent: () =>
+              import('./contacts/settings/settings-tabs').then((m) => m.SettingsSecurity),
+          },
+          {
+            path: 'billing',
+            loadComponent: () =>
+              import('./contacts/settings/settings-tabs').then((m) => m.SettingsBilling),
+          },
+          {
+            path: 'notifications',
+            loadComponent: () =>
+              import('./contacts/settings/settings-tabs').then((m) => m.SettingsNotifications),
+          },
+        ],
+      },
+    ],
+  },
   { path: '**', redirectTo: 'signin' },
 ];
