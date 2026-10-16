@@ -56,26 +56,6 @@
   border-radius: 2px;
 }
 
-.conversion {
-  .sales-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    margin-top: 12px;
-    padding-top: 12px;
-    border-top: 1px solid var(--outline);
-  }
-
-  .sales-row > span {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 2px;
-  }
-
-  .sales-row b { font-size: 13px; }
-  .sales-row span span { font-size: 10px; color: var(--primary-grey); }
-}
-
 .board-card {
   flex: 1;
   min-height: 0;

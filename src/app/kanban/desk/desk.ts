@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { DashPage } from '../../shared/dash-page/dash-page';
 import { PanelHeader } from '../../shared/panel-header/panel-header';
-import { ConversionArea } from '../../dashboard/widgets/conversion-area';
+import { ConversionLine } from '../conversion-line';
 import { AvatarStack } from '../../shared/avatar-stack/avatar-stack';
 import { KANBAN_OVERVIEW, KanbanCard, KanbanColumn } from '../kanban-data';
 import { KanbanStore } from '../kanban-store';
@@ -14,7 +14,7 @@ interface DeskColumn {
 @Component({
   selector: 'app-kanban-desk',
   standalone: true,
-  imports: [DashPage, PanelHeader, ConversionArea, AvatarStack],
+  imports: [DashPage, PanelHeader, ConversionLine, AvatarStack],
   templateUrl: './desk.html',
   styleUrl: './desk.scss',
 })
