@@ -1,0 +1,124 @@
+@if (open) {
+  <div class="modal-overlay" (click)="close()">
+    <div #dialog class="modal-card" role="dialog" [attr.aria-label]="isNew ? 'Create New Contact' : 'Contact details'" tabindex="-1" (click)="$event.stopPropagation()" (keydown.tab)="trapTab($event)">
+      @if (isNew) {
+        <p class="modal-kicker">Create New Contact</p>
+
+        <div class="avatar-pick">
+          <span class="avatar-box">
+            <svg viewBox="0 0 24 24"><circle cx="10" cy="8.5" r="3"/><path d="M4 19.5c1.2-3 3.4-4.5 6-4.5 1 0 2 .2 2.9.6"/><circle cx="17" cy="9" r="2.2"/><path d="M15.5 13.6c2 .3 3.5 1.4 4.3 3.4M17 6.8v4M15 8.8h4"/></svg>
+          </span>
+        </div>
+
+        <div class="form-grid">
+          <label class="field">
+            <span>First name</span>
+            <span class="field-control">
+              <input [(ngModel)]="first" placeholder="Start typing..." aria-label="First name" />
+            </span>
+          </label>
+          <label class="field">
+            <span>Last name</span>
+            <span class="field-control">
+              <input [(ngModel)]="last" placeholder="Start typing..." aria-label="Last name" />
+            </span>
+          </label>
+          <label class="field field-wide">
+            <span>Email</span>
+            <span class="field-control">
+              <input [(ngModel)]="email" placeholder="Start typing..." aria-label="Email" />
+              <svg class="field-icon" viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="m4.5 7.5 7.5 6 7.5-6"/></svg>
+            </span>
+          </label>
+          <label class="field">
+            <span>Phone</span>
+            <span class="field-control">
+              <input [(ngModel)]="phone" placeholder="Start typing..." aria-label="Phone" />
+            </span>
+          </label>
+          <label class="field">
+            <span>Category</span>
+            <span class="field-control">
+              <select [(ngModel)]="category" aria-label="Category">
+                <option>Developer</option>
+                <option>Designer</option>
+                <option>Manager</option>
+              </select>
+              <svg class="field-icon" viewBox="0 0 24 24"><path d="m6 9.5 6 6 6-6" /></svg>
+            </span>
+          </label>
+        </div>
+
+        <div class="form-actions">
+          <button class="btn btn-rest" type="button" (click)="close()">Cancel</button>
+          <button class="btn btn-primary" type="button" (click)="submit()">Add Contact</button>
+        </div>
+      } @else if (contact) {
+        <button class="close-btn corner" type="button" aria-label="Close" (click)="close()">
+          <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" /></svg>
+        </button>
+
+        <div class="profile-hero">
+          <app-contact-avatar [initials]="contact.member.initials" [color]="contact.member.color" [size]="72" [radius]="18" />
+          <h2>{{ nameOf(contact) }}</h2>
+          <span class="hero-role">{{ contact.role === 'Designer' ? 'UI/UX Designer' : contact.role }}</span>
+          <div class="socials">
+            <button type="button" aria-label="Facebook"><b>f</b></button>
+            <button type="button" aria-label="Pinterest"><b>P</b></button>
+            <button type="button" aria-label="Twitter">
+              <svg viewBox="0 0 24 24"><path d="M4 5h3.5l4.5 6 4-6H20l-6.5 8.5L20.5 19H17l-4.8-6.4L7.5 19H3.5l7-9L4 5Z" /></svg>
+            </button>
+            <button type="button" aria-label="LinkedIn"><b>in</b></button>
+          </div>
+        </div>
+
+        <h3>About me</h3>
+        <p class="modal-text">
+          When I first got into the online advertising business, I was looking for the magical
+          combination that would put my website into the top search engine rankings, catapult me to
+          the forefront of the minds or individuals looking to buy my product, and generally make me
+          rich beyond my wildest dreams.
+        </p>
+
+        <div class="check-head">
+          <h3>Checklist</h3>
+          <span class="check-count">{{ doneCount }} / 9</span>
+        </div>
+        <div class="progress" role="progressbar" [attr.aria-valuenow]="doneCount" aria-valuemin="0" aria-valuemax="9">
+          <span [style.width.%]="(doneCount / 9) * 100"></span>
+        </div>
+        <ul class="check-list">
+          @for (c of checks; track $index) {
+            <li>
+              <button class="check" type="button" [class.done]="c.done" (click)="c.done = !c.done" [attr.aria-label]="'Toggle ' + c.title">
+                @if (c.done) {
+                  <svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>
+                }
+              </button>
+              <span [class.dim]="!c.done">{{ c.title }}</span>
+            </li>
+          }
+          <li>
+            <span class="box" aria-hidden="true"></span>
+            <span class="dim">Type to add more ...</span>
+          </li>
+        </ul>
+
+        <div class="hero-actions">
+          <a [href]="'mailto:' + contact.email">
+            <svg viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="m4.5 7.5 7.5 6 7.5-6"/></svg>
+            SEND EMAIL
+          </a>
+          <a [href]="'tel:' + contact.phone">
+            <svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg>
+            MAKE A CALL
+          </a>
+          <button type="button" (click)="close()">
+            <svg viewBox="0 0 24 24"><path d="M4.5 7A1.5 1.5 0 0 1 6 5.5h12A1.5 1.5 0 0 1 19.5 7v8a1.5 1.5 0 0 1-1.5 1.5H12l-3.5 3v-3H6A1.5 1.5 0 0 1 4.5 15V7Z" /></svg>
+            SEND MESSAGE
+          </button>
+        </div>
+      }
+    </div>
+  </div>
+}
