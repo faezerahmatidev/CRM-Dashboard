@@ -1,0 +1,173 @@
+.info-panel {
+  gap: 16px;
+  padding: 18px 16px;
+  overflow: visible;
+}
+
+.tasks-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+  flex: 1;
+  gap: 12px;
+  padding-bottom: 76px;
+}
+
+.tasks-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.filter-tabs {
+  display: inline-flex;
+  gap: 8px;
+}
+
+.filter-tabs button {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  border: 0;
+  border-radius: 8px;
+  background: var(--bg-light);
+  color: var(--primary);
+  font-size: 10.5px;
+  font-weight: 900;
+  padding: 9px 16px;
+  cursor: pointer;
+}
+
+.filter-tabs button svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.filter-tabs button.active {
+  background: var(--primary);
+  color: #fff;
+}
+
+.add-task {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1.5px dashed var(--outline);
+  border-radius: 10px;
+  padding: 13px 16px;
+}
+
+.add-task .box {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  border-radius: 6px;
+  background: var(--bg-light);
+}
+
+.add-task input {
+  flex: 1;
+  border: 0;
+  outline: none;
+  background: transparent;
+  font-size: 12.5px;
+  font-weight: 700;
+  font-family: inherit;
+  min-width: 0;
+}
+
+.task-rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-bottom: 8px;
+}
+
+.task-rows li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--outline);
+  border-radius: 10px;
+  padding: 11px 14px;
+}
+
+.check {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  border-radius: 6px;
+  border: 1.5px solid var(--outline);
+  background: var(--bg-light);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  padding: 0;
+}
+
+.check.done {
+  background: var(--primary);
+  border-color: var(--primary);
+}
+
+.check svg {
+  width: 12px;
+  height: 12px;
+  stroke: #fff;
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.t-title {
+  flex: 1;
+  min-width: 0;
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.t-meta {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  color: var(--primary-grey);
+  font-size: 10.5px;
+  white-space: nowrap;
+}
+
+.t-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.t-meta svg {
+  width: 13px;
+  height: 13px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (max-width: 900px) {
+  .t-meta { display: none; }
+}

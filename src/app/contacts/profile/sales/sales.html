@@ -1,0 +1,76 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-profile-sidebar name="Vincent Moody" chart="bars" />
+  </aside>
+
+  <div page-main class="dash-main">
+    <div class="sales-grid">
+      <section class="dash-card">
+        <h3 class="dash-card-title">Latest Sales</h3>
+        <div class="map-ph" role="img" aria-label="Customer map placeholder">
+          <svg viewBox="0 0 320 180">
+            <rect x="0" y="0" width="320" height="180" fill="#eef3f6" />
+            <path d="M0,120 C60,100 90,130 150,110 C210,90 250,120 320,100 L320,180 L0,180 Z" fill="#dcebf5" />
+            <path d="M40,0 C50,60 45,120 60,180 M120,0 C125,70 115,130 130,180 M210,0 C215,60 205,120 220,180 M280,0 C282,60 278,130 285,180" stroke="#ffffff" stroke-width="5" fill="none" />
+            <path d="M0,60 C80,55 160,70 240,60 C270,57 300,60 320,58 M0,130 C90,125 180,135 320,128" stroke="#ffffff" stroke-width="4" fill="none" />
+            <text x="150" y="70" class="map-label">New York</text>
+            @for (p of [{x:110,y:45},{x:180,y:60},{x:150,y:95},{x:200,y:120},{x:90,y:80},{x:230,y:85}]; track $index) {
+              <g [attr.transform]="'translate(' + p.x + ',' + p.y + ')'">
+                <path d="M0,-14 a8,8 0 1 1 -0.1,0 M0,-14 C -5,-20 -5,-26 0,-26 C 5,-26 5,-20 0,-14" fill="#5e81f4" />
+                <circle cx="0" cy="-20" r="2.5" fill="#fff" />
+              </g>
+            }
+          </svg>
+          <span class="map-tag">New York</span>
+        </div>
+        <ul class="invoice-rows">
+          @for (inv of invoices; track $index) {
+            <li>
+              <span class="badge" [class]="inv.status === 'Paid' ? 'badge-blue' : 'badge-yellow'">{{ inv.status }}</span>
+              <span class="inv-label">{{ inv.label }}</span>
+              <b class="inv-amount">{{ inv.amount }}</b>
+              <button class="dots-btn" type="button" aria-label="Invoice options">...</button>
+            </li>
+          }
+        </ul>
+      </section>
+
+      <div class="sales-side">
+        <section class="dash-card">
+          <div class="dash-card-head">
+            <h3 class="dash-card-title">Latest Events</h3>
+            <button class="mini-btn" type="button">View all</button>
+          </div>
+          <ul class="event-rows">
+            @for (e of events; track e.title) {
+              <li>
+                <span class="soft-icon">
+                  <svg viewBox="0 0 24 24"><rect x="6.5" y="3.5" width="11" height="17" rx="2"/><path d="M9.5 7.5h5" /></svg>
+                </span>
+                <span class="ev-text">
+                  <b>{{ e.title }}</b>
+                  <span>{{ e.sub }}</span>
+                </span>
+                <b class="ev-meta">{{ e.meta }}</b>
+              </li>
+            }
+          </ul>
+        </section>
+
+        <section class="dash-card">
+          <div class="dash-card-head">
+            <h3 class="dash-card-title">Income Details</h3>
+            <app-card-tabs [options]="['Day', 'Week', 'Month']" active="Day" />
+          </div>
+          <p class="income-total">$142.000 <span>Total income</span></p>
+          <app-income-chart />
+          <div class="income-foot">
+            <span><b>$342.000</b><span>Total sales</span></span>
+            <span><b>$200.000</b><span>Spendings</span></span>
+            <span><b>$142.000</b><span>Income</span></span>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>

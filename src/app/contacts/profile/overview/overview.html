@@ -1,0 +1,56 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-profile-sidebar chart="area" />
+  </aside>
+
+  <div page-main class="dash-main">
+    <section class="dash-card tasks-card">
+      <div class="tasks-toolbar">
+        <div class="filter-tabs" role="tablist" aria-label="Task filter">
+          <button type="button" [class.active]="tasks.filter() === 'ALL'" (click)="setFilter('ALL')">
+            <svg viewBox="0 0 24 24"><path d="M8.5 6.5H20M8.5 12H20M8.5 17.5H20" /><circle cx="5" cy="6.5" r="1" /><circle cx="5" cy="12" r="1" /><circle cx="5" cy="17.5" r="1" /></svg>
+            ALL
+          </button>
+          <button type="button" [class.active]="tasks.filter() === 'DONE'" (click)="setFilter('DONE')">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" /><path d="m9 12.5 2 2 4-4.5" /></svg>
+            DONE
+          </button>
+          <button type="button" [class.active]="tasks.filter() === 'PENDING'" (click)="setFilter('PENDING')">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8" /><path d="M12 8v4l2.5 2.5" /></svg>
+            PENDING
+          </button>
+        </div>
+        <app-sort-control prefix="SORT:" [value]="tasks.sortAsc() ? 'A-Z' : 'Z-A'" (toggled)="tasks.toggleSort()" />
+      </div>
+
+      <div class="add-task">
+        <span class="box" aria-hidden="true"></span>
+        <input [(ngModel)]="draft" (keyup.enter)="addTask()" placeholder="Type to add a new task ..." aria-label="Add a new task" />
+      </div>
+
+      <ul class="task-rows">
+        @for (task of tasks.visible(); track task.id) {
+          <li>
+            <button class="check" type="button" [class.done]="task.done" (click)="tasks.toggleDone(task.id)" [attr.aria-label]="'Toggle ' + task.title">
+              @if (task.done) {
+                <svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>
+              }
+            </button>
+            <b class="t-title">{{ task.title }}</b>
+            <span class="t-meta">
+              <span><svg viewBox="0 0 24 24"><path d="M8.5 6.5H20M8.5 12H20M8.5 17.5H20" /><circle cx="5" cy="6.5" r="1" /><circle cx="5" cy="12" r="1" /><circle cx="5" cy="17.5" r="1" /></svg>{{ task.sub }}</span>
+              <span><svg viewBox="0 0 24 24"><path d="M21 11.5l-8.5 8.5a5.5 5.5 0 0 1-7.8-7.8L13 4a3.7 3.7 0 0 1 5.2 5.2l-8.2 8.2a1.85 1.85 0 0 1-2.6-2.6L15 7.5" /></svg>{{ task.attach }}</span>
+              <span><svg viewBox="0 0 24 24"><path d="M4.5 7A1.5 1.5 0 0 1 6 5.5h12A1.5 1.5 0 0 1 19.5 7v8a1.5 1.5 0 0 1-1.5 1.5H12l-3.5 3v-3H6A1.5 1.5 0 0 1 4.5 15V7Z" /></svg>{{ task.comments }}</span>
+            </span>
+            <span class="badge" [class]="badgeOf(task.done, task.status)">{{ labelOf(task.done, task.status) }}</span>
+            <app-user-avatar [initials]="task.member.initials" [color]="task.member.color" [size]="32" />
+          </li>
+        }
+      </ul>
+
+      <app-fab aria-label="Reload tasks">
+        <svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 3.5V8h-4.5" /></svg>
+      </app-fab>
+    </section>
+  </div>
+</div>
