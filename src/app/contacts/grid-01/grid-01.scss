@@ -44,7 +44,10 @@
   align-items: center;
   gap: 4px;
   overflow: hidden;
+  cursor: pointer;
 }
+
+.ccard:focus { outline: 1.5px solid var(--primary); outline-offset: 2px; }
 
 .card-menu {
   position: absolute;

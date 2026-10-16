@@ -13,13 +13,13 @@
       <div class="grid-scroll">
         <div class="ccards">
           @for (c of store.inGroup('A'); track c.id) {
-            <article class="ccard">
-              <button class="dots-btn card-menu" type="button" aria-label="Card options" (click)="store.openDetails(c)">...</button>
+            <article class="ccard" (click)="store.openDetails(c)" (keyup.enter)="store.openDetails(c)" tabindex="0">
+              <button class="dots-btn card-menu" type="button" aria-label="Card options" (click)="store.openDetails(c); $event.stopPropagation()">...</button>
               <app-contact-avatar [initials]="c.member.initials" [color]="c.member.color" [size]="56" [radius]="14" />
               <b>{{ nameOf(c) }}</b>
               <span class="c-role">{{ c.role }}</span>
               <span class="tag-pill">{{ c.tag }}</span>
-              <div class="card-actions">
+              <div class="card-actions" (click)="$event.stopPropagation()">
                 <a class="mail" [href]="'mailto:' + c.email">
                   <svg viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="m4.5 7.5 7.5 6 7.5-6"/></svg>
                   EMAIL
