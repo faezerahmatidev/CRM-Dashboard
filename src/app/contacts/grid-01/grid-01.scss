@@ -1,0 +1,103 @@
+.info-panel {
+  gap: 16px;
+  padding: 18px 16px;
+  overflow: visible;
+}
+
+.contacts-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: hidden;
+  flex: 1;
+}
+
+.contacts-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.grid-scroll {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.ccards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  padding-bottom: 8px;
+}
+
+.ccard {
+  position: relative;
+  border: 1px solid var(--outline);
+  border-radius: 12px;
+  background: #fff;
+  padding: 20px 14px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  overflow: hidden;
+}
+
+.card-menu {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+}
+
+.ccard b { font-size: 12.5px; margin-top: 8px; }
+.c-role { font-size: 10.5px; color: var(--primary-grey); }
+
+.tag-pill {
+  font-size: 10.5px;
+  font-weight: 700;
+  color: var(--primary-grey);
+  background: var(--bg-light);
+  border-radius: 7px;
+  padding: 8px 26px;
+  margin: 10px 0 16px;
+}
+
+.card-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-self: stretch;
+  border-top: 1px solid var(--outline);
+  margin: 0 -14px;
+}
+
+.card-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  font-size: 10.5px;
+  font-weight: 900;
+  color: var(--primary-dark);
+  text-decoration: none;
+  padding: 13px 0;
+}
+
+.card-actions a + a { border-left: 1px solid var(--outline); }
+.card-actions a:hover { color: var(--primary); }
+
+.card-actions svg {
+  width: 14px;
+  height: 14px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+@media (max-width: 1100px) {
+  .ccards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}

@@ -1,0 +1,40 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-contacts-sidebar [stats]="stats" chart="lines" />
+  </aside>
+
+  <div page-main class="dash-main">
+    <section class="dash-card contacts-card">
+      <div class="contacts-toolbar">
+        <app-view-toggle mode="list" (modeChange)="onViewChange($event)" />
+        <app-sort-control prefix="SORT:" [value]="store.sortAsc() ? 'A-Z' : 'Z-A'" (toggled)="store.toggleSort()" />
+      </div>
+
+      <div class="chead">
+        <span>Name</span><span>Email</span><span>Phone</span><span>Rate</span><span>Progress</span><span></span>
+      </div>
+      <ul class="crows">
+        @for (c of store.inGroup('B'); track c.id) {
+          <li>
+            <span class="c-main">
+              <app-contact-avatar [initials]="c.member.initials" [color]="c.member.color" [size]="44" [radius]="12" />
+              <span class="c-titles">
+                <b>{{ nameOf(c) }}</b>
+                <span>{{ c.role }}</span>
+              </span>
+            </span>
+            <span class="c-stat"><b>{{ c.email }}</b><span>Email</span></span>
+            <span class="c-stat"><b>{{ c.phone }}</b><span>Phone</span></span>
+            <span class="c-stat"><b>${{ c.rate }} / hr</b><span>Rate</span></span>
+            <span class="c-prog">
+              <span class="prog-top"><span>Job progress</span><b>{{ c.progress }}%</b></span>
+              <span class="prog-bar"><span [style.width.%]="c.progress" [style.background]="barColor(c.progress)"></span></span>
+            </span>
+            <app-dots-menu (edit)="store.openDetails(c)" (remove)="store.remove(c.id)" />
+          </li>
+        }
+      </ul>
+      <app-pagination [active]="store.page()" (pageChange)="store.setPage($event)" [showPerPage]="true" [perPage]="15" />
+    </section>
+  </div>
+</div>

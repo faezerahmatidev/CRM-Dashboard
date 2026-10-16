@@ -1,0 +1,44 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-contacts-sidebar [stats]="stats" chart="lines" />
+  </aside>
+
+  <div page-main class="dash-main">
+    <section class="dash-card contacts-card">
+      <div class="contacts-toolbar">
+        <app-view-toggle mode="grid" (modeChange)="onViewChange($event)" />
+        <app-sort-control prefix="SORT:" [value]="store.sortAsc() ? 'A-Z' : 'Z-A'" (toggled)="store.toggleSort()" />
+      </div>
+
+      <div class="grid-scroll">
+        <div class="ccards">
+          @for (c of store.inGroup('A'); track c.id) {
+            <article class="ccard">
+              <div class="card-top">
+                <app-contact-avatar [initials]="c.member.initials" [color]="c.member.color" [size]="52" [radius]="13" />
+                <span class="c-titles">
+                  <b>{{ nameOf(c) }}</b>
+                  <span>{{ c.role }}</span>
+                </span>
+              </div>
+              <div class="card-field">
+                <span>Email</span>
+                <b>{{ c.email }}</b>
+              </div>
+              <div class="card-field">
+                <span>Phone</span>
+                <b>{{ c.phone }}</b>
+              </div>
+              <div class="card-foot">
+                <span class="tag-pill">{{ c.tag }}</span>
+                <span class="rate-pill">${{ c.rate }}.00</span>
+                <button class="dots-btn" type="button" aria-label="Card options" (click)="store.openDetails(c)">...</button>
+              </div>
+            </article>
+          }
+        </div>
+      </div>
+      <app-pagination [active]="store.page()" (pageChange)="store.setPage($event)" />
+    </section>
+  </div>
+</div>

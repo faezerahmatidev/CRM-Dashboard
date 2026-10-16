@@ -1,0 +1,43 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-contacts-sidebar [stats]="stats" chart="lines" />
+  </aside>
+
+  <div page-main class="dash-main">
+    <section class="dash-card contacts-card">
+      <div class="contacts-toolbar">
+        <app-view-toggle mode="grid" (modeChange)="onViewChange($event)" />
+        <app-sort-control prefix="SORT:" [value]="store.sortAsc() ? 'A-Z' : 'Z-A'" (toggled)="store.toggleSort()" />
+      </div>
+
+      <div class="grid-scroll">
+        <div class="ccards">
+          @for (c of store.inGroup('B'); track c.id) {
+            <article class="ccard">
+              <span class="rate-badge">${{ c.rate }}.00</span>
+              <app-contact-avatar [initials]="c.member.initials" [color]="c.member.color" [size]="56" [radius]="14" />
+              <b>{{ nameOf(c) }}</b>
+              <span class="c-role">{{ c.role }}</span>
+              <div class="prog-row">
+                <span>{{ c.progressCaption }}</span>
+                <b>{{ c.progress }}%</b>
+              </div>
+              <div class="prog-bar"><span [style.width.%]="c.progress" [style.background]="barColor(c.progress)"></span></div>
+              <div class="card-actions">
+                <a class="mail" [href]="'mailto:' + c.email">
+                  <svg viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="m4.5 7.5 7.5 6 7.5-6"/></svg>
+                  EMAIL
+                </a>
+                <a class="call" [href]="'tel:' + c.phone">
+                  <svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg>
+                  CALL
+                </a>
+              </div>
+            </article>
+          }
+        </div>
+      </div>
+      <app-pagination [active]="store.page()" (pageChange)="store.setPage($event)" />
+    </section>
+  </div>
+</div>

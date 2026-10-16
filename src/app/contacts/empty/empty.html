@@ -1,0 +1,18 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-contacts-sidebar [stats]="stats" chart="donut" />
+  </aside>
+
+  <div page-main class="dash-main">
+    <section class="dash-card empty-card">
+      <app-empty-state
+        image="assets/projects-empty.svg"
+        imageAlt="No contacts illustration"
+        title="No contacts found?"
+        text="Try to create more new contacts or drag xls files to upload contacts list"
+        actionLabel="Create List"
+        (action)="onSetup()"
+      />
+    </section>
+  </div>
+</div>

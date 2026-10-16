@@ -1,0 +1,33 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-contacts-sidebar [stats]="stats" chart="lines" />
+  </aside>
+
+  <div page-main class="dash-main">
+    <section class="dash-card contacts-card">
+      <div class="contacts-toolbar">
+        <app-view-toggle mode="list" (modeChange)="onViewChange($event)" />
+        <app-sort-control prefix="SORT:" [value]="store.sortAsc() ? 'A-Z' : 'Z-A'" (toggled)="store.toggleSort()" />
+      </div>
+
+      <div class="chead">
+        <span>Name</span><span>Email</span><span>Phone</span><span>Rate</span><span>Position</span>
+      </div>
+      <ul class="crows">
+        @for (c of store.inGroup('A'); track c.id) {
+          <li (click)="store.openDetails(c)" (keyup.enter)="store.openDetails(c)" tabindex="0">
+            <span class="c-main">
+              <app-contact-avatar [initials]="c.member.initials" [color]="c.member.color" [size]="44" [radius]="12" />
+              <b>{{ nameOf(c) }}</b>
+            </span>
+            <span class="c-stat">{{ c.email }}</span>
+            <span class="c-stat">{{ c.phone }}</span>
+            <span class="c-stat rate"><b>${{ c.rate }} / hr</b></span>
+            <span class="tag-pill">{{ c.tag }}</span>
+          </li>
+        }
+      </ul>
+      <app-pagination [active]="store.page()" (pageChange)="store.setPage($event)" />
+    </section>
+  </div>
+</div>
