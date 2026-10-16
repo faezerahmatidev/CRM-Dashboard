@@ -1,0 +1,42 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-calendar-sidebar />
+  </aside>
+
+  <div page-main class="dash-main">
+    <section class="dash-card cal-card">
+      <app-cal-tabs [title]="title" />
+
+      <div class="grid-scroll">
+        <div class="wgrid">
+          <span class="corner"></span>
+          @for (d of days; track d.iso) {
+            <span class="dow">{{ d.label }}</span>
+          }
+          @for (h of hours; track h) {
+            <span class="hour">{{ hourLabel(h) }}</span>
+            @for (d of days; track d.iso) {
+              <span class="slot"></span>
+            }
+          }
+          @for (d of days; track d.iso; let di = $index) {
+            @for (e of store.eventsOn(d.iso); track e.id) {
+              <button
+                class="block"
+                [class]="'block-' + e.color"
+                type="button"
+                [style.grid-column]="di + 2"
+                [style.grid-row]="rowOf(e.startHour) + ' / span ' + spanOf(e.startHour, e.span)"
+                [style.margin-top.px]="topOf(e.startHour)"
+                (click)="store.openDetails(e)"
+              >
+                <b>{{ e.title }}</b>
+                <span>{{ e.time }}</span>
+              </button>
+            }
+          }
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

@@ -1,0 +1,45 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-calendar-sidebar />
+  </aside>
+
+  <div page-main class="dash-main">
+    <section class="dash-card cal-card">
+      <app-cal-tabs [title]="title" />
+
+      <div class="grid-scroll">
+        <div class="dgrid">
+          <span class="corner"></span>
+          <span class="dow">{{ weekday }}</span>
+          @for (h of hours; track h) {
+            <span class="hour">{{ hourLabel(h) }}</span>
+            <span class="slot"></span>
+          }
+          @for (e of store.eventsOn(iso); track e.id) {
+            <button
+              class="block"
+              [class]="'block-' + e.color"
+              type="button"
+              [style.grid-column]="2"
+              [style.grid-row]="rowOf(e.startHour) + ' / span ' + spanOf(e.startHour, e.span)"
+              [style.margin-top.px]="topOf(e.startHour)"
+              (click)="store.openDetails(e)"
+            >
+              <b>{{ e.title }}</b>
+              <span>{{ e.time }}</span>
+            </button>
+          }
+          <div class="add-box" [style.grid-column]="2" [style.grid-row]="5">
+            <input
+              [(ngModel)]="draft"
+              (keyup.enter)="addHere()"
+              placeholder="Type to add your event ..."
+              aria-label="Add event"
+            />
+            <span>10:00 - 11:00</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

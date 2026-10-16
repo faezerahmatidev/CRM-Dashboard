@@ -1,0 +1,53 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-calendar-sidebar />
+  </aside>
+
+  <div page-main class="dash-main">
+    <section class="dash-card cal-card">
+      <app-cal-tabs [title]="title" />
+
+      <div class="grid-scroll">
+        <div class="mgrid">
+          @for (w of weekdays; track w) {
+            <span class="dow">{{ w }}</span>
+          }
+          @for (cell of cells; track cell.iso) {
+            <div
+              class="cell"
+              [class.outside]="!cell.inMonth"
+              [class.selected]="store.selectedDay() === cell.iso"
+              (click)="store.selectDay(cell.iso)"
+              (keyup.enter)="store.selectDay(cell.iso)"
+              tabindex="0"
+            >
+              <span class="day-num">{{ cell.day }}</span>
+              @for (e of store.eventsOn(cell.iso); track e.id) {
+                <button
+                  class="pill"
+                  [class]="'pill-' + e.color"
+                  type="button"
+                  (click)="store.openDetails(e); $event.stopPropagation()"
+                >
+                  <b>{{ e.title }}</b>
+                  <span>{{ e.time }}</span>
+                </button>
+              }
+              @if (store.selectedDay() === cell.iso) {
+                <div class="add-box" (click)="$event.stopPropagation()">
+                  <input
+                    [(ngModel)]="draft"
+                    (keyup.enter)="addOn(cell.iso)"
+                    placeholder="Type to add ..."
+                    aria-label="Add event"
+                  />
+                  <span>10:00 - 11:00</span>
+                </div>
+              }
+            </div>
+          }
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
