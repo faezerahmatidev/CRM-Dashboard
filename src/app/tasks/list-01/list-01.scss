@@ -1,3 +1,9 @@
+.info-panel {
+  gap: 16px;
+  padding: 18px 16px;
+  overflow: visible;
+}
+
 .overview {
   .conv-sub {
     font-size: 10px;
@@ -12,7 +18,7 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 .ov-list li {
@@ -22,7 +28,7 @@
   gap: 12px;
   background: var(--bg-light);
   border-radius: 10px;
-  padding: 12px 14px;
+  padding: 10px 12px;
 }
 
 .ov-text {
