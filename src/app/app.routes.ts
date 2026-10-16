@@ -123,5 +123,28 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'calendar',
+    loadComponent: () =>
+      import('./calendar/calendar-layout').then((m) => m.CalendarLayout),
+    children: [
+      { path: '', pathMatch: 'full', redirectTo: 'month' },
+      {
+        path: 'month',
+        loadComponent: () => import('./calendar/month/month').then((m) => m.CalMonth),
+        data: { title: 'Calendar' },
+      },
+      {
+        path: 'week',
+        loadComponent: () => import('./calendar/week/week').then((m) => m.CalWeek),
+        data: { title: 'Calendar' },
+      },
+      {
+        path: 'day',
+        loadComponent: () => import('./calendar/day/day').then((m) => m.CalDay),
+        data: { title: 'Calendar' },
+      },
+    ],
+  },
   { path: '**', redirectTo: 'signin' },
 ];
