@@ -1,0 +1,73 @@
+@if (open) {
+  <div class="modal-overlay" (click)="close()">
+    <div #dialog class="modal-card" role="dialog" aria-label="Event details" tabindex="-1" (click)="$event.stopPropagation()" (keydown.tab)="trapTab($event)">
+      <div class="modal-head">
+        <button class="mark-row" type="button" (click)="toggleMarkComplete()" [attr.aria-pressed]="markComplete">
+          <span class="check" [class.done]="markComplete">
+            @if (markComplete) {
+              <svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>
+            }
+          </span>
+          Mark as Complete
+        </button>
+        <button class="close-btn" type="button" aria-label="Close" (click)="close()">
+          <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" /></svg>
+        </button>
+      </div>
+
+      <div class="modal-title-block">
+        @if (isNew) {
+          <input class="title-input" [(ngModel)]="title" placeholder="Type your event" aria-label="Event title" />
+        } @else {
+          <h2 class="title-text">{{ title }}</h2>
+        }
+        <span class="created">Event created on 07 Jun 2019</span>
+      </div>
+
+      <div class="modal-cols">
+        <div>
+          <p class="modal-label">Date</p>
+          <div class="modal-due">
+            <span class="pill">
+              <svg viewBox="0 0 24 24"><rect x="4.5" y="6" width="15" height="13" rx="2"/><path d="M4.5 10h15M8.5 3.5V7M15.5 3.5V7"/></svg>
+              {{ dateLabel }}
+            </span>
+            <span class="pill">
+              <svg viewBox="0 0 24 24"><path d="M6 3.5h12M6 20.5h12M7.5 3.5v17M16.5 3.5v17" /></svg>
+              {{ event?.time ?? '05:53 PM' }}
+            </span>
+          </div>
+        </div>
+        <div>
+          <p class="modal-label">Shared with</p>
+          <button class="add-btn boxed" type="button" aria-label="Share with someone">+</button>
+        </div>
+      </div>
+
+      <h3>Description</h3>
+      <p class="modal-text">
+        When I first got into the online advertising business, I was looking for the magical
+        combination that would put my website into the top search engine rankings, catapult me to
+        the forefront of the minds or individuals looking to buy my product, and generally make me
+        rich beyond my wildest dreams.
+      </p>
+
+      <h3>Locations</h3>
+      <div class="location-row">
+        <svg viewBox="0 0 24 24"><path d="M12 21s-6.5-5.4-6.5-10.5A6.5 6.5 0 0 1 12 4a6.5 6.5 0 0 1 6.5 6.5C18.5 15.6 12 21 12 21Z" /><circle cx="12" cy="10.5" r="2.3" /><path d="M4 8.5a8 8 0 0 1 2-3M20 8.5a8 8 0 0 0-2-3M7 5.5a5 5 0 0 1 1.5-1.5M17 5.5A5 5 0 0 0 15.5 4" /></svg>
+        <input [(ngModel)]="location" placeholder="Type to add your location..." aria-label="Event location" />
+      </div>
+
+      <div class="comment-row">
+        <input [(ngModel)]="comment" (keyup.enter)="submit()" placeholder="Add your comment" aria-label="Add your comment" />
+        <button class="icon-ghost" type="button" aria-label="Attach a file">
+          <svg viewBox="0 0 24 24"><path d="M21 11.5l-8.5 8.5a5.5 5.5 0 0 1-7.8-7.8L13 4a3.7 3.7 0 0 1 5.2 5.2l-8.2 8.2a1.85 1.85 0 0 1-2.6-2.6L15 7.5" /></svg>
+        </button>
+        <button class="icon-ghost" type="button" aria-label="Send comment" (click)="submit()">
+          <svg viewBox="0 0 24 24"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7Z" /></svg>
+        </button>
+        <button class="btn btn-primary send-btn" type="button" (click)="submit()">Send</button>
+      </div>
+    </div>
+  </div>
+}
