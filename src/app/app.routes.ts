@@ -87,5 +87,23 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'tasks',
+    loadComponent: () =>
+      import('./tasks/tasks-layout').then((m) => m.TasksLayout),
+    children: [
+      { path: '', pathMatch: 'full', redirectTo: 'list-01' },
+      {
+        path: 'empty',
+        loadComponent: () => import('./tasks/empty/empty').then((m) => m.TasksEmpty),
+        data: { title: 'Tasks' },
+      },
+      {
+        path: 'list-01',
+        loadComponent: () => import('./tasks/list-01/list-01').then((m) => m.TasksList01),
+        data: { title: 'Tasks' },
+      },
+    ],
+  },
   { path: '**', redirectTo: 'signin' },
 ];
