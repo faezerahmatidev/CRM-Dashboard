@@ -8,10 +8,13 @@
       <app-cal-tabs [title]="title" />
 
       <div class="grid-scroll">
-        <div class="mgrid">
-          @for (w of weekdays; track w) {
-            <span class="dow">{{ w }}</span>
-          }
+        <div class="cal-grid">
+          <div class="mgrid-head">
+            @for (w of weekdays; track w) {
+              <span class="dow">{{ w }}</span>
+            }
+          </div>
+          <div class="mgrid">
           @for (cell of cells; track cell.iso) {
             <div
               class="cell"
@@ -46,6 +49,7 @@
               }
             </div>
           }
+          </div>
         </div>
       </div>
     </section>

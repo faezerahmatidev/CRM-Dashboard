@@ -1,3 +1,9 @@
+.info-panel {
+  gap: 16px;
+  padding: 18px 16px;
+  overflow: visible;
+}
+
 .cal-card {
   display: flex;
   flex-direction: column;
@@ -9,16 +15,25 @@
 .grid-scroll {
   flex: 1;
   min-height: 0;
-  overflow: auto;
+  overflow: hidden;
+  display: flex;
 }
 
-.mgrid {
-  display: grid;
-  grid-template-columns: repeat(7, minmax(0, 1fr));
-  min-width: 640px;
+.cal-grid {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
   border: 1px solid var(--outline);
   border-radius: 12px;
   overflow: hidden;
+  min-width: 640px;
+}
+
+.mgrid-head {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  flex: none;
 }
 
 .dow {
@@ -30,8 +45,17 @@
   border-bottom: 1px solid var(--outline);
 }
 
+.mgrid {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  grid-auto-rows: minmax(0, 1fr);
+}
+
 .cell {
-  min-height: 108px;
+  min-height: 0;
+  overflow: hidden;
   border-bottom: 1px solid var(--outline);
   border-right: 1px solid var(--outline);
   padding: 8px;
@@ -50,6 +74,7 @@
   font-weight: 700;
   text-align: right;
   color: var(--primary-dark);
+  flex: none;
 }
 
 .cell.outside .day-num { color: var(--primary-grey); font-weight: 400; }
@@ -64,6 +89,14 @@
   flex-direction: column;
   gap: 2px;
   min-width: 0;
+  flex: none;
+}
+
+.pill b,
+.pill span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .pill b { font-size: 11px; }
@@ -81,6 +114,7 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
+  flex: none;
 }
 
 .add-box input {

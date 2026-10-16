@@ -32,11 +32,11 @@ import { UPCOMING } from './calendar-data';
   `,
   styles: [`
     .conv-sub { font-size: 10px; color: var(--primary-grey); margin: 2px 0 12px; }
-    .ev-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+    .ev-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
     .ev-list li {
       background: var(--bg-light);
       border-radius: 10px;
-      padding: 12px 14px;
+      padding: 10px 12px;
       display: flex;
       flex-direction: column;
       gap: 3px;
