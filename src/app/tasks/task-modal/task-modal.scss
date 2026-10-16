@@ -26,6 +26,32 @@
   margin-bottom: 18px;
 }
 
+.close-btn {
+  border: 1px solid var(--outline);
+  background: #fff;
+  border-radius: 8px;
+  width: 30px;
+  height: 30px;
+  color: var(--primary-grey);
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+}
+
+.close-btn:hover {
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+.close-btn svg {
+  width: 13px;
+  height: 13px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+}
+
 .mark-row {
   display: inline-flex;
   align-items: center;
