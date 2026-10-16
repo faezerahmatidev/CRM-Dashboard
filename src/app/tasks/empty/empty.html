@@ -1,0 +1,24 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-panel-header logo="C" title="CRAFTUI LLC" sub="8484 Ross Wells" />
+    <section>
+      <h3 class="widget-title">Tasks overview</h3>
+      <p class="conv-sub">Overall tasks performance</p>
+    </section>
+    <app-messages-list [count]="5" [viewAll]="true" [messages]="messages" />
+    <app-conversion-bars title="Conversion history" sub="Week to week performance" />
+  </aside>
+
+  <div page-main class="dash-main">
+    <section class="dash-card empty-card">
+      <app-empty-state
+        image="assets/projects-empty.svg"
+        imageAlt="No tasks illustration"
+        title="No tasks found?"
+        text="Try to assign more tasks to your employees or create a new project and setup it from scratch"
+        actionLabel="Setup"
+        (action)="onSetup()"
+      />
+    </section>
+  </div>
+</div>
