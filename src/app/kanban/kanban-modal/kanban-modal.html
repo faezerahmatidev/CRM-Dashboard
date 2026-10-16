@@ -1,0 +1,110 @@
+@if (open) {
+  <div class="modal-overlay" (click)="close()">
+    <div #dialog class="modal-card" role="dialog" [attr.aria-label]="isNew ? 'Add New Task' : 'Task Description'" tabindex="-1" (click)="$event.stopPropagation()" (keydown.tab)="trapTab($event)">
+      <div class="modal-head">
+        <button class="mark-row" type="button" (click)="toggleMarkComplete()" [attr.aria-pressed]="markComplete">
+          <span class="check" [class.done]="markComplete">
+            @if (markComplete) {
+              <svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>
+            }
+          </span>
+          Mark as Complete
+        </button>
+        <button class="close-btn" type="button" aria-label="Close" (click)="close()">
+          <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" /></svg>
+        </button>
+      </div>
+
+      <div class="modal-title-block">
+        @if (isNew) {
+          <input class="title-input" [(ngModel)]="title" placeholder="Type your task" aria-label="Task title" />
+        } @else {
+          <h2 class="title-text">{{ title }}</h2>
+        }
+        <span class="created">Task created on {{ createdLabel }}</span>
+      </div>
+
+      <div class="modal-cols">
+        <div>
+          <p class="modal-label">Assigned to</p>
+          @if (card) {
+            <div class="assigned-row">
+              <app-user-avatar [initials]="card.members[0]?.initials ?? 'ME'" [color]="card.members[0]?.color ?? 'linear-gradient(135deg,#5e81f4,#9698d6)'" [size]="32" />
+              <app-user-avatar initials="DP" color="linear-gradient(135deg,#5e81f4,#9698d6)" [size]="32" />
+              <app-user-avatar initials="HR" color="linear-gradient(135deg,#34b26b,#7ce7ac)" [size]="32" />
+              <button class="add-btn" type="button" aria-label="Add assignee">+</button>
+            </div>
+          } @else {
+            <button class="add-btn boxed" type="button" aria-label="Add assignee">+</button>
+          }
+        </div>
+        <div>
+          <p class="modal-label">Due to</p>
+          <div class="modal-due">
+            <span class="pill date-pill">
+              <svg viewBox="0 0 24 24"><rect x="4.5" y="6" width="15" height="13" rx="2"/><path d="M4.5 10h15M8.5 3.5V7M15.5 3.5V7"/></svg>
+              {{ isNew ? 'Select date' : dueLabel }}
+            </span>
+            <span class="pill tag-pill">
+              <svg viewBox="0 0 24 24"><path d="M21 11.5l-8.5 8.5a5.5 5.5 0 0 1-7.8-7.8L13 4a3.7 3.7 0 0 1 5.2 5.2l-8.2 8.2a1.85 1.85 0 0 1-2.6-2.6L15 7.5" /></svg>
+              {{ isNew ? 'Select tag' : tagLabel }}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <h3>Description</h3>
+      @if (isNew) {
+        <p class="modal-label">Description</p>
+        <input class="plain-input" [(ngModel)]="description" placeholder="Start typing..." aria-label="Task description" />
+      } @else {
+        <p class="modal-text">{{ description }}</p>
+      }
+
+      <div class="check-head">
+        <h3>Checklist</h3>
+        @if (!isNew) {
+          <span class="check-count">{{ doneCount }} / {{ totalCount }}</span>
+        }
+      </div>
+      @if (!isNew && card) {
+        <div class="progress" role="progressbar" [attr.aria-valuenow]="progressPct" aria-valuemin="0" aria-valuemax="100">
+          <span [style.width.%]="progressPct"></span>
+        </div>
+        <ul class="check-list">
+          @for (c of card.checklist; track $index) {
+            <li>
+              <button class="check" type="button" [class.done]="checklistDone[$index]" (click)="toggleCheck($index)" [attr.aria-label]="'Toggle ' + c.title">
+                @if (checklistDone[$index]) {
+                  <svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>
+                }
+              </button>
+              <span [class.struck]="checklistDone[$index]">{{ c.title }}</span>
+            </li>
+          }
+        </ul>
+      }
+      <div class="add-check">
+        <span class="box" aria-hidden="true"></span>
+        <input [(ngModel)]="checklistDraft" (keyup.enter)="addChecklistItem()" placeholder="Type to add more ..." aria-label="Add checklist item" />
+      </div>
+
+      <h3>Attachments</h3>
+      <button class="upload-row" type="button">
+        <svg viewBox="0 0 24 24"><path d="M7 18a4.5 4.5 0 1 1 .6-8.96A5.5 5.5 0 0 1 18.3 10H18a3.5 3.5 0 0 1 .5 6.96" /><path d="M12 12v8M8.5 15.5 12 12l3.5 3.5" /></svg>
+        Upload your attachment
+      </button>
+
+      <div class="comment-row">
+        <input [(ngModel)]="comment" (keyup.enter)="submit()" placeholder="Add your comment" aria-label="Add your comment" />
+        <button class="icon-ghost" type="button" aria-label="Attach a file">
+          <svg viewBox="0 0 24 24"><path d="M21 11.5l-8.5 8.5a5.5 5.5 0 0 1-7.8-7.8L13 4a3.7 3.7 0 0 1 5.2 5.2l-8.2 8.2a1.85 1.85 0 0 1-2.6-2.6L15 7.5" /></svg>
+        </button>
+        <button class="icon-ghost" type="button" aria-label="Send comment" (click)="submit()">
+          <svg viewBox="0 0 24 24"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7Z" /></svg>
+        </button>
+        <button class="btn btn-primary send-btn" type="button" (click)="submit()">{{ isNew ? 'Create' : 'Send' }}</button>
+      </div>
+    </div>
+  </div>
+}
