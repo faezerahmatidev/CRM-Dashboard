@@ -40,9 +40,9 @@
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="7.5"/><circle cx="12" cy="12" r="4"/><circle cx="12" cy="12" r="1" /></svg>
         <i class="dot red"></i>
       </button>
-      <button type="button" title="Activity" aria-label="Activity" [class.active]="activeIcon === 'activity'">
+      <a routerLink="/notifications" title="Notifications" aria-label="Notifications" [class.active]="activeIcon === 'activity'">
         <svg viewBox="0 0 24 24"><path d="M3.5 9.5c2-2.5 4-2.5 6 0s4 2.5 6 0c1.2-1.5 2.4-2 5-1"/><path d="M3.5 14.5c2-2.5 4-2.5 6 0s4 2.5 6 0c1.2-1.5 2.4-2 5-1"/></svg>
-      </button>
+      </a>
       <button type="button" title="Help" aria-label="Help" [class.active]="activeIcon === 'help'">
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M9.8 9.6A2.3 2.3 0 0 1 12 8.2c1.3 0 2.3.9 2.3 2 0 1.4-1.4 1.7-2.3 2.4v.7M12 16.8h.01"/></svg>
       </button>

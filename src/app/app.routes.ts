@@ -402,5 +402,25 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'notifications',
+    loadComponent: () =>
+      import('./notifications/notifications-layout').then((m) => m.NotificationsLayout),
+    children: [
+      { path: '', pathMatch: 'full', redirectTo: 'list' },
+      {
+        path: 'list',
+        loadComponent: () =>
+          import('./notifications/list/list').then((m) => m.NotificationsList),
+        data: { title: 'Notifications' },
+      },
+      {
+        path: 'grid',
+        loadComponent: () =>
+          import('./notifications/grid/grid').then((m) => m.NotificationsGrid),
+        data: { title: 'Notifications' },
+      },
+    ],
+  },
   { path: '**', redirectTo: 'signin' },
 ];
