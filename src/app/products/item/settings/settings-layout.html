@@ -1,0 +1,34 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-product-panel />
+  </aside>
+
+  <div page-main class="dash-main">
+    <section class="dash-card settings-card">
+      <div class="settings-grid">
+        <div class="settings-main">
+          <router-outlet />
+        </div>
+        <div class="settings-side">
+          <nav class="settings-nav" aria-label="Item settings">
+            @for (n of nav; track n.path) {
+              <a [routerLink]="n.path" routerLinkActive="active" replaceUrl>
+                <span class="nav-titles">
+                  <b>{{ n.title }}</b>
+                  <span>{{ n.sub }}</span>
+                </span>
+              </a>
+            }
+          </nav>
+          <div class="deactivate">
+            <svg viewBox="0 0 24 24"><rect x="5" y="6.5" width="14" height="13" rx="2"/><path d="M4 6.5h16M9.5 6.5V5a1.5 1.5 0 0 1 1.5-1.5h2A1.5 1.5 0 0 1 14.5 5v1.5M10 10.5v6M14 10.5v6"/></svg>
+            <span>
+              <b>Deactivate product</b>
+              <span>Hide &amp; disable current item</span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
