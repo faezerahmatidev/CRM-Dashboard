@@ -1,0 +1,60 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-messages-sidebar active="Starred" />
+  </aside>
+
+  <div page-main class="dash-main">
+    <section class="dash-card msg-card">
+      <div class="msg-toolbar">
+        <button class="new-btn" type="button" (click)="store.openNew()">
+          <svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7.5 18.5 3.5 19.5l1-4L16.5 3.5Z" /></svg>
+          NEW CONVERSATION
+        </button>
+        <app-sort-control prefix="SORT:" [value]="store.sortAsc() ? 'A-Z' : 'Z-A'" (toggled)="store.toggleSort()" />
+        <app-avatar-stack [members]="stack" [size]="28" />
+      </div>
+
+      <div class="conv-grid">
+        <div class="conv-left">
+          <app-thread-list />
+        </div>
+
+        <div class="media-panel">
+          <div class="media-head">
+            <button class="back" type="button" aria-label="Back to conversation">
+              <svg viewBox="0 0 24 24"><path d="M15 5.5 8.5 12l6.5 6.5" /></svg>
+              BACK
+            </button>
+            <div class="media-tabs" role="tablist" aria-label="Media filter">
+              @for (t of tabs; track t) {
+                <button type="button" role="tab" [class.active]="t === activeTab" (click)="activeTab = t">{{ t }}</button>
+              }
+            </div>
+          </div>
+
+          <div class="media-search">
+            <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m15.5 15.5 4 4"/></svg>
+            <input [(ngModel)]="query" placeholder="Type to search files..." aria-label="Search files" />
+          </div>
+
+          <div class="file-grid">
+            @for (f of files; track f.name) {
+              <article class="fcard">
+                <button class="dots-btn" type="button" aria-label="File options">...</button>
+                @if (f.kind === 'file') {
+                  <span class="file-badge" [style.background]="f.tint" [style.color]="f.color">{{ f.badge }}</span>
+                } @else {
+                  <span class="photo" [style.background]="gradients[+f.badge % gradients.length]" role="img" [attr.aria-label]="f.name"></span>
+                }
+                <b>{{ f.name }}</b>
+                @if (f.size) {
+                  <span class="fsize">{{ f.size }}</span>
+                }
+              </article>
+            }
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

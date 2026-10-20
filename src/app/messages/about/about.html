@@ -1,0 +1,94 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-messages-sidebar active="Starred" />
+  </aside>
+
+  <div page-main class="dash-main">
+    <section class="dash-card msg-card">
+      <div class="msg-toolbar">
+        <button class="new-btn" type="button" (click)="store.openNew()">
+          <svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7.5 18.5 3.5 19.5l1-4L16.5 3.5Z" /></svg>
+          NEW CONVERSATION
+        </button>
+        <app-sort-control prefix="SORT:" [value]="store.sortAsc() ? 'A-Z' : 'Z-A'" (toggled)="store.toggleSort()" />
+        <app-avatar-stack [members]="stack" [size]="28" />
+      </div>
+
+      <div class="conv-grid">
+        <div class="conv-left">
+          <app-thread-list />
+        </div>
+
+        <div class="about-panel">
+          <div class="media-head">
+            <button class="back" type="button" aria-label="Back to conversation">
+              <svg viewBox="0 0 24 24"><path d="M15 5.5 8.5 12l6.5 6.5" /></svg>
+              BACK
+            </button>
+          </div>
+
+          <div class="profile-hero">
+            <app-user-avatar
+              [initials]="store.selected().member.initials"
+              [color]="store.selected().member.color"
+              [size]="72"
+            />
+            <h2>{{ store.selected().name }}</h2>
+            <span class="hero-role">UI/UX Designer</span>
+            <div class="socials">
+              <button type="button" aria-label="Facebook"><b>f</b></button>
+              <button type="button" aria-label="Pinterest"><b>P</b></button>
+              <button type="button" aria-label="Twitter">
+                <svg viewBox="0 0 24 24"><path d="M4 5h3.5l4.5 6 4-6H20l-6.5 8.5L20.5 19H17l-4.8-6.4L7.5 19H3.5l7-9L4 5Z" /></svg>
+              </button>
+              <button type="button" aria-label="LinkedIn"><b>in</b></button>
+            </div>
+          </div>
+
+          <h3>About me</h3>
+          <p class="about-text">
+            When I first got into the online advertising business, I was looking for the magical
+            combination that would put my website into the top search engine rankings, catapult me to
+            the forefront of the minds or individuals looking to buy my product, and generally make me
+            rich beyond my wildest dreams.
+          </p>
+
+          <div class="check-head">
+            <h3>Checklist</h3>
+            <span class="check-count">{{ doneCount }} / 9</span>
+          </div>
+          <div class="progress" role="progressbar" [attr.aria-valuenow]="doneCount" aria-valuemin="0" aria-valuemax="9">
+            <span [style.width.%]="(doneCount / 9) * 100"></span>
+          </div>
+          <ul class="check-list">
+            @for (c of checks; track $index) {
+              <li>
+                <button class="check" type="button" [class.done]="c.done" (click)="c.done = !c.done" [attr.aria-label]="'Toggle ' + c.title">
+                  @if (c.done) {
+                    <svg viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5" /></svg>
+                  }
+                </button>
+                <span [class.dim]="!c.done">{{ c.title }}</span>
+              </li>
+            }
+          </ul>
+
+          <div class="hero-actions">
+            <a [href]="'mailto:' + store.selected().name">
+              <svg viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="m4.5 7.5 7.5 6 7.5-6"/></svg>
+              SEND EMAIL
+            </a>
+            <button type="button">
+              <svg viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2"/></svg>
+              MAKE A CALL
+            </button>
+            <button type="button">
+              <svg viewBox="0 0 24 24"><path d="M4.5 7A1.5 1.5 0 0 1 6 5.5h12A1.5 1.5 0 0 1 19.5 7v8a1.5 1.5 0 0 1-1.5 1.5H12l-3.5 3v-3H6A1.5 1.5 0 0 1 4.5 15V7Z" /></svg>
+              SEND MESSAGE
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
