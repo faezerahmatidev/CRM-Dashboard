@@ -1,0 +1,25 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-notification-panel />
+  </aside>
+
+  <div page-main class="dash-main">
+    <section class="dash-card" app-view-card>
+      <app-view-toolbar
+        mode="grid"
+        (modeChange)="onViewChange($event)"
+        sortPrefix="SORT:"
+        [sortValue]="store.newestFirst() ? 'NEWEST FIRST' : 'OLDEST FIRST'"
+        (sortToggle)="store.toggleSort()"
+      />
+      <div class="feed-layout">
+        <div class="feed-grid">
+          @for (p of store.visible(); track p.id) {
+            <app-post-card [post]="p" />
+          }
+        </div>
+        <app-notification-members />
+      </div>
+    </section>
+  </div>
+</div>
