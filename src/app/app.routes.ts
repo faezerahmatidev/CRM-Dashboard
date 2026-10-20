@@ -422,5 +422,28 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'reports',
+    loadComponent: () =>
+      import('./reports/reports-layout').then((m) => m.ReportsLayout),
+    children: [
+      { path: '', pathMatch: 'full', redirectTo: 'view-01' },
+      {
+        path: 'view-01',
+        loadComponent: () => import('./reports/view-01/view-01').then((m) => m.Reports01),
+        data: { title: 'Reports' },
+      },
+      {
+        path: 'view-02',
+        loadComponent: () => import('./reports/view-02/view-02').then((m) => m.Reports02),
+        data: { title: 'Reports' },
+      },
+      {
+        path: 'view-03',
+        loadComponent: () => import('./reports/view-03/view-03').then((m) => m.Reports03),
+        data: { title: 'Reports' },
+      },
+    ],
+  },
   { path: '**', redirectTo: 'signin' },
 ];
