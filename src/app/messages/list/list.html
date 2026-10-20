@@ -1,0 +1,48 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-messages-sidebar active="All Inbox" />
+  </aside>
+
+  <div page-main class="dash-main">
+    <section class="dash-card msg-card">
+      <div class="msg-toolbar">
+        <button class="new-btn" type="button" (click)="store.openNew()">
+          <svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7.5 18.5 3.5 19.5l1-4L16.5 3.5Z" /></svg>
+          NEW CONVERSATION
+        </button>
+        <app-sort-control prefix="SORT:" [value]="store.sortAsc() ? 'A-Z' : 'Z-A'" (toggled)="store.toggleSort()" />
+      </div>
+
+      <ul class="mrows">
+        @for (t of store.visible(); track t.id) {
+          <li (click)="store.select(t.id)" (keyup.enter)="store.select(t.id)" tabindex="0">
+            <button
+              class="star"
+              type="button"
+              [class.on]="t.starred"
+              (click)="store.toggleStar(t.id); $event.stopPropagation()"
+              [attr.aria-label]="'Star ' + t.name"
+              [attr.aria-pressed]="t.starred"
+            >★</button>
+            <app-user-avatar [initials]="t.member.initials" [color]="t.member.color" [size]="40" />
+            <span class="m-main"><b>{{ t.name }}</b></span>
+            <span class="m-text"><b>{{ t.subject }}</b><span>{{ t.snippet }}</span></span>
+            @if (t.hasAttach) {
+              <svg class="attach" viewBox="0 0 24 24"><path d="M21 11.5l-8.5 8.5a5.5 5.5 0 0 1-7.8-7.8L13 4a3.7 3.7 0 0 1 5.2 5.2l-8.2 8.2a1.85 1.85 0 0 1-2.6-2.6L15 7.5" /></svg>
+            } @else {
+              <span class="no-attach"></span>
+            }
+            <span class="m-time">{{ t.time }}</span>
+            <span (click)="$event.stopPropagation()">
+              <app-dots-menu (edit)="store.select(t.id)" (remove)="store.remove(t.id)" />
+            </span>
+          </li>
+        }
+      </ul>
+
+      <app-fab aria-label="Reload messages">
+        <svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 3.5V8h-4.5" /></svg>
+      </app-fab>
+    </section>
+  </div>
+</div>

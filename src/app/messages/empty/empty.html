@@ -1,0 +1,18 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-messages-sidebar active="All Inbox" />
+  </aside>
+
+  <div page-main class="dash-main">
+    <section class="dash-card empty-card">
+      <app-empty-state
+        image="assets/projects-empty.svg"
+        imageAlt="No messages illustration"
+        title="No messages found?"
+        text="Try to create more new conversation or wait until someone will send you a message"
+        actionLabel="Create Chat"
+        (action)="onSetup()"
+      />
+    </section>
+  </div>
+</div>
