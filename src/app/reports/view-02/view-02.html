@@ -1,0 +1,50 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-products-sidebar chart="bars" />
+  </aside>
+
+  <div page-main class="dash-main">
+    <div class="cards-2">
+      <app-chart-card
+        title="Your Sales"
+        [tabs]="tabs"
+        [(tab)]="salesTab"
+        [calendar]="true"
+        bigNumber="$142,000"
+        bigSub="Total income"
+        [sets]="salesSets"
+        [xLabels]="['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul']"
+        viewBox="0 0 560 230"
+        [labelY]="214"
+        [labelStartX]="30"
+        [labelStepX]="83"
+      />
+
+      <app-events-card [events]="events" linkAll="/dashboard/orders" />
+    </div>
+
+    <div class="cards-2">
+      <section class="dash-card" app-dash-card title="Income Breakdown" [tabs]="tabs" [(tab)]="breakdownTab" [calendar]="true">
+        <app-income-donut [total]="donutTotal()" [slices]="donutSlices()" />
+      </section>
+
+      <app-chart-card
+        title="Income Details"
+        [tabs]="tabs"
+        [(tab)]="incomeTab"
+        [calendar]="true"
+        bigNumber="$142,000"
+        [showTrend]="true"
+        bigSub="Total income"
+        [sets]="incomeSets"
+        viewBox="0 0 560 190"
+      >
+        <div class="stats-3">
+          <div><b>{{ incomeStats[incomeTab][0] }}</b><span>Total sales</span></div>
+          <div><b>{{ incomeStats[incomeTab][1] }}</b><span>Spendings</span></div>
+          <div><b>{{ incomeStats[incomeTab][2] }}</b><span>Income</span></div>
+        </div>
+      </app-chart-card>
+    </div>
+  </div>
+</div>

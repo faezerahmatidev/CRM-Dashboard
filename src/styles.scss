@@ -287,6 +287,36 @@ button {
   margin: 0;
 }
 
+/* Three-column stat footer shared by income cards (sales + reports). */
+.stats-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  margin-top: 10px;
+  border-top: 1px solid var(--outline);
+  padding-top: 14px;
+}
+
+.stats-3 div {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  align-items: center;
+  text-align: center;
+}
+
+.stats-3 div + div {
+  border-left: 1px solid var(--outline);
+}
+
+.stats-3 b {
+  font-size: 14px;
+}
+
+.stats-3 span {
+  font-size: 10px;
+  color: var(--primary-grey);
+}
+
 .tabs {
   display: inline-flex;
   gap: 2px;
