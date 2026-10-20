@@ -1,0 +1,49 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-files-sidebar active="My Files" />
+  </aside>
+
+  <div page-main class="dash-main">
+    <section class="dash-card" app-view-card>
+      <app-view-toolbar
+        mode="list"
+        (modeChange)="onViewChange($event)"
+        [sortValue]="store.sortAsc() ? 'A-Z' : 'Z-A'"
+        (sortToggle)="store.toggleSort()"
+      />
+      <app-data-table
+        [columns]="columns"
+        [rows]="rows()"
+        [grid]="grid"
+        sortKey="file"
+        [sortDir]="store.sortAsc() ? 'asc' : 'desc'"
+        [selectable]="false"
+        (sortChange)="store.toggleSort()"
+        (open)="openDetails($event)"
+        (edit)="openDetails($event)"
+        (remove)="store.remove($event)"
+      >
+        <ng-template app-cell="file" let-cell let-row="row">
+          <span class="f-main">
+            @if (fileOf(row.id); as f) {
+              <app-file-badge [badge]="f.badge" [size]="40" [radius]="10" [label]="f.name" />
+            }
+            <b>{{ cell.text }}</b>
+          </span>
+        </ng-template>
+        <ng-template app-cell="tag" let-cell>
+          <span class="ftag">
+            <svg viewBox="0 0 24 24"><path d="M5 5.5h11.5L20 9l-3.5 3.5H5V5.5Z"/><circle cx="9" cy="9" r="1.2"/></svg>
+            {{ cell.text }}
+          </span>
+        </ng-template>
+        <ng-template app-cell="shared" let-row="row">
+          @if (fileOf(row.id); as f) {
+            <app-avatar-stack [members]="f.shared" [extra]="f.extra" [size]="28" />
+          }
+        </ng-template>
+      </app-data-table>
+      <app-pagination [active]="store.page()" (pageChange)="store.setPage($event)" />
+    </section>
+  </div>
+</div>

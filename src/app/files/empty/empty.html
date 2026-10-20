@@ -1,0 +1,18 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-files-sidebar active="My Files" />
+  </aside>
+
+  <div page-main class="dash-main">
+    <section class="dash-card empty-card" app-view-card>
+      <app-empty-state
+        image="assets/projects-empty.svg"
+        imageAlt="No files illustration"
+        title="No files and folders found?"
+        text="Try to upload more files to your storage or create a new shared folder from your desktop"
+        actionLabel="Upload"
+        (action)="store.openUpload()"
+      />
+    </section>
+  </div>
+</div>

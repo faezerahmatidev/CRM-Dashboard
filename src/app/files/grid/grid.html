@@ -1,0 +1,38 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-files-sidebar active="My Files" />
+  </aside>
+
+  <div page-main class="dash-main">
+    <section class="dash-card" app-view-card>
+      <app-view-toolbar
+        mode="grid"
+        (modeChange)="onViewChange($event)"
+        [sortValue]="store.sortAsc() ? 'A-Z' : 'Z-A'"
+        (sortToggle)="store.toggleSort()"
+      />
+
+      <div class="fhead" aria-hidden="true">
+        <span>Name</span><span>Size</span><span>Tag</span><span>Shared with</span>
+      </div>
+
+      <app-card-grid>
+        @for (f of store.visible(); track f.id) {
+          <article class="fcard" (click)="openDetails(f.id)" (keyup.enter)="openDetails(f.id)" tabindex="0">
+            <span class="card-menu" (click)="$event.stopPropagation()">
+              <app-dots-menu (edit)="openDetails(f.id)" (remove)="store.remove(f.id)" />
+            </span>
+            <app-file-badge [badge]="f.badge" [size]="52" [radius]="12" [label]="f.name" />
+            <b>{{ f.name }}</b>
+            <span class="fsize">{{ f.size }}</span>
+            <span class="ftag">
+              <svg viewBox="0 0 24 24"><path d="M5 5.5h11.5L20 9l-3.5 3.5H5V5.5Z"/><circle cx="9" cy="9" r="1.2"/></svg>
+              {{ f.tag }}
+            </span>
+          </article>
+        }
+      </app-card-grid>
+      <app-pagination [active]="store.page()" (pageChange)="store.setPage($event)" />
+    </section>
+  </div>
+</div>
