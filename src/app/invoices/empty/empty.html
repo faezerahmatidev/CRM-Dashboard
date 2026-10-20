@@ -1,0 +1,18 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-invoices-sidebar />
+  </aside>
+
+  <div page-main class="dash-main">
+    <section class="dash-card empty-card" app-view-card>
+      <app-empty-state
+        image="assets/projects-empty.svg"
+        imageAlt="No invoices illustration"
+        title="No invoices found?"
+        text="Try to create more new invoices, send these documents and wait for a payment"
+        actionLabel="Create Invoice"
+        (action)="onSetup()"
+      />
+    </section>
+  </div>
+</div>

@@ -22,6 +22,7 @@ export interface TableCell {
   rating?: string;
   icon?: 'laptop' | 'audio' | 'cube' | 'doc';
   palette?: string;
+  color?: string;
 }
 
 export interface TableRow {

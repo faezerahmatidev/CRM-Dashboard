@@ -1,0 +1,47 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-invoices-sidebar />
+  </aside>
+
+  <div page-main class="dash-main">
+    <section class="dash-card" app-view-card>
+      <app-view-toolbar
+        [mode]="null"
+        [sortValue]="store.sortAsc() ? 'A-Z' : 'Z-A'"
+        (sortToggle)="sortBy('doc')"
+      >
+        <ng-container toolbar-start>
+          <app-filter-tabs
+            [options]="filterOptions"
+            [active]="store.filter()"
+            (activeChange)="setFilter($event)"
+            ariaLabel="Invoice status filter"
+          />
+        </ng-container>
+      </app-view-toolbar>
+      <app-data-table
+        [columns]="columns"
+        [rows]="rows()"
+        [grid]="grid"
+        [sortKey]="store.sortKey() === 'number' ? 'doc' : store.sortKey()"
+        [sortDir]="store.sortAsc() ? 'asc' : 'desc'"
+        [selectable]="false"
+        emptyText="No invoices found."
+        (sortChange)="sortBy($event)"
+        (open)="openById($event)"
+        (edit)="openById($event)"
+        (remove)="store.remove($event)"
+      >
+        <ng-template app-cell="customer" let-cell let-row="row">
+          <span class="i-customer">
+            @if (invoiceOf(row.id); as inv) {
+              <app-contact-avatar [initials]="inv.member.initials" [color]="inv.member.color" [size]="36" [radius]="10" />
+            }
+            <b>{{ cell.text }}</b>
+          </span>
+        </ng-template>
+      </app-data-table>
+      <app-pagination [active]="store.page()" (pageChange)="store.setPage($event)" />
+    </section>
+  </div>
+</div>
