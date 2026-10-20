@@ -1,0 +1,18 @@
+.cards-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin-bottom: 18px;
+}
+
+.cards-2 {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: 18px;
+}
+
+.conv-sub { font-size: 10px; color: var(--primary-grey); margin: 2px 0 8px; }
+
+@media (max-width: 1100px) {
+  .cards-3, .cards-2 { grid-template-columns: minmax(0, 1fr); }
+}

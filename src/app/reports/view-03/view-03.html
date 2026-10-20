@@ -1,0 +1,66 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-products-sidebar chart="bars" />
+  </aside>
+
+  <div page-main class="dash-main">
+    <div class="cards-3">
+      <app-area-chart
+        title=""
+        [tabs]="tabs"
+        [(tab)]="yellowTab"
+        [calendar]="true"
+        [sets]="yellowSets"
+        [xLabels]="['Apr', 'Jun', 'Jul', 'Aug', 'Sep']"
+        viewBox="0 0 340 200"
+        [labelY]="188"
+        [labelStartX]="24"
+        [labelStepX]="72"
+        [tipX]="120"
+        [tipY]="20"
+      />
+
+      <section class="dash-card" app-dash-card title="Conversion history">
+        <p class="conv-sub">Week to week performance</p>
+        <app-conversion-bars [bare]="true" />
+      </section>
+
+      <app-area-chart
+        title=""
+        [tabs]="tabs"
+        [(tab)]="dualTab"
+        [calendar]="true"
+        [sets]="dualSets"
+        [xLabels]="['Apr', 'Jun', 'Jul', 'Aug', 'Sep']"
+        viewBox="0 0 340 200"
+        [labelY]="188"
+        [labelStartX]="24"
+        [labelStepX]="72"
+        [tipX]="180"
+        [tipY]="52"
+      />
+    </div>
+
+    <div class="cards-2">
+      <app-area-chart
+        title="Orders"
+        [tabs]="tabs"
+        [(tab)]="ordersTab"
+        [calendar]="true"
+        [legend]="ordersLegend"
+        [sets]="ordersSets"
+        [xLabels]="['Jan', 'Feb', 'Mar', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']"
+        viewBox="0 0 560 210"
+        [labelY]="198"
+        [labelStartX]="24"
+        [labelStepX]="51"
+        [tipX]="258"
+        [tipY]="40"
+      />
+
+      <section class="dash-card" app-dash-card title="" [tabs]="tabs" [(tab)]="donutTab" [calendar]="true">
+        <app-income-donut total="$85k" legend="side" />
+      </section>
+    </div>
+  </div>
+</div>

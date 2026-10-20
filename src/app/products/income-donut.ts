@@ -13,6 +13,7 @@ export interface DonutSlice {
   selector: 'app-income-donut',
   standalone: true,
   template: `
+    <div [class.side-wrap]="legend === 'side'">
     <svg class="pie" viewBox="0 0 200 190" role="img" [attr.aria-label]="total + ' income breakdown'">
       @for (s of arcs; track $index) {
         <circle
@@ -23,7 +24,7 @@ export interface DonutSlice {
       }
       <text x="100" y="103" text-anchor="middle" class="pie-total">{{ total }}</text>
     </svg>
-    <ul class="legend">
+    <ul class="legend" [class.side]="legend === 'side'">
       @for (s of slices; track s.label) {
         <li>
           <span class="lg-label"><i [style.background]="s.color"></i>{{ s.label }}</span>
@@ -31,11 +32,16 @@ export interface DonutSlice {
         </li>
       }
     </ul>
+    </div>
   `,
   styles: [`
     .pie { width: 100%; height: auto; display: block; }
     .pie-total { font-size: 22px; font-weight: 900; fill: var(--primary-dark); }
     .legend { list-style: none; margin: 12px 0 0; padding: 12px 0 0; border-top: 1px solid var(--outline); display: grid; grid-template-columns: 1fr 1fr; gap: 10px 16px; }
+    .legend.side { grid-template-columns: 1fr; border-top: 0; margin: 0; padding: 0; }
+    .side-wrap { display: flex; align-items: center; gap: 18px; }
+    .side-wrap .pie { flex: 1; min-width: 0; }
+    .side-wrap .legend { flex: 1; min-width: 0; }
     .legend li { display: flex; align-items: center; justify-content: space-between; gap: 8px; font-size: 10.5px; }
     .lg-label { display: inline-flex; align-items: center; gap: 7px; color: var(--primary-grey); }
     .lg-label i { width: 8px; height: 8px; border-radius: 50%; }
@@ -44,6 +50,8 @@ export interface DonutSlice {
 })
 export class IncomeDonut {
   @Input() total = '$85k';
+  /** Legend placement: below the chart or beside it. */
+  @Input() legend: 'below' | 'side' = 'below';
   @Input() slices: DonutSlice[] = [
     { label: 'Marketing Channels', value: '$22.0k', color: '#5e81f4', fraction: 0.16 },
     { label: 'Offline Channels', value: '$18.6k', color: '#f4be5e', fraction: 0.34 },
