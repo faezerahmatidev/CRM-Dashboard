@@ -1,0 +1,72 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-dash-welcome />
+    <app-latest-updates />
+    <app-upcoming-events />
+  </aside>
+
+  <div page-main class="dash-main">
+    <div class="kpi-grid">
+      @for (k of kpis; track k.label) {
+        <div class="dash-card kpi" app-stat-card
+          [label]="k.label" [value]="k.value" [sub]="k.sub" [bar]="k.bar" [barWidth]="k.width">
+        </div>
+      }
+    </div>
+
+    <div class="cards-2">
+      <app-chart-card
+        title="Orders"
+        [tabs]="tabs"
+        [(tab)]="ordersTab"
+        [calendar]="true"
+        [sets]="ordersSets"
+        [xLabels]="['Jan','Feb','Mar','Apr','Jun','Jul','Aug','Sep','Oct','Nov','Dec']"
+        viewBox="0 0 640 240"
+        [labelY]="224"
+        [labelStartX]="20"
+        [labelStepX]="60"
+        [tipX]="220"
+        [tipWidth]="92"
+      />
+
+      <app-chart-card
+        title="Planned Income"
+        [calendar]="true"
+        [sets]="{ '': plannedSet }"
+        [xLabels]="['Jan','Feb','Mar','Apr','Jun']"
+        viewBox="0 0 340 210"
+        [labelY]="196"
+        [labelStartX]="20"
+        [labelStepX]="70"
+      />
+    </div>
+
+    <div class="cards-3">
+      <section class="dash-card">
+        <app-conversion-bars [bare]="true" />
+        <div class="stats-2">
+          <div><b>$342,000</b><span>Total sales</span></div>
+          <div><b>$200,000</b><span>Spendings</span></div>
+        </div>
+      </section>
+
+      <section class="dash-card">
+        <app-rings-chart [bare]="true" />
+      </section>
+
+      <app-chart-card
+        title=""
+        [tabs]="tabs"
+        [(tab)]="miniTab"
+        [sets]="miniSets"
+        viewBox="0 0 460 160"
+      >
+        <div class="stats-2">
+          <div><b>$342,000</b><span>Total sales</span></div>
+          <div><b>$200,000</b><span>Spendings</span></div>
+        </div>
+      </app-chart-card>
+    </div>
+  </div>
+</div>

@@ -15,8 +15,10 @@ export interface RingSegment {
   standalone: true,
   template: `
     <section>
-      <h3 class="widget-title">{{ title }}</h3>
-      <p class="conv-sub">{{ sub }}</p>
+      @if (!bare) {
+        <h3 class="widget-title">{{ title }}</h3>
+        <p class="conv-sub">{{ sub }}</p>
+      }
       <svg class="rings" viewBox="0 0 200 190" role="img" [attr.aria-label]="title + ' total ' + total">
         @for (r of rings; track $index) {
           <circle cx="100" cy="95" [attr.r]="r.radius" fill="none" stroke="#eef0f6" [attr.stroke-width]="r.width" />
@@ -28,10 +30,12 @@ export interface RingSegment {
         }
         <text x="100" y="103" text-anchor="middle" class="rings-total">{{ total }}</text>
       </svg>
+      @if (!bare) {
       <div class="sales-row">
         <span><b>{{ sales }}</b><span>Total sales</span></span>
         <span><b>{{ spendings }}</b><span>Spendings</span></span>
       </div>
+      }
     </section>
   `,
   styles: [`
@@ -56,6 +60,8 @@ export class RingsChart {
   @Input() total = '$85k';
   @Input() sales = '$342.000';
   @Input() spendings = '$200.000';
+  /** Hide the title and the sales/spendings footer. */
+  @Input() bare = false;
   @Input() rings: RingSegment[] = [
     { color: '#5e81f4', dash: '367 490', radius: 78, width: 7, rotate: -210 },
     { color: '#8181a5', dash: '250 390', radius: 62, width: 6, rotate: -190 },
