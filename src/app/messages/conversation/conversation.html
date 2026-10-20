@@ -1,0 +1,82 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-messages-sidebar active="Starred" />
+  </aside>
+
+  <div page-main class="dash-main">
+    <section class="dash-card msg-card">
+      <div class="msg-toolbar">
+        <button class="new-btn" type="button" (click)="store.openNew()">
+          <svg viewBox="0 0 24 24"><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7.5 18.5 3.5 19.5l1-4L16.5 3.5Z" /></svg>
+          NEW CONVERSATION
+        </button>
+        <app-sort-control prefix="SORT:" [value]="store.sortAsc() ? 'A-Z' : 'Z-A'" (toggled)="store.toggleSort()" />
+        <app-avatar-stack [members]="stack" [size]="28" />
+        <span class="search-history">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m15.5 15.5 4 4"/></svg>
+          SEARCH IN HISTORY
+        </span>
+      </div>
+
+      <div class="conv-grid">
+        <div class="conv-left">
+          <app-thread-list />
+        </div>
+
+        <div class="thread-panel">
+          <h2 class="thread-title">Where To Look For Cheap Brochure Printing Services</h2>
+          <p class="thread-sub">Discussion from Dribbble Presentation project</p>
+          <p class="thread-meta">
+            <span class="date-pill">14 Aug 2018</span>
+            <span class="tag-pill">Spotify</span>
+          </p>
+
+          <div class="bubbles">
+            @for (m of thread; track $index) {
+              @if (m.from === 'typing') {
+                <div class="row them">
+                  <app-user-avatar [initials]="store.selected().member.initials" [color]="store.selected().member.color" [size]="28" />
+                  <span class="typing" aria-label="Someone is typing"><i></i><i></i><i></i></span>
+                </div>
+              } @else if (m.from === 'them') {
+                <div class="row them">
+                  <app-user-avatar [initials]="store.selected().member.initials" [color]="store.selected().member.color" [size]="28" />
+                  <span class="bubble grey">{{ m.text }}@if (m.time) {<span class="btime">{{ m.time }}</span>}</span>
+                </div>
+              } @else {
+                <div class="row me">
+                  <span class="bubble blue">{{ m.text }}</span>
+                  <app-user-avatar initials="ME" color="linear-gradient(135deg,#5e81f4,#9698d6)" [size]="28" />
+                </div>
+                @if (m.time) {
+                  <span class="metime">{{ m.time }}</span>
+                }
+              }
+            }
+            <div class="row them">
+              <app-user-avatar [initials]="store.selected().member.initials" [color]="store.selected().member.color" [size]="28" />
+              <span class="typing" aria-label="Someone is typing"><i></i><i></i><i></i></span>
+            </div>
+          </div>
+
+          <div class="composer">
+            <input
+              [ngModel]="store.draft()"
+              (ngModelChange)="store.setDraft($event)"
+              (keyup.enter)="store.sendDraft()"
+              placeholder="Add your message"
+              aria-label="Add your message"
+            />
+            <button class="icon" type="button" aria-label="Attach">
+              <svg viewBox="0 0 24 24"><path d="M21 11.5l-8.5 8.5a5.5 5.5 0 0 1-7.8-7.8L13 4a3.7 3.7 0 0 1 5.2 5.2l-8.2 8.2a1.85 1.85 0 0 1-2.6-2.6L15 7.5" /></svg>
+            </button>
+            <button class="icon" type="button" aria-label="Emoji">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M9 9.5h.01M15 9.5h.01M8.5 14.5c1 1.2 2.2 1.8 3.5 1.8s2.5-.6 3.5-1.8" /></svg>
+            </button>
+            <button class="send" type="button" (click)="store.sendDraft()">Send</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
