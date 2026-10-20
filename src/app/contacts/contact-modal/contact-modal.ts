@@ -1,6 +1,6 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, Output, SimpleChanges, ViewChild, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ContactAvatar } from '../contact-avatar';
+import { ContactAvatar } from '../../shared/contact-avatar/contact-avatar';
 import { Contact, fullName } from '../contacts-data';
 import { ContactsStore } from '../contacts-store';
 

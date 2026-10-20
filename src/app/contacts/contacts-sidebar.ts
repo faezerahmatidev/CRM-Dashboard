@@ -1,7 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { PanelHeader } from '../shared/panel-header/panel-header';
 import { RingsChart } from '../shared/rings-chart/rings-chart';
-import { ConversionLines } from './conversion-lines';
+import { ConversionLines } from '../shared/conversion-lines/conversion-lines';
 
 export interface OverviewStat {
   value: string;

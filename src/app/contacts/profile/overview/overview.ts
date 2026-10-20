@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { DashPage } from '../../../shared/dash-page/dash-page';
 import { ViewToolbar } from '../../../shared/view-toolbar/view-toolbar';
 import { ViewCard } from '../../../shared/view-card/view-card';
+import { FilterTabs } from '../../../shared/filter-tabs/filter-tabs';
 import { UserAvatar } from '../../../shared/user-avatar/user-avatar';
 import { Fab } from '../../../shared/fab/fab';
 import { ProfileSidebar } from '../../profile-sidebar';
@@ -11,7 +12,7 @@ import { TaskFilter, TasksStore } from '../../../tasks/tasks-store';
 @Component({
   selector: 'app-profile-overview',
   standalone: true,
-  imports: [FormsModule, DashPage, ProfileSidebar, ViewToolbar, ViewCard, UserAvatar, Fab],
+  imports: [FormsModule, DashPage, ProfileSidebar, ViewToolbar, ViewCard, FilterTabs, UserAvatar, Fab],
   templateUrl: './overview.html',
   styleUrl: './overview.scss',
 })
@@ -19,6 +20,11 @@ export class ProfileOverview {
   protected tasks = inject(TasksStore);
 
   draft = '';
+  filterOptions = [
+    { value: 'ALL', label: 'ALL', icon: 'list' as const },
+    { value: 'DONE', label: 'DONE', icon: 'done' as const },
+    { value: 'PENDING', label: 'PENDING', icon: 'pending' as const },
+  ];
 
   setFilter(f: TaskFilter): void {
     this.tasks.setFilter(f);

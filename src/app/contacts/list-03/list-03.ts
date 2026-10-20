@@ -5,7 +5,7 @@ import { ViewToolbar } from '../../shared/view-toolbar/view-toolbar';
 import { ViewCard } from '../../shared/view-card/view-card';
 import { ProjectViewMode } from '../../shared/view-toggle/view-toggle';
 import { Pagination } from '../../shared/pagination/pagination';
-import { ContactAvatar } from '../contact-avatar';
+import { ContactAvatar } from '../../shared/contact-avatar/contact-avatar';
 import { DataTable, TableCell, TableColumn } from '../../shared/data-table/data-table';
 import { CellDef } from '../../shared/data-table/cell-def';
 import { ContactsSidebar } from '../contacts-sidebar';

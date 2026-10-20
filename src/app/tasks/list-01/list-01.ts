@@ -5,6 +5,7 @@ import { PanelHeader } from '../../shared/panel-header/panel-header';
 import { ConversionBars } from '../../dashboard/widgets/conversion-bars';
 import { ViewToolbar } from '../../shared/view-toolbar/view-toolbar';
 import { ViewCard } from '../../shared/view-card/view-card';
+import { FilterTabs } from '../../shared/filter-tabs/filter-tabs';
 import { UserAvatar } from '../../shared/user-avatar/user-avatar';
 import { Fab } from '../../shared/fab/fab';
 import { TASK_OVERVIEW } from '../tasks-data';
@@ -13,7 +14,7 @@ import { TaskFilter, TasksStore } from '../tasks-store';
 @Component({
   selector: 'app-tasks-list-01',
   standalone: true,
-  imports: [FormsModule, DashPage, PanelHeader, ConversionBars, ViewToolbar, ViewCard, UserAvatar, Fab],
+  imports: [FormsModule, DashPage, PanelHeader, ConversionBars, ViewToolbar, ViewCard, FilterTabs, UserAvatar, Fab],
   templateUrl: './list-01.html',
   styleUrl: './list-01.scss',
 })
@@ -22,6 +23,11 @@ export class TasksList01 {
 
   overview = TASK_OVERVIEW;
   draft = '';
+  filterOptions = [
+    { value: 'ALL', label: 'ALL', icon: 'list' as const },
+    { value: 'DONE', label: 'DONE', icon: 'done' as const },
+    { value: 'PENDING', label: 'PENDING', icon: 'pending' as const },
+  ];
 
   setFilter(f: TaskFilter): void {
     this.store.setFilter(f);

@@ -20,7 +20,7 @@ export interface TableCell {
   sub?: string;
   tone?: PillTone;
   rating?: string;
-  icon?: 'laptop' | 'audio' | 'cube';
+  icon?: 'laptop' | 'audio' | 'cube' | 'doc';
   palette?: string;
 }
 

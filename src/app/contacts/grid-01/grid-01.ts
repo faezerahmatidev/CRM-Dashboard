@@ -7,7 +7,7 @@ import { CardGrid } from '../../shared/card-grid/card-grid';
 import { ProjectViewMode } from '../../shared/view-toggle/view-toggle';
 import { Pagination } from '../../shared/pagination/pagination';
 import { ContactsSidebar } from '../contacts-sidebar';
-import { ContactAvatar } from '../contact-avatar';
+import { ContactAvatar } from '../../shared/contact-avatar/contact-avatar';
 import { OVERVIEW_A, fullName } from '../contacts-data';
 import { ContactsStore } from '../contacts-store';
 
