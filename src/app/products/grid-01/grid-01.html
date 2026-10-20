@@ -1,0 +1,28 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-products-sidebar chart="donut" />
+  </aside>
+
+  <div page-main class="dash-main">
+    <section class="dash-card" app-view-card>
+      <app-view-toolbar mode="grid" [sortValue]="null" (modeChange)="onViewChange($event)">
+        <ng-container toolbar-end>
+          <app-actions-button />
+        </ng-container>
+      </app-view-toolbar>
+      <app-card-grid>
+        @for (p of store.visible('A'); track p.id) {
+          <app-product-card
+            variant="01"
+            [product]="p"
+            [selected]="store.isSelected(p.id)"
+            (selectChange)="store.toggleSelect($event.id, $event.checked)"
+            (open)="openItem()"
+            (menu)="openItem()"
+          />
+        }
+      </app-card-grid>
+      <app-pagination [active]="store.page()" (pageChange)="store.setPage($event)" />
+    </section>
+  </div>
+</div>

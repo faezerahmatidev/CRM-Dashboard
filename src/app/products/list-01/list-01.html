@@ -1,0 +1,28 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-products-sidebar chart="donut" />
+  </aside>
+
+  <div page-main class="dash-main">
+    <section class="dash-card" app-view-card>
+      <app-view-toolbar mode="list" [sortValue]="null" (modeChange)="onViewChange($event)">
+        <ng-container toolbar-end>
+          <app-actions-button />
+        </ng-container>
+      </app-view-toolbar>
+      <app-data-table
+        [columns]="columns"
+        [rows]="rows()"
+        [grid]="grid"
+        [sortKey]="sortCol"
+        [sortDir]="store.sortDir()"
+        (sortChange)="sortBy($event)"
+        (selectChange)="store.toggleSelect($event.id, $event.checked)"
+        (open)="openItem()"
+        (edit)="openItem()"
+        (remove)="store.remove($event)"
+      />
+      <app-pagination [active]="store.page()" (pageChange)="store.setPage($event)" />
+    </section>
+  </div>
+</div>
