@@ -28,7 +28,7 @@ import { MessagesStore } from './messages-store';
           <app-user-avatar [initials]="t.member.initials" [color]="t.member.color" [size]="40" />
           <span class="t-body">
             <span class="t-top"><b>{{ t.name }}</b><span>{{ t.time }}</span></span>
-            <span class="t-preview">{{ previews[t.id] ?? t.snippet }}</span>
+            <span class="t-preview">{{ previews[t.id] || t.snippet }}</span>
           </span>
         </li>
       }

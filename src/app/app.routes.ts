@@ -234,5 +234,39 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'messages',
+    loadComponent: () =>
+      import('./messages/messages-layout').then((m) => m.MessagesLayout),
+    children: [
+      { path: '', pathMatch: 'full', redirectTo: 'list' },
+      {
+        path: 'empty',
+        loadComponent: () => import('./messages/empty/empty').then((m) => m.MessagesEmpty),
+        data: { title: 'Messages' },
+      },
+      {
+        path: 'list',
+        loadComponent: () => import('./messages/list/list').then((m) => m.MessagesList),
+        data: { title: 'Messages' },
+      },
+      {
+        path: 'conversation',
+        loadComponent: () =>
+          import('./messages/conversation/conversation').then((m) => m.MessagesConversation),
+        data: { title: 'Messages' },
+      },
+      {
+        path: 'media',
+        loadComponent: () => import('./messages/media/media').then((m) => m.MessagesMedia),
+        data: { title: 'Messages' },
+      },
+      {
+        path: 'about',
+        loadComponent: () => import('./messages/about/about').then((m) => m.MessagesAbout),
+        data: { title: 'Messages' },
+      },
+    ],
+  },
   { path: '**', redirectTo: 'signin' },
 ];
