@@ -6,15 +6,17 @@
   </aside>
 
   <div page-main class="dash-main">
-    <section class="dash-card projects-card">
-      <div class="projects-toolbar">
-        <app-view-toggle mode="grid" (modeChange)="onViewChange($event)" />
-        <app-sort-control [value]="sortAsc ? 'A-Z' : 'Z-A'" (toggled)="sortAsc = !sortAsc" />
-      </div>
+    <section class="dash-card" app-view-card>
+      <app-view-toolbar
+        mode="grid"
+        (modeChange)="onViewChange($event)"
+        [sortValue]="sortAsc ? 'A-Z' : 'Z-A'"
+        (sortToggle)="sortAsc = !sortAsc"
+      />
       <div class="plist-head">
         <span>Projects</span><span>Tasks <i>⇅</i></span><span>Due date <i>⇅</i></span><span>Members <i>⇅</i></span>
       </div>
-      <div class="grid-cards">
+      <app-card-grid [columns]="4" [collapseBelow]="1500">
         @for (p of sortedProjects(); track p.name) {
           <article class="grid-card clickable-card" routerLink="/projects/details/tasks" replaceUrl [title]="p.name">
             <span class="mini-bar"><i [style.width.%]="p.progress" [style.background]="p.progressColor"></i></span>
@@ -26,7 +28,7 @@
             <app-avatar-stack [members]="p.members" [extra]="p.gridExtra ?? p.extra" />
           </article>
         }
-      </div>
+      </app-card-grid>
       <app-pagination [active]="page" (pageChange)="page = $event" />
     </section>
   </div>

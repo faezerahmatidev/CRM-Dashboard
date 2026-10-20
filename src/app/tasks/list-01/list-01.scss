@@ -85,20 +85,8 @@
 
 .tasks-card {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  min-height: 0;
-  overflow: hidden;
-  flex: 1;
   gap: 12px;
   padding-bottom: 76px;
-}
-
-.tasks-toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
 }
 
 .filter-tabs {

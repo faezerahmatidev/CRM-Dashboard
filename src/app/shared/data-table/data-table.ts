@@ -57,6 +57,8 @@ export class DataTable {
   @Input() sortDir: 'asc' | 'desc' = 'asc';
   @Input() selectable = true;
   @Input() emptyText = 'No rows found.';
+  /** `cards` = bordered boxes (contacts/products), `rows` = plain separators (projects). */
+  @Input() variant: 'cards' | 'rows' = 'cards';
 
   @Output() sortChange = new EventEmitter<string>();
   @Output() selectChange = new EventEmitter<TableSelectEvent>();

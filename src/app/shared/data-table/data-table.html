@@ -30,6 +30,7 @@
       @for (r of rows; track r.id) {
         <li
           class="trow"
+          [class.plain]="variant === 'rows'"
           [style.grid-template-columns]="grid"
           (click)="open.emit(r.id)"
           (keyup.enter)="open.emit(r.id)"

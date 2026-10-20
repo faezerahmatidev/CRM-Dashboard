@@ -3,7 +3,8 @@ import { FormsModule } from '@angular/forms';
 import { DashPage } from '../../shared/dash-page/dash-page';
 import { PanelHeader } from '../../shared/panel-header/panel-header';
 import { ConversionBars } from '../../dashboard/widgets/conversion-bars';
-import { SortControl } from '../../shared/sort-control/sort-control';
+import { ViewToolbar } from '../../shared/view-toolbar/view-toolbar';
+import { ViewCard } from '../../shared/view-card/view-card';
 import { UserAvatar } from '../../shared/user-avatar/user-avatar';
 import { Fab } from '../../shared/fab/fab';
 import { TASK_OVERVIEW } from '../tasks-data';
@@ -12,7 +13,7 @@ import { TaskFilter, TasksStore } from '../tasks-store';
 @Component({
   selector: 'app-tasks-list-01',
   standalone: true,
-  imports: [FormsModule, DashPage, PanelHeader, ConversionBars, SortControl, UserAvatar, Fab],
+  imports: [FormsModule, DashPage, PanelHeader, ConversionBars, ViewToolbar, ViewCard, UserAvatar, Fab],
   templateUrl: './list-01.html',
   styleUrl: './list-01.scss',
 })

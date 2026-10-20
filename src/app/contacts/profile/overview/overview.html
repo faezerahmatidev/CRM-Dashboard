@@ -4,8 +4,13 @@
   </aside>
 
   <div page-main class="dash-main">
-    <section class="dash-card tasks-card">
-      <div class="tasks-toolbar">
+    <section class="dash-card tasks-card" app-view-card>
+      <app-view-toolbar
+        [mode]="null"
+        [sortValue]="tasks.sortAsc() ? 'A-Z' : 'Z-A'"
+        (sortToggle)="tasks.toggleSort()"
+      >
+        <ng-container toolbar-start>
         <div class="filter-tabs" role="tablist" aria-label="Task filter">
           <button type="button" [class.active]="tasks.filter() === 'ALL'" (click)="setFilter('ALL')">
             <svg viewBox="0 0 24 24"><path d="M8.5 6.5H20M8.5 12H20M8.5 17.5H20" /><circle cx="5" cy="6.5" r="1" /><circle cx="5" cy="12" r="1" /><circle cx="5" cy="17.5" r="1" /></svg>
@@ -20,8 +25,8 @@
             PENDING
           </button>
         </div>
-        <app-sort-control prefix="SORT:" [value]="tasks.sortAsc() ? 'A-Z' : 'Z-A'" (toggled)="tasks.toggleSort()" />
-      </div>
+        </ng-container>
+      </app-view-toolbar>
 
       <div class="add-task">
         <span class="box" aria-hidden="true"></span>

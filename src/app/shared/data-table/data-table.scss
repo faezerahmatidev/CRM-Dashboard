@@ -64,6 +64,14 @@
 
 .trow:focus { outline: 1.5px solid var(--primary); outline-offset: 2px; }
 
+.trow.plain {
+  border: 0;
+  border-top: 1px solid var(--outline);
+  border-radius: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+}
+
 .check-cell { display: grid; place-items: center; }
 
 .check-cell input {

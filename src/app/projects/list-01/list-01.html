@@ -6,34 +6,43 @@
   </aside>
 
   <div page-main class="dash-main">
-    <section class="dash-card projects-card">
-      <div class="projects-toolbar">
-        <app-view-toggle mode="list" (modeChange)="onViewChange($event)" />
-        <app-sort-control [value]="sortAsc ? 'A-Z' : 'Z-A'" (toggled)="sortAsc = !sortAsc" />
-      </div>
-      <div class="plist-head">
-        <span>Projects</span><span>Tasks <i>⇅</i></span><span>Budget <i>⇅</i></span><span>Due date <i>⇅</i></span><span>Members <i>⇅</i></span><span></span>
-      </div>
-      <ul class="plist-rows">
-        @for (p of sortedProjects(); track p.name) {
-          <li class="clickable" routerLink="/projects/details/tasks" replaceUrl [title]="p.name">
-            <span class="p-main">
+    <section class="dash-card" app-view-card>
+      <app-view-toolbar
+        mode="list"
+        (modeChange)="onViewChange($event)"
+        [sortValue]="sortAsc ? 'A-Z' : 'Z-A'"
+        (sortToggle)="sortAsc = !sortAsc"
+      />
+      <app-data-table
+        [columns]="columns"
+        [rows]="rows()"
+        [grid]="grid"
+        sortKey="project"
+        [sortDir]="sortAsc ? 'asc' : 'desc'"
+        [selectable]="false"
+        variant="rows"
+        (sortChange)="sortAsc = !sortAsc"
+        (open)="openDetails()"
+        (edit)="onEditByName($event)"
+        (remove)="onRemoveByName($event)"
+      >
+        <ng-template app-cell="project" let-cell let-row="row">
+          <span class="p-main">
+            @if (projectOf(row.id); as p) {
               <app-project-brand [glyph]="p.brand.glyph" [tint]="p.brand.tint" [color]="p.brand.color" />
-              <span class="p-titles">
-                <b>{{ p.name }}</b>
-                <span>{{ p.category }}</span>
-              </span>
+            }
+            <span class="p-titles">
+              <b>{{ cell.text }}</b>
+              <span>{{ cell.sub }}</span>
             </span>
-            <span class="p-stat"><b>{{ p.tasksDone }} / {{ p.tasksTotal }}</b><span>Tasks</span></span>
-            <span class="p-stat"><b>{{ p.budget }}</b><span>Budget</span></span>
-            <span class="p-stat"><b>{{ p.due }}</b><span>Due date</span></span>
-            <span class="p-members">
-              <app-avatar-stack [members]="p.members" [extra]="p.extra" />
-            </span>
-            <app-dots-menu (edit)="onEdit(p)" (remove)="onRemove(p)" />
-          </li>
-        }
-      </ul>
+          </span>
+        </ng-template>
+        <ng-template app-cell="members" let-row="row">
+          @if (projectOf(row.id); as p) {
+            <app-avatar-stack [members]="p.members" [extra]="p.extra" />
+          }
+        </ng-template>
+      </app-data-table>
       <app-pagination [active]="page" (pageChange)="page = $event" />
     </section>
   </div>

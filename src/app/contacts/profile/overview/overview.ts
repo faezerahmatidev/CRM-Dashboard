@@ -1,7 +1,8 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DashPage } from '../../../shared/dash-page/dash-page';
-import { SortControl } from '../../../shared/sort-control/sort-control';
+import { ViewToolbar } from '../../../shared/view-toolbar/view-toolbar';
+import { ViewCard } from '../../../shared/view-card/view-card';
 import { UserAvatar } from '../../../shared/user-avatar/user-avatar';
 import { Fab } from '../../../shared/fab/fab';
 import { ProfileSidebar } from '../../profile-sidebar';
@@ -10,7 +11,7 @@ import { TaskFilter, TasksStore } from '../../../tasks/tasks-store';
 @Component({
   selector: 'app-profile-overview',
   standalone: true,
-  imports: [FormsModule, DashPage, ProfileSidebar, SortControl, UserAvatar, Fab],
+  imports: [FormsModule, DashPage, ProfileSidebar, ViewToolbar, ViewCard, UserAvatar, Fab],
   templateUrl: './overview.html',
   styleUrl: './overview.scss',
 })
