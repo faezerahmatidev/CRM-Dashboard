@@ -1,0 +1,46 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-product-panel />
+  </aside>
+
+  <div page-main class="dash-main">
+    <div class="item-grid">
+      <section class="dash-card sales-card">
+        <h3 class="dash-card-title">Latest Sales</h3>
+        <app-data-table
+          [columns]="columns"
+          [rows]="rows()"
+          [grid]="grid"
+          [selectable]="false"
+          (open)="store.openSale()"
+          (edit)="store.openSale()"
+        />
+        <app-pagination [active]="page" (pageChange)="page = $event" />
+      </section>
+
+      <div class="item-side">
+        <section class="dash-card">
+          <div class="dash-card-head">
+            <h3 class="dash-card-title">Income Breakdown</h3>
+            <app-card-tabs [options]="['Day', 'Week', 'Month']" [(active)]="breakdownPeriod" />
+          </div>
+          <app-income-donut />
+        </section>
+
+        <section class="dash-card">
+          <div class="dash-card-head">
+            <h3 class="dash-card-title">Income Details</h3>
+            <app-card-tabs [options]="['Day', 'Week', 'Month']" [(active)]="period" />
+          </div>
+          <p class="income-total">$142.000 <span>Total income</span></p>
+          <app-income-chart />
+          <div class="income-foot">
+            <span><b>$342.000</b><span>Total sales</span></span>
+            <span><b>$200.000</b><span>Spendings</span></span>
+            <span><b>$142.000</b><span>Income</span></span>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
