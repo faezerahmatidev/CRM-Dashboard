@@ -8,6 +8,7 @@ import { Component, Input } from '@angular/core';
     <span
       class="thumb"
       [style.background]="palette"
+      [style.color]="color"
       [style.width.px]="size"
       [style.height.px]="size"
       [style.border-radius.px]="radius"
@@ -34,6 +35,7 @@ import { Component, Input } from '@angular/core';
 export class CatalogThumb {
   @Input() icon: 'laptop' | 'audio' | 'cube' = 'laptop';
   @Input() palette = 'linear-gradient(135deg,#5e81f4,#9698d6)';
+  @Input() color = '#fff';
   @Input() size = 40;
   @Input() radius = 10;
   @Input() label = '';
