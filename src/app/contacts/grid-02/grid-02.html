@@ -4,14 +4,15 @@
   </aside>
 
   <div page-main class="dash-main">
-    <section class="dash-card contacts-card">
-      <div class="contacts-toolbar">
-        <app-view-toggle mode="grid" (modeChange)="onViewChange($event)" />
-        <app-sort-control prefix="SORT:" [value]="store.sortAsc() ? 'A-Z' : 'Z-A'" (toggled)="store.toggleSort()" />
-      </div>
+    <section class="dash-card" app-view-card>
+      <app-view-toolbar
+        mode="grid"
+        (modeChange)="onViewChange($event)"
+        [sortValue]="store.sortAsc() ? 'A-Z' : 'Z-A'"
+        (sortToggle)="store.toggleSort()"
+      />
 
-      <div class="grid-scroll">
-        <div class="ccards">
+      <app-card-grid>
           @for (c of store.inGroup('B'); track c.id) {
             <article class="ccard" (click)="store.openDetails(c)" (keyup.enter)="store.openDetails(c)" tabindex="0">
               <span class="rate-badge">${{ c.rate }}.00</span>
@@ -35,8 +36,7 @@
               </div>
             </article>
           }
-        </div>
-      </div>
+      </app-card-grid>
       <app-pagination [active]="store.page()" (pageChange)="store.setPage($event)" />
     </section>
   </div>

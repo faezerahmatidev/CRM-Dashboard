@@ -4,29 +4,34 @@
   </aside>
 
   <div page-main class="dash-main">
-    <section class="dash-card contacts-card">
-      <div class="contacts-toolbar">
-        <app-view-toggle mode="list" (modeChange)="onViewChange($event)" />
-        <app-sort-control prefix="SORT:" [value]="store.sortAsc() ? 'A-Z' : 'Z-A'" (toggled)="store.toggleSort()" />
-      </div>
-
-      <div class="chead">
-        <span>Name</span><span>Email</span><span>Phone</span><span>Rate</span><span>Position</span>
-      </div>
-      <ul class="crows">
-        @for (c of store.inGroup('A'); track c.id) {
-          <li (click)="store.openDetails(c)" (keyup.enter)="store.openDetails(c)" tabindex="0">
-            <span class="c-main">
+    <section class="dash-card" app-view-card>
+      <app-view-toolbar
+        mode="list"
+        (modeChange)="onViewChange($event)"
+        [sortValue]="store.sortAsc() ? 'A-Z' : 'Z-A'"
+        (sortToggle)="store.toggleSort()"
+      />
+      <app-data-table
+        [columns]="columns"
+        [rows]="rows()"
+        [grid]="grid"
+        sortKey="person"
+        [sortDir]="store.sortAsc() ? 'asc' : 'desc'"
+        [selectable]="false"
+        (sortChange)="store.toggleSort()"
+        (open)="openById($event)"
+        (edit)="openById($event)"
+        (remove)="store.remove($event)"
+      >
+        <ng-template app-cell="person" let-cell let-row="row">
+          <span class="c-person">
+            @if (contactOf(row.id); as c) {
               <app-contact-avatar [initials]="c.member.initials" [color]="c.member.color" [size]="44" [radius]="12" />
-              <b>{{ nameOf(c) }}</b>
-            </span>
-            <span class="c-stat">{{ c.email }}</span>
-            <span class="c-stat">{{ c.phone }}</span>
-            <span class="c-stat rate"><b>${{ c.rate }} / hr</b></span>
-            <span class="tag-pill">{{ c.tag }}</span>
-          </li>
-        }
-      </ul>
+            }
+            <b>{{ cell.text }}</b>
+          </span>
+        </ng-template>
+      </app-data-table>
       <app-pagination [active]="store.page()" (pageChange)="store.setPage($event)" />
     </section>
   </div>

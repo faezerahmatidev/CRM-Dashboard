@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { DashPage } from '../../../shared/dash-page/dash-page';
 import { CardTabs } from '../../../shared/card-tabs/card-tabs';
 import { ProfileSidebar } from '../../profile-sidebar';
-import { IncomeChart } from '../../income-chart';
+import { IncomeChart } from '../../../shared/income-chart/income-chart';
 
 interface Invoice {
   label: string;

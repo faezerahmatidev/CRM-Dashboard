@@ -1,0 +1,139 @@
+.tbl-wrap {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.tbl { min-width: 720px; }
+
+.thead,
+.trow {
+  display: grid;
+  align-items: center;
+  gap: 12px;
+}
+
+.thead {
+  font-size: 10.5px;
+  color: var(--primary-grey);
+  padding: 10px 14px 10px 0;
+}
+
+.hlabel { white-space: nowrap; }
+
+.hbtn {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10.5px;
+  color: var(--primary-grey);
+  padding: 0;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.hbtn:hover { color: var(--primary); }
+
+.hbtn svg {
+  width: 12px;
+  height: 12px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.tbody {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 8px;
+}
+
+.trow {
+  border: 1px solid var(--outline);
+  border-radius: 12px;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.trow:focus { outline: 1.5px solid var(--primary); outline-offset: 2px; }
+
+.check-cell { display: grid; place-items: center; }
+
+.check-cell input {
+  width: 17px;
+  height: 17px;
+  accent-color: var(--primary);
+  cursor: pointer;
+}
+
+.c-product {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.c-titles {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.c-titles b,
+.c-text b,
+.c-num b,
+.c-price {
+  font-size: 12px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.c-titles span,
+.c-text span,
+.c-num span {
+  font-size: 10px;
+  color: var(--primary-grey);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.c-text, .c-num {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.pill {
+  font-size: 10.5px;
+  font-weight: 700;
+  border-radius: 7px;
+  padding: 8px 0;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.tone-grey { color: var(--primary-grey); background: var(--bg-light); }
+.tone-blue { color: var(--primary); background: var(--btn-rest-bg); }
+.tone-red { color: #f0566b; background: #ffe9ec; }
+.tone-green { color: #34b26b; background: #e4f8ec; }
+.tone-yellow { color: #d99a2b; background: #fdf3e0; }
+
+.actions { display: grid; place-items: center; }
+
+.tempty {
+  text-align: center;
+  color: var(--primary-grey);
+  font-size: 12px;
+  padding: 24px 0;
+}

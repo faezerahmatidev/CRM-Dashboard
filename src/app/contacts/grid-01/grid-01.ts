@@ -1,8 +1,10 @@
 import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { DashPage } from '../../shared/dash-page/dash-page';
-import { ViewToggle, ProjectViewMode } from '../../shared/view-toggle/view-toggle';
-import { SortControl } from '../../shared/sort-control/sort-control';
+import { ViewToolbar } from '../../shared/view-toolbar/view-toolbar';
+import { ViewCard } from '../../shared/view-card/view-card';
+import { CardGrid } from '../../shared/card-grid/card-grid';
+import { ProjectViewMode } from '../../shared/view-toggle/view-toggle';
 import { Pagination } from '../../shared/pagination/pagination';
 import { ContactsSidebar } from '../contacts-sidebar';
 import { ContactAvatar } from '../contact-avatar';
@@ -12,7 +14,7 @@ import { ContactsStore } from '../contacts-store';
 @Component({
   selector: 'app-contacts-grid-01',
   standalone: true,
-  imports: [DashPage, ContactsSidebar, ContactAvatar, ViewToggle, SortControl, Pagination],
+  imports: [DashPage, ContactsSidebar, ContactAvatar, ViewToolbar, ViewCard, CardGrid, Pagination],
   templateUrl: './grid-01.html',
   styleUrl: './grid-01.scss',
 })

@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { PanelHeader } from '../shared/panel-header/panel-header';
-import { ConversionDonut } from './conversion-donut';
+import { RingsChart } from '../shared/rings-chart/rings-chart';
 import { ConversionLines } from './conversion-lines';
 
 export interface OverviewStat {
@@ -14,7 +14,7 @@ export interface OverviewStat {
 @Component({
   selector: 'app-contacts-sidebar',
   standalone: true,
-  imports: [PanelHeader, ConversionDonut, ConversionLines],
+  imports: [PanelHeader, RingsChart, ConversionLines],
   template: `
     <app-panel-header logo="C" title="CRAFTUI LLC" sub="8484 Ross Wells" />
 
@@ -34,7 +34,7 @@ export interface OverviewStat {
     </section>
 
     @if (chart === 'donut') {
-      <app-conversion-donut />
+      <app-rings-chart />
     } @else {
       <section class="conversion">
         <app-conversion-lines />

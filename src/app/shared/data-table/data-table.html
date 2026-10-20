@@ -1,0 +1,94 @@
+<div class="tbl-wrap">
+  <div class="tbl">
+    <div class="thead" [style.grid-template-columns]="grid" role="row">
+      @if (selectable) {
+        <span class="check-cell" aria-hidden="true"></span>
+      }
+      @for (c of columns; track c.key) {
+        @if (c.sortable) {
+          <button
+            type="button"
+            class="hbtn"
+            (click)="headerClick(c)"
+            [attr.aria-sort]="c.key === sortKey ? (sortDir === 'asc' ? 'ascending' : 'descending') : 'none'"
+          >
+            {{ c.label }}
+            <svg viewBox="0 0 24 24"><path d="M8 4v13M5.5 14.5 8 17l2.5-2.5M16 20V7M13.5 9.5 16 7l2.5 2.5" /></svg>
+          </button>
+        } @else {
+          <span class="hlabel">{{ c.label }}</span>
+        }
+      }
+      <span aria-hidden="true"></span>
+    </div>
+
+    @if (!rows.length) {
+      <p class="tempty">{{ emptyText }}</p>
+    }
+
+    <ul class="tbody">
+      @for (r of rows; track r.id) {
+        <li
+          class="trow"
+          [style.grid-template-columns]="grid"
+          (click)="open.emit(r.id)"
+          (keyup.enter)="open.emit(r.id)"
+          tabindex="0"
+        >
+          @if (selectable) {
+            <span class="check-cell" (click)="$event.stopPropagation()">
+              <input
+                type="checkbox"
+                [checked]="!!r.selected"
+                (change)="onCheck(r.id, $any($event.target).checked)"
+                [attr.aria-label]="'Select row'"
+              />
+            </span>
+          }
+          @for (c of columns; track c.key) {
+            @if (r.cells[c.key]; as cell) {
+              @if ((c.kind ?? 'text') === 'custom' && templateFor(c.key); as tpl) {
+                <ng-container *ngTemplateOutlet="tpl; context: { $implicit: cell, row: r }" />
+              } @else {
+              @switch (c.kind ?? 'text') {
+                @case ('product') {
+                  <span class="c-product">
+                    <app-catalog-thumb
+                      [icon]="cell.icon ?? 'laptop'"
+                      [palette]="cell.palette ?? ''"
+                      [size]="40"
+                      [radius]="10"
+                      [label]="cell.text"
+                    />
+                    <span class="c-titles"><b>{{ cell.text }}</b><span>{{ cell.sub }}</span></span>
+                  </span>
+                }
+                @case ('number') {
+                  <span class="c-num"><b>{{ cell.text }}</b><span>{{ cell.sub }}</span></span>
+                }
+                @case ('rating') {
+                  <app-rating-stars [value]="cell.rating ?? cell.text" mode="row" />
+                }
+                @case ('price') {
+                  <b class="c-price">{{ cell.text }}</b>
+                }
+                @case ('pill') {
+                  <span class="pill tone-{{ cell.tone ?? 'grey' }}">{{ cell.text }}</span>
+                }
+                @default {
+                  <span class="c-text"><b>{{ cell.text }}</b>@if (cell.sub) {<span>{{ cell.sub }}</span>}</span>
+                }
+              }
+              }
+            } @else {
+              <span></span>
+            }
+          }
+          <span class="actions" (click)="$event.stopPropagation()">
+            <app-dots-menu (edit)="edit.emit(r.id)" (remove)="remove.emit(r.id)" />
+          </span>
+        </li>
+      }
+    </ul>
+  </div>
+</div>

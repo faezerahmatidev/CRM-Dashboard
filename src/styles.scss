@@ -266,6 +266,13 @@ button {
   min-width: 0;
 }
 
+/* Shared by every dashboard view's left panel (identical in all views). */
+.info-panel {
+  gap: 16px;
+  padding: 18px 16px;
+  overflow: visible;
+}
+
 .dash-card-head {
   display: flex;
   align-items: center;
