@@ -1,0 +1,62 @@
+@if (open) {
+  <div class="modal-overlay" (click)="close()">
+    <div #dialog class="modal-card" role="dialog" aria-label="New conversation" tabindex="-1" (click)="$event.stopPropagation()" (keydown.tab)="trapTab($event)">
+      <div class="modal-top">
+        <button class="draft-toggle" type="button" [class.on]="saveDraft" (click)="saveDraft = !saveDraft" [attr.aria-pressed]="saveDraft">
+          <span class="radio"></span>
+          Save as Draft
+        </button>
+        <button class="close-btn" type="button" aria-label="More options">
+          <svg viewBox="0 0 24 24"><circle cx="6" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="18" cy="12" r="1.2"/></svg>
+        </button>
+      </div>
+
+      <label class="heading-field">
+        <input [(ngModel)]="heading" placeholder="Type your heading here" aria-label="Conversation heading" />
+        <span class="hint">Select project to assign</span>
+      </label>
+
+      <div class="meta-grid">
+        <div class="meta-cell">
+          <span class="meta-label">Add members</span>
+          <button class="add-member" type="button" aria-label="Add members">+</button>
+        </div>
+        <div class="meta-cell">
+          <span class="meta-label">Due to</span>
+          <span class="meta-pill">
+            <svg viewBox="0 0 24 24"><rect x="4.5" y="6" width="15" height="13" rx="2"/><path d="M4.5 10h15M8.5 3.5V7M15.5 3.5V7"/></svg>
+            14 Aug 2018
+          </span>
+          <span class="meta-pill">
+            <svg viewBox="0 0 24 24"><path d="M5 5.5h11.5L20 9l-3.5 3.5H5V5.5Z"/><circle cx="9" cy="9" r="1.2"/></svg>
+            Select tag
+          </span>
+        </div>
+      </div>
+
+      <label class="msg-field">
+        <span class="meta-label">Your message</span>
+        <textarea [(ngModel)]="message" rows="4" placeholder="Start typing..." aria-label="Your message"></textarea>
+      </label>
+
+      <div class="attach-block">
+        <span class="meta-label">Attachments</span>
+        <button class="upload" type="button">
+          <svg viewBox="0 0 24 24"><path d="M7 18a4.5 4.5 0 1 1 .6-8.96A5.5 5.5 0 0 1 18.3 10H18a3.5 3.5 0 0 1 .5 6.96" /><path d="M12 12v8M8.5 15.5 12 12l3.5 3.5" /></svg>
+          Upload your attachment
+        </button>
+      </div>
+
+      <div class="modal-foot">
+        <input [(ngModel)]="comment" placeholder="Add your comment" aria-label="Add your comment" />
+        <button class="icon" type="button" aria-label="Attach">
+          <svg viewBox="0 0 24 24"><path d="M21 11.5l-8.5 8.5a5.5 5.5 0 0 1-7.8-7.8L13 4a3.7 3.7 0 0 1 5.2 5.2l-8.2 8.2a1.85 1.85 0 0 1-2.6-2.6L15 7.5" /></svg>
+        </button>
+        <button class="icon" type="button" aria-label="Emoji">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M9 9.5h.01M15 9.5h.01M8.5 14.5c1 1.2 2.2 1.8 3.5 1.8s2.5-.6 3.5-1.8" /></svg>
+        </button>
+        <button class="send" type="button" (click)="send()">Send</button>
+      </div>
+    </div>
+  </div>
+}
