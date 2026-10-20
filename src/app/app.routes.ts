@@ -341,5 +341,38 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'invoices',
+    loadComponent: () =>
+      import('./invoices/invoices-layout').then((m) => m.InvoicesLayout),
+    children: [
+      { path: '', pathMatch: 'full', redirectTo: 'list-01' },
+      {
+        path: 'empty',
+        loadComponent: () => import('./invoices/empty/empty').then((m) => m.InvoicesEmpty),
+        data: { title: 'Invoices' },
+      },
+      {
+        path: 'list-01',
+        loadComponent: () => import('./invoices/list-01/list-01').then((m) => m.InvoicesList01),
+        data: { title: 'Invoices' },
+      },
+      {
+        path: 'list-02',
+        loadComponent: () => import('./invoices/list-02/list-02').then((m) => m.InvoicesList02),
+        data: { title: 'Invoices' },
+      },
+      {
+        path: 'new',
+        loadComponent: () => import('./invoices/new/invoice-new').then((m) => m.InvoiceNew),
+        data: { title: 'New Invoice' },
+      },
+      {
+        path: 'new/items',
+        loadComponent: () => import('./invoices/new/invoice-new').then((m) => m.InvoiceNewItems),
+        data: { title: 'New Invoice' },
+      },
+    ],
+  },
   { path: '**', redirectTo: 'signin' },
 ];

@@ -8,8 +8,8 @@ import { ContactAvatar } from '../../shared/contact-avatar/contact-avatar';
 import { DataTable, PillTone, TableCell, TableColumn } from '../../shared/data-table/data-table';
 import { CellDef } from '../../shared/data-table/cell-def';
 import { InvoicesSidebar } from '../invoices-sidebar';
-import { Invoice, InvoiceCategory, InvoiceFilter, InvoiceSortKey, InvoiceStatus } from '../invoices-data';
-import { InvoicesStore } from '../invoices-store';
+import { Invoice, InvoiceCategory, InvoiceFilter, InvoiceStatus } from '../invoices-data';
+import { InvoiceSortKey, InvoicesStore } from '../invoices-store';
 
 const SORT_MAP: Record<string, InvoiceSortKey> = {
   date: 'date',
