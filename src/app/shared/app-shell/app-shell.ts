@@ -3,7 +3,7 @@ import { RouterLink } from '@angular/router';
 
 export type ShellIcon =
   | 'dashboard' | 'briefcase' | 'tasks' | 'kanban' | 'files' | 'calendar'
-  | 'team' | 'messages' | 'products' | 'reports' | 'map'
+  | 'team' | 'messages' | 'products' | 'invoices' | 'reports' | 'map'
   | 'goals' | 'activity' | 'help';
 
 @Component({
