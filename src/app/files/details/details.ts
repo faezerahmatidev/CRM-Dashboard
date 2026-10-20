@@ -4,14 +4,14 @@ import { DashPage } from '../../shared/dash-page/dash-page';
 import { AvatarStack } from '../../shared/avatar-stack/avatar-stack';
 import { UserAvatar } from '../../shared/user-avatar/user-avatar';
 import { FilesSidebar } from '../files-sidebar';
-import { FileBadge } from '../file-badge';
+import { FileBadgeIcon } from '../file-badge';
 import { FILE_COMMENTS } from '../files-data';
 import { FilesStore } from '../files-store';
 
 @Component({
   selector: 'app-file-details',
   standalone: true,
-  imports: [FormsModule, DashPage, FilesSidebar, FileBadge, AvatarStack, UserAvatar],
+  imports: [FormsModule, DashPage, FilesSidebar, FileBadgeIcon, AvatarStack, UserAvatar],
   templateUrl: './details.html',
   styleUrl: './details.scss',
 })

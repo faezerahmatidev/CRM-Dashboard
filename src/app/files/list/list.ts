@@ -9,14 +9,14 @@ import { AvatarStack } from '../../shared/avatar-stack/avatar-stack';
 import { DataTable, TableCell, TableColumn } from '../../shared/data-table/data-table';
 import { CellDef } from '../../shared/data-table/cell-def';
 import { FilesSidebar } from '../files-sidebar';
-import { FileBadge } from '../file-badge';
+import { FileBadgeIcon } from '../file-badge';
 import { SharedFile } from '../files-data';
 import { FilesStore } from '../files-store';
 
 @Component({
   selector: 'app-files-list',
   standalone: true,
-  imports: [DashPage, FilesSidebar, ViewToolbar, ViewCard, Pagination, AvatarStack, DataTable, CellDef, FileBadge],
+  imports: [DashPage, FilesSidebar, ViewToolbar, ViewCard, Pagination, AvatarStack, DataTable, CellDef, FileBadgeIcon],
   templateUrl: './list.html',
   styleUrl: './list.scss',
 })

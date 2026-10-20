@@ -8,13 +8,13 @@ import { ProjectViewMode } from '../../shared/view-toggle/view-toggle';
 import { Pagination } from '../../shared/pagination/pagination';
 import { DotsMenu } from '../../shared/dots-menu/dots-menu';
 import { FilesSidebar } from '../files-sidebar';
-import { FileBadge } from '../file-badge';
+import { FileBadgeIcon } from '../file-badge';
 import { FilesStore } from '../files-store';
 
 @Component({
   selector: 'app-files-grid',
   standalone: true,
-  imports: [DashPage, FilesSidebar, ViewToolbar, ViewCard, CardGrid, Pagination, DotsMenu, FileBadge],
+  imports: [DashPage, FilesSidebar, ViewToolbar, ViewCard, CardGrid, Pagination, DotsMenu, FileBadgeIcon],
   templateUrl: './grid.html',
   styleUrl: './grid.scss',
 })

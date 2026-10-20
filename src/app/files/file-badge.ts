@@ -36,7 +36,7 @@ import type { FileBadge } from './files-data';
     }
   `],
 })
-export class FileBadge {
+export class FileBadgeIcon {
   @Input() badge!: FileBadge;
   @Input() size = 44;
   @Input() radius = 11;

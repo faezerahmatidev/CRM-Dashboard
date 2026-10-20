@@ -374,5 +374,33 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'files',
+    loadComponent: () =>
+      import('./files/files-layout').then((m) => m.FilesLayout),
+    children: [
+      { path: '', pathMatch: 'full', redirectTo: 'grid' },
+      {
+        path: 'empty',
+        loadComponent: () => import('./files/empty/empty').then((m) => m.FilesEmpty),
+        data: { title: 'File Management' },
+      },
+      {
+        path: 'grid',
+        loadComponent: () => import('./files/grid/grid').then((m) => m.FilesGrid),
+        data: { title: 'File Management' },
+      },
+      {
+        path: 'list',
+        loadComponent: () => import('./files/list/list').then((m) => m.FilesList),
+        data: { title: 'File Management' },
+      },
+      {
+        path: 'details',
+        loadComponent: () => import('./files/details/details').then((m) => m.FileDetails),
+        data: { title: 'File Management' },
+      },
+    ],
+  },
   { path: '**', redirectTo: 'signin' },
 ];
