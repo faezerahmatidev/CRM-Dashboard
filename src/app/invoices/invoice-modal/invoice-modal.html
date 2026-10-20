@@ -1,0 +1,89 @@
+@if (open && store.selected(); as inv) {
+  <div class="modal-overlay" (click)="close()">
+    <div #dialog class="modal-card" role="dialog" [attr.aria-label]="'Invoice ' + detail.number" tabindex="-1" (click)="$event.stopPropagation()" (keydown.tab)="trapTab($event)">
+      <div class="doc-grid">
+        <div class="doc-main">
+          <p class="doc-kicker">Invoice #{{ detail.number }}</p>
+
+          <div class="doc-head">
+            <span class="doc-brand">
+              <span class="brand-box">D</span>
+              <span class="brand-titles"><b>{{ detail.company }}</b><span>{{ detail.date }}</span></span>
+            </span>
+            <span class="pill tone-green">Paid</span>
+          </div>
+
+          <div class="parties">
+            <div class="party">
+              <span class="party-label">From:</span>
+              <b>{{ detail.fromName }}</b>
+              @for (l of detail.fromLines; track l) {
+                <span>{{ l }}</span>
+              }
+            </div>
+            <div class="party">
+              <span class="party-label">Bill to:</span>
+              <b>{{ detail.toName }}</b>
+              @for (l of detail.toLines; track l) {
+                <span>{{ l }}</span>
+              }
+            </div>
+          </div>
+
+          <h3>Description</h3>
+          <div class="lines-head"><span>Item</span><span>Hours</span><span>Rate</span><span>Amount</span></div>
+          <ul class="lines">
+            @for (l of lines; track l.item) {
+              <li><span>{{ l.item }}</span><span>{{ l.hours }}</span><span>{{ l.rate }}</span><b>{{ l.amount }}</b></li>
+            }
+          </ul>
+          <ul class="totals">
+            <li><span>Subtotal</span><b>{{ detail.subtotal }}</b></li>
+            <li><span>Tax 10%</span><b>{{ detail.tax }}</b></li>
+            <li class="grand"><span>Total</span><b>{{ detail.total }}</b></li>
+          </ul>
+        </div>
+
+        <div class="doc-side">
+          <button class="close-btn corner" type="button" aria-label="Close" (click)="close()">
+            <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" /></svg>
+          </button>
+          <div class="act-head">
+            <h3>Activities</h3>
+            <span class="sort-hint">
+              <svg viewBox="0 0 24 24"><path d="M4 7h12M4 12h8M4 17h5" /><path d="m17 9 3 3 3-3M20 12v7" /></svg>
+              SORT: <b>NEWEST FIRST</b>
+              <svg viewBox="0 0 24 24"><path d="m6 9.5 6 6 6-6" /></svg>
+            </span>
+          </div>
+          <ul class="acts">
+            <li>
+              <span class="act-dot"></span>
+              <span class="act-text"><b>Created invoice #{{ detail.number }}</b><span>04 Aug 2019</span></span>
+              <b class="act-amount">$1890.00</b>
+              <button class="dots-btn" type="button" aria-label="Activity options">...</button>
+            </li>
+            <li>
+              <span class="act-dot"></span>
+              <span class="act-text"><b>Set due date to 13 Nov 2019</b><span>05 May 2019</span></span>
+              <b class="act-amount">$2190.00</b>
+              <button class="dots-btn" type="button" aria-label="Activity options">...</button>
+            </li>
+            <li>
+              <span class="act-dot"></span>
+              <span class="act-text"><b>Invoice paid</b><span>04 Sep 2019</span></span>
+              <span class="paid-pill">Invoice paid</span>
+            </li>
+          </ul>
+          <div class="comment-bar">
+            <input [(ngModel)]="comment" placeholder="Add your comment" aria-label="Add your comment" />
+            <button class="icon" type="button" aria-label="Attach">
+              <svg viewBox="0 0 24 24"><path d="M21 11.5l-8.5 8.5a5.5 5.5 0 0 1-7.8-7.8L13 4a3.7 3.7 0 0 1 5.2 5.2l-8.2 8.2a1.85 1.85 0 0 1-2.6-2.6L15 7.5" /></svg>
+            </button>
+            <button class="send" type="button" (click)="comment = ''">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+}

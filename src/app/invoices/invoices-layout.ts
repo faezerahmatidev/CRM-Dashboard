@@ -13,7 +13,7 @@ import { InvoicesStore } from './invoices-store';
     <app-shell title="{{ title }}" activeIcon="invoices" actionIcon="plus" (action)="goNew()" [showBack]="showBack" (back)="goList()">
       <router-outlet />
     </app-shell>
-    <app-invoice-modal />
+    <app-invoice-modal [open]="store.selected() !== null" />
   `,
 })
 export class InvoicesLayout implements OnInit {
