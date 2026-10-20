@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, HostListener, Input, OnChanges, Output, SimpleChanges, ViewChild, inject } from '@angular/core';
-import { CatalogThumb } from '../shared/catalog-thumb/catalog-thumb';
+import { CatalogThumb } from '../../shared/catalog-thumb/catalog-thumb';
 import { PURCHASES } from '../products-data';
 import { ProductsStore } from '../products-store';
 

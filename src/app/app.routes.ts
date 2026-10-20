@@ -268,5 +268,78 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'products',
+    loadComponent: () =>
+      import('./products/products-layout').then((m) => m.ProductsLayout),
+    children: [
+      { path: '', pathMatch: 'full', redirectTo: 'list-01' },
+      {
+        path: 'empty',
+        loadComponent: () => import('./products/empty/empty').then((m) => m.ProductsEmpty),
+        data: { title: 'Products' },
+      },
+      {
+        path: 'list-01',
+        loadComponent: () => import('./products/list-01/list-01').then((m) => m.ProductsList01),
+        data: { title: 'Products' },
+      },
+      {
+        path: 'grid-01',
+        loadComponent: () => import('./products/grid-01/grid-01').then((m) => m.ProductsGrid01),
+        data: { title: 'Products' },
+      },
+      {
+        path: 'list-02',
+        loadComponent: () => import('./products/list-02/list-02').then((m) => m.ProductsList02),
+        data: { title: 'Products' },
+      },
+      {
+        path: 'grid-02',
+        loadComponent: () => import('./products/grid-02/grid-02').then((m) => m.ProductsGrid02),
+        data: { title: 'Products' },
+      },
+      {
+        path: 'item/overview',
+        loadComponent: () =>
+          import('./products/item/overview/overview').then((m) => m.ItemOverview),
+        data: { title: 'Item Overview' },
+      },
+      {
+        path: 'item/settings',
+        loadComponent: () =>
+          import('./products/item/settings/settings-layout').then((m) => m.ItemSettings),
+        data: { title: 'Item Settings' },
+        children: [
+          { path: '', pathMatch: 'full', redirectTo: 'general' },
+          {
+            path: 'general',
+            loadComponent: () =>
+              import('./products/item/settings/settings-tabs').then((m) => m.ProductSettingsGeneral),
+          },
+          {
+            path: 'description',
+            loadComponent: () =>
+              import('./products/item/settings/settings-tabs').then((m) => m.ProductSettingsDescription),
+          },
+          {
+            path: 'shipping',
+            loadComponent: () =>
+              import('./products/item/settings/settings-tabs').then((m) => m.ProductSettingsShipping),
+          },
+          {
+            path: 'discount',
+            loadComponent: () =>
+              import('./products/item/settings/settings-tabs').then((m) => m.ProductSettingsDiscount),
+          },
+          {
+            path: 'notifications',
+            loadComponent: () =>
+              import('./products/item/settings/settings-tabs').then((m) => m.ProductSettingsNotifications),
+          },
+        ],
+      },
+    ],
+  },
   { path: '**', redirectTo: 'signin' },
 ];

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CatalogThumb } from '../../../shared/catalog-thumb/catalog-thumb';
 import { Toggle } from '../../../shared/toggle/toggle';
 import { ITEM } from '../../products-data';
 
@@ -26,7 +25,7 @@ const FORM_CSS = `
 @Component({
   selector: 'app-product-settings-general',
   standalone: true,
-  imports: [FormsModule, CatalogThumb],
+  imports: [FormsModule],
   template: `
     <form class="set-form" (ngSubmit)="$event.preventDefault()">
       <div class="photos">

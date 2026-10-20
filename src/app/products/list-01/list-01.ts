@@ -8,8 +8,8 @@ import { ProjectViewMode } from '../../shared/view-toggle/view-toggle';
 import { Pagination } from '../../shared/pagination/pagination';
 import { DataTable, TableCell, TableColumn } from '../../shared/data-table/data-table';
 import { ProductsSidebar } from '../products-sidebar';
-import { Product, ProductSortKey } from '../products-data';
-import { ProductsStore } from '../products-store';
+import { Product } from '../products-data';
+import { ProductSortKey, ProductsStore } from '../products-store';
 
 const SORT_MAP: Record<string, ProductSortKey> = {
   product: 'name',
