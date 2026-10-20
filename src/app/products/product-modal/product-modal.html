@@ -1,0 +1,66 @@
+@if (open) {
+  <div class="modal-overlay" (click)="close()">
+    <div #dialog class="modal-card" role="dialog" aria-label="Create new product" tabindex="-1" (click)="$event.stopPropagation()" (keydown.tab)="trapTab($event)">
+      <div class="modal-top">
+        <span class="modal-kicker">
+          <span class="radio" aria-hidden="true"></span>
+          Create New Product
+        </span>
+        <button class="close-btn" type="button" aria-label="Close" (click)="close()">
+          <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" /></svg>
+        </button>
+      </div>
+
+      <button class="upload-box" type="button">
+        <svg viewBox="0 0 24 24"><path d="M7 18a4.5 4.5 0 1 1 .6-8.96A5.5 5.5 0 0 1 18.3 10H18a3.5 3.5 0 0 1 .5 6.96" /><path d="M12 12v8M8.5 15.5 12 12l3.5 3.5" /></svg>
+      </button>
+
+      <div class="form-grid">
+        <label class="field field-wide">
+          <span>Product's name</span>
+          <span class="field-control">
+            <input [(ngModel)]="name" placeholder="Start typing..." aria-label="Product name" />
+          </span>
+        </label>
+        <label class="field">
+          <span>Sku</span>
+          <span class="field-control">
+            <input [(ngModel)]="sku" placeholder="Start typing..." aria-label="Sku" />
+            <svg class="field-icon" viewBox="0 0 24 24"><rect x="4" y="9" width="16" height="9" rx="1.5"/><path d="M8 9V7.5A1.5 1.5 0 0 1 9.5 6h5A1.5 1.5 0 0 1 16 7.5V9M4 12.5h16" /></svg>
+          </span>
+        </label>
+        <label class="field">
+          <span>Available quantity</span>
+          <span class="field-control">
+            <input [(ngModel)]="qty" placeholder="Start typing..." aria-label="Available quantity" />
+            <svg class="field-icon" viewBox="0 0 24 24"><rect x="6.5" y="3.5" width="11" height="17" rx="2"/><path d="M9.5 7.5h5" /></svg>
+          </span>
+        </label>
+        <label class="field">
+          <span>Price</span>
+          <span class="field-control">
+            <input [(ngModel)]="price" placeholder="Start typing..." aria-label="Price" />
+            <svg class="field-icon" viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2"/><path d="M11 18h2" /></svg>
+          </span>
+        </label>
+        <label class="field">
+          <span>Category</span>
+          <span class="field-control">
+            <select [(ngModel)]="category" aria-label="Category">
+              <option>Select category</option>
+              <option>Electronics</option>
+              <option>Accessories</option>
+              <option>Digital goods</option>
+            </select>
+            <svg class="field-icon" viewBox="0 0 24 24"><path d="m6 9.5 6 6 6-6" /></svg>
+          </span>
+        </label>
+      </div>
+
+      <div class="form-actions">
+        <button class="btn btn-rest" type="button" (click)="close()">Cancel</button>
+        <button class="btn btn-primary" type="button" (click)="submit()">Add &amp; Proceed</button>
+      </div>
+    </div>
+  </div>
+}
