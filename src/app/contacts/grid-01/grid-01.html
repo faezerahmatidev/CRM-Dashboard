@@ -14,7 +14,7 @@
 
       <app-card-grid>
           @for (c of store.inGroup('A'); track c.id) {
-            <article class="ccard" (click)="store.openDetails(c)" (keyup.enter)="store.openDetails(c)" tabindex="0">
+            <article class="ccard" role="button" (click)="store.openDetails(c)" (keyup.enter)="store.openDetails(c)" tabindex="0" [attr.aria-label]="'Open details for ' + nameOf(c)">
               <button class="dots-btn card-menu" type="button" aria-label="Card options" (click)="store.openDetails(c); $event.stopPropagation()">...</button>
               <app-contact-avatar [initials]="c.member.initials" [color]="c.member.color" [size]="56" [radius]="14" />
               <b>{{ nameOf(c) }}</b>

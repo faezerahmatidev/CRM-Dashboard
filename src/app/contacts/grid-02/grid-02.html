@@ -14,7 +14,7 @@
 
       <app-card-grid>
           @for (c of store.inGroup('B'); track c.id) {
-            <article class="ccard" (click)="store.openDetails(c)" (keyup.enter)="store.openDetails(c)" tabindex="0">
+            <article class="ccard" role="button" (click)="store.openDetails(c)" (keyup.enter)="store.openDetails(c)" tabindex="0" [attr.aria-label]="'Open details for ' + nameOf(c)">
               <span class="rate-badge">${{ c.rate }}.00</span>
               <app-contact-avatar [initials]="c.member.initials" [color]="c.member.color" [size]="56" [radius]="14" />
               <b>{{ nameOf(c) }}</b>

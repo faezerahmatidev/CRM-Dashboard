@@ -12,10 +12,12 @@ import { MessagesStore } from './messages-store';
     <ul class="threads">
       @for (t of store.visible(); track t.id) {
         <li
+          role="button"
           [class.active]="t.id === store.selectedId()"
           (click)="store.select(t.id)"
           (keyup.enter)="store.select(t.id)"
           tabindex="0"
+          [attr.aria-label]="'Open conversation with ' + t.name"
         >
           <button
             class="star"

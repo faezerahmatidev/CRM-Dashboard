@@ -18,7 +18,7 @@
 
       <app-card-grid>
         @for (f of store.visible(); track f.id) {
-          <article class="fcard" (click)="openDetails(f.id)" (keyup.enter)="openDetails(f.id)" tabindex="0">
+          <article class="fcard" role="button" (click)="openDetails(f.id)" (keyup.enter)="openDetails(f.id)" tabindex="0" [attr.aria-label]="'Open details for ' + f.name">
             <span class="card-menu" (click)="$event.stopPropagation()">
               <app-dots-menu (edit)="openDetails(f.id)" (remove)="store.remove(f.id)" />
             </span>

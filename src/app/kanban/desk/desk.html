@@ -44,6 +44,7 @@
               @for (c of store.inColumn(col.key); track c.id) {
                 <li
                   class="kcard"
+                  role="button"
                   [class.dragging]="draggingId === c.id"
                   draggable="true"
                   (dragstart)="onDragStart(c.id)"
@@ -51,6 +52,7 @@
                   (click)="store.openDetails(c)"
                   (keyup.enter)="store.openDetails(c)"
                   tabindex="0"
+                  [attr.aria-label]="'Open task ' + c.title"
                 >
                   <div class="kcard-head">
                     <span class="kcard-titles">

@@ -14,10 +14,12 @@ import { Product } from './products-data';
   template: `
     <article
       class="pcard"
+      role="button"
       [class.photo-top]="variant === '02'"
       (click)="open.emit(product.id)"
       (keyup.enter)="open.emit(product.id)"
       tabindex="0"
+      [attr.aria-label]="'Open product ' + product.name"
     >
       @if (variant === '02') {
         <div class="photo" [style.background]="product.palette">

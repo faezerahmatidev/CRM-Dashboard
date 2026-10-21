@@ -18,11 +18,13 @@
           @for (cell of cells; track cell.iso) {
             <div
               class="cell"
+              role="button"
               [class.outside]="!cell.inMonth"
               [class.selected]="store.selectedDay() === cell.iso"
               (click)="store.selectDay(cell.iso)"
               (keyup.enter)="store.selectDay(cell.iso)"
               tabindex="0"
+              [attr.aria-label]="'Select day ' + cell.day"
             >
               <span class="day-num">{{ cell.day }}</span>
               @for (e of store.eventsOn(cell.iso); track e.id) {
