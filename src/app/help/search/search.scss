@@ -1,0 +1,135 @@
+.help-hero {
+  align-items: center;
+  overflow-y: auto;
+}
+
+.help-hero h2 {
+  font-size: 20px;
+  font-weight: 900;
+  margin: 26px 0 4px;
+  text-align: center;
+}
+
+.hero-sub {
+  font-size: 11px;
+  color: var(--primary-grey);
+  margin: 0 0 18px;
+  text-align: center;
+}
+
+.search-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: min(560px, 100%);
+  border-bottom: 1.5px solid var(--outline);
+  padding-bottom: 10px;
+  margin-bottom: 18px;
+}
+
+.query-label {
+  font-size: 11px;
+  color: var(--primary-grey);
+  white-space: nowrap;
+}
+
+.search-row input {
+  flex: 1;
+  border: 0;
+  outline: none;
+  background: transparent;
+  font-size: 12.5px;
+  font-family: inherit;
+  min-width: 0;
+  text-align: left;
+}
+
+.search-row .icon {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  color: var(--primary-grey);
+  display: grid;
+  place-items: center;
+  padding: 4px;
+}
+
+.search-row .icon svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+
+.faq {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.faq li { border-bottom: 1px solid var(--outline); }
+
+.qrow {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 4px;
+  font-family: inherit;
+  text-align: left;
+}
+
+.qrow b { font-size: 12.5px; }
+.faq li.open .qrow b { color: var(--primary); }
+
+.qrow svg {
+  width: 15px;
+  height: 15px;
+  flex: 0 0 15px;
+  stroke: var(--primary-grey);
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: transform 0.2s;
+}
+
+.faq li.open .qrow svg { transform: rotate(180deg); }
+
+.answer {
+  font-size: 11.5px;
+  line-height: 1.75;
+  color: var(--primary-dark);
+  margin: 0 0 18px;
+  padding: 0 4px;
+}
+
+.no-results {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+  padding: 30px 0;
+}
+
+.qmark {
+  font-size: 64px;
+  font-weight: 900;
+  color: var(--primary);
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.no-results h3 { font-size: 17px; font-weight: 900; margin: 0; }
+.no-results p { font-size: 11px; color: var(--primary-grey); margin: 0 0 12px; max-width: 420px; }
+.no-results .btn { min-width: 170px; }

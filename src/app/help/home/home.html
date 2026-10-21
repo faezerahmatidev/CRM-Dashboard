@@ -1,0 +1,40 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-help-sidebar />
+  </aside>
+
+  <div page-main class="dash-main">
+    <section class="dash-card help-hero">
+      <h2>Hello, how can we help?</h2>
+      <p class="hero-sub">Type your question or search keyword</p>
+
+      <div class="search-row">
+        <input [(ngModel)]="draft" (keyup.enter)="search()" placeholder="Start typing..." aria-label="Search help articles" />
+        <button class="icon" type="button" aria-label="Search" (click)="search()">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m15.5 15.5 4 4"/></svg>
+        </button>
+      </div>
+
+      <app-filter-tabs
+        [options]="pillOptions"
+        [active]="store.category()"
+        (activeChange)="pickCategory($event)"
+        ariaLabel="Help categories"
+      />
+
+      <div class="cat-grid">
+        @for (c of categories; track c.title) {
+          <div class="cat-col">
+            <span class="cat-art" aria-hidden="true"></span>
+            <h3>{{ c.title }}</h3>
+            <ul>
+              @for (l of c.links; track l) {
+                <li><button type="button" (click)="ask(l)">{{ l }}</button></li>
+              }
+            </ul>
+          </div>
+        }
+      </div>
+    </section>
+  </div>
+</div>

@@ -1,0 +1,43 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-help-sidebar />
+  </aside>
+
+  <div page-main class="dash-main">
+    <section class="dash-card help-hero">
+      <h2>Hello, how can we help?</h2>
+      <p class="hero-sub">Type your question or search keyword</p>
+
+      <div class="search-row">
+        <span class="query-label">{{ store.query() || 'Bank transactions' }}</span>
+        <input [(ngModel)]="draft" (keyup.enter)="search()" placeholder="Start typing..." aria-label="Search help articles" />
+        <button class="icon" type="button" aria-label="Search" (click)="search()">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m15.5 15.5 4 4"/></svg>
+        </button>
+      </div>
+
+      @if (store.results().length) {
+        <ul class="faq">
+          @for (f of store.results(); track f.id) {
+            <li [class.open]="store.expandedId() === f.id">
+              <button class="qrow" type="button" (click)="store.toggleExpanded(f.id)" [attr.aria-expanded]="store.expandedId() === f.id">
+                <b>{{ f.question }}</b>
+                <svg viewBox="0 0 24 24"><path d="m6 9.5 6 6 6-6" /></svg>
+              </button>
+              @if (store.expandedId() === f.id) {
+                <p class="answer">{{ f.answer }}</p>
+              }
+            </li>
+          }
+        </ul>
+      } @else {
+        <div class="no-results">
+          <span class="qmark" aria-hidden="true">?</span>
+          <h3>We don't have any solutions</h3>
+          <p>Try to upload more files to your storage or create a new shared folder from your desktop</p>
+          <button class="btn btn-primary" type="button" (click)="createTicket()">Create a Ticket</button>
+        </div>
+      }
+    </section>
+  </div>
+</div>
