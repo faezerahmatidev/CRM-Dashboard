@@ -1,8 +1,13 @@
-import { Injectable, effect, signal } from '@angular/core';
+import { Injectable, computed, effect, signal } from '@angular/core';
+import { hasStringKey, loadList, saveList } from '../shared/storage/storage';
 import { FAQS, TICKETS, Ticket } from './help-data';
 
 function clone(list: Ticket[]): Ticket[] {
   return list.map((t) => ({ ...t }));
+}
+
+function seedTickets(): Ticket[] {
+  return clone(TICKETS);
 }
 
 /** Help center state: FAQ search, tickets and the new-ticket dialog. */
@@ -32,40 +37,27 @@ export class HelpStore {
   readonly modalOpen = this._modalOpen.asReadonly();
 
   constructor() {
-    effect(() => {
-      try {
-        localStorage.setItem(HelpStore.STORAGE_KEY, JSON.stringify(this._tickets()));
-      } catch {
-        // Storage unavailable (private mode) — keep in-memory state.
-      }
-    });
+    effect(() => saveList(HelpStore.STORAGE_KEY, this._tickets()));
   }
 
   private static load(): Ticket[] {
-    try {
-      const raw = localStorage.getItem(HelpStore.STORAGE_KEY);
-      if (!raw) return clone(TICKETS);
-      const parsed = JSON.parse(raw) as Ticket[];
-      return Array.isArray(parsed) && parsed.length ? parsed : clone(TICKETS);
-    } catch {
-      return clone(TICKETS);
-    }
+    return loadList(HelpStore.STORAGE_KEY, seedTickets, hasStringKey('id'));
   }
 
-  results(): typeof FAQS {
+  readonly results = computed((): typeof FAQS => {
     const q = this._query().trim().toLowerCase();
     if (!q) return FAQS;
     return FAQS.filter(
       (f) => f.question.toLowerCase().includes(q) || f.answer.toLowerCase().includes(q),
     );
-  }
+  });
 
-  visibleTickets(): Ticket[] {
+  readonly visibleTickets = computed((): Ticket[] => {
     const asc = this._sortAsc();
     return [...this._tickets()].sort((a, b) =>
       asc ? a.number.localeCompare(b.number) : b.number.localeCompare(a.number),
     );
-  }
+  });
 
   setQuery(q: string): void {
     this._query.set(q);

@@ -1,8 +1,13 @@
 import { Injectable, effect, signal } from '@angular/core';
+import { hasStringKey, loadList, saveList } from '../shared/storage/storage';
 import { CONTACTS, Contact, ContactGroup, blankContact } from './contacts-data';
 
 function clone(contacts: Contact[]): Contact[] {
   return contacts.map((c) => ({ ...c, member: { ...c.member } }));
+}
+
+function seedContacts(): Contact[] {
+  return clone(CONTACTS);
 }
 
 /** Contacts state shared by the list/grid views and the contact dialog. */
@@ -27,24 +32,11 @@ export class ContactsStore {
   readonly selected = this._selected.asReadonly();
 
   constructor() {
-    effect(() => {
-      try {
-        localStorage.setItem(ContactsStore.STORAGE_KEY, JSON.stringify(this._contacts()));
-      } catch {
-        // Storage unavailable (private mode) — keep in-memory state.
-      }
-    });
+    effect(() => saveList(ContactsStore.STORAGE_KEY, this._contacts()));
   }
 
   private static load(): Contact[] {
-    try {
-      const raw = localStorage.getItem(ContactsStore.STORAGE_KEY);
-      if (!raw) return clone(CONTACTS);
-      const parsed = JSON.parse(raw) as Contact[];
-      return Array.isArray(parsed) && parsed.length ? parsed : clone(CONTACTS);
-    } catch {
-      return clone(CONTACTS);
-    }
+    return loadList(ContactsStore.STORAGE_KEY, seedContacts, hasStringKey('id'));
   }
 
   inGroup(group: ContactGroup): Contact[] {

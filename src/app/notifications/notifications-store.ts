@@ -1,4 +1,5 @@
-import { Injectable, effect, signal } from '@angular/core';
+import { Injectable, computed, effect, signal } from '@angular/core';
+import { hasStringKey, loadList, saveList } from '../shared/storage/storage';
 import { POSTS, Post } from './notifications-data';
 
 function clone(list: Post[]): Post[] {
@@ -7,6 +8,10 @@ function clone(list: Post[]): Post[] {
     member: { ...p.member },
     comments: p.comments.map((c) => ({ ...c, member: { ...c.member } })),
   }));
+}
+
+function seedPosts(): Post[] {
+  return clone(POSTS);
 }
 
 /** Notifications feed state: newest-first sort and per-post comments. */
@@ -21,32 +26,19 @@ export class NotificationsStore {
   readonly newestFirst = this._newestFirst.asReadonly();
 
   constructor() {
-    effect(() => {
-      try {
-        localStorage.setItem(NotificationsStore.STORAGE_KEY, JSON.stringify(this._posts()));
-      } catch {
-        // Storage unavailable (private mode) — keep in-memory state.
-      }
-    });
+    effect(() => saveList(NotificationsStore.STORAGE_KEY, this._posts()));
   }
 
   private static load(): Post[] {
-    try {
-      const raw = localStorage.getItem(NotificationsStore.STORAGE_KEY);
-      if (!raw) return clone(POSTS);
-      const parsed = JSON.parse(raw) as Post[];
-      return Array.isArray(parsed) && parsed.length ? parsed : clone(POSTS);
-    } catch {
-      return clone(POSTS);
-    }
+    return loadList(NotificationsStore.STORAGE_KEY, seedPosts, hasStringKey('id'));
   }
 
-  visible(): Post[] {
+  readonly visible = computed((): Post[] => {
     const newest = this._newestFirst();
     return [...this._posts()].sort((a, b) =>
       newest ? b.stamp.localeCompare(a.stamp) : a.stamp.localeCompare(b.stamp),
     );
-  }
+  });
 
   toggleSort(): void {
     this._newestFirst.update((v) => !v);
