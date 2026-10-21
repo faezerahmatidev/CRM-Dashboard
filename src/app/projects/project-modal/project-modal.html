@@ -27,7 +27,7 @@
             <ul class="member-picker">
               @for (m of roster; track m.initials) {
                 <li>
-                  <button type="button" [class.picked]="isAssigned(m)" (click)="toggleAssignee(m)">
+                  <button type="button" [class.picked]="isAssigned(m)" (click)="toggleAssignee(m)" [attr.aria-label]="'Assign ' + m.initials" [attr.aria-pressed]="isAssigned(m)">
                     <app-user-avatar [initials]="m.initials" [color]="m.color" [size]="26" />
                     <span class="pick-check">{{ isAssigned(m) ? '✓' : '' }}</span>
                   </button>

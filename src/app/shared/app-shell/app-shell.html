@@ -70,6 +70,7 @@
         <button class="icon-btn" type="button" aria-label="Search">
           <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6"/><path d="m15.5 15.5 4 4"/></svg>
         </button>
+        @if (showAction) {
         <button class="icon-btn" type="button" [attr.aria-label]="actionIcon === 'plus' ? 'Add new' : 'Account'" (click)="action.emit()">
           @if (actionIcon === 'plus') {
             <svg viewBox="0 0 24 24"><path d="M12 5.5v13M5.5 12h13"/></svg>
@@ -77,6 +78,7 @@
             <svg viewBox="0 0 24 24"><circle cx="12" cy="8.5" r="3.2"/><path d="M5.5 19.5c1.4-3 3.7-4.5 6.5-4.5s5.1 1.5 6.5 4.5"/></svg>
           }
         </button>
+        }
       </div>
     </header>
     <div class="shell-content">

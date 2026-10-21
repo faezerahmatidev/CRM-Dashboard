@@ -20,6 +20,8 @@ export class AppShell {
   @Input() activeIcon: ShellIcon = 'dashboard';
   /** Topbar action button glyph. */
   @Input() actionIcon: 'user' | 'plus' = 'user';
+  /** Hide the topbar action button when the section has no create action. */
+  @Input() showAction = true;
   /** Show a back button before the title. */
   @Input() showBack = false;
   @Output() action = new EventEmitter<void>();

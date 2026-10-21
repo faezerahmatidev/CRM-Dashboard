@@ -10,7 +10,7 @@ import { NotificationsStore } from './notifications-store';
   standalone: true,
   imports: [RouterOutlet, AppShell],
   template: `
-    <app-shell title="{{ title }}" activeIcon="activity">
+    <app-shell title="{{ title }}" activeIcon="activity" [showAction]="false">
       <router-outlet />
     </app-shell>
   `,

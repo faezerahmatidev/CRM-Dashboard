@@ -9,7 +9,7 @@ import { AppShell } from '../shared/app-shell/app-shell';
   standalone: true,
   imports: [RouterOutlet, AppShell],
   template: `
-    <app-shell title="{{ title }}" activeIcon="reports">
+    <app-shell title="{{ title }}" activeIcon="reports" [showAction]="false">
       <router-outlet />
     </app-shell>
   `,
