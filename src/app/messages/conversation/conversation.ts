@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DashPage } from '../../shared/dash-page/dash-page';
 import { SortControl } from '../../shared/sort-control/sort-control';
+import { NewButton } from '../../shared/new-button/new-button';
 import { AvatarStack } from '../../shared/avatar-stack/avatar-stack';
 import { UserAvatar } from '../../shared/user-avatar/user-avatar';
 import { MessagesSidebar } from '../messages-sidebar';
@@ -13,7 +14,7 @@ import { members } from '../../shared/avatar';
 @Component({
   selector: 'app-messages-conversation',
   standalone: true,
-  imports: [FormsModule, DashPage, MessagesSidebar, ThreadList, UserAvatar, SortControl, AvatarStack],
+  imports: [FormsModule, DashPage, MessagesSidebar, ThreadList, UserAvatar, SortControl, AvatarStack, NewButton],
   templateUrl: './conversation.html',
   styleUrl: './conversation.scss',
 })

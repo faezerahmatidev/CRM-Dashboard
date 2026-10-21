@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DashPage } from '../../shared/dash-page/dash-page';
 import { SortControl } from '../../shared/sort-control/sort-control';
+import { NewButton } from '../../shared/new-button/new-button';
 import { AvatarStack } from '../../shared/avatar-stack/avatar-stack';
 import { MessagesSidebar } from '../messages-sidebar';
 import { ThreadList } from '../thread-list';
@@ -12,7 +13,7 @@ import { members } from '../../shared/avatar';
 @Component({
   selector: 'app-messages-media',
   standalone: true,
-  imports: [FormsModule, DashPage, MessagesSidebar, ThreadList, SortControl, AvatarStack],
+  imports: [FormsModule, DashPage, MessagesSidebar, ThreadList, SortControl, AvatarStack, NewButton],
   templateUrl: './media.html',
   styleUrl: './media.scss',
 })

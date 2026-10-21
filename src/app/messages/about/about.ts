@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { DashPage } from '../../shared/dash-page/dash-page';
 import { SortControl } from '../../shared/sort-control/sort-control';
+import { NewButton } from '../../shared/new-button/new-button';
 import { AvatarStack } from '../../shared/avatar-stack/avatar-stack';
 import { UserAvatar } from '../../shared/user-avatar/user-avatar';
 import { MessagesSidebar } from '../messages-sidebar';
@@ -16,7 +17,7 @@ interface CheckRow {
 @Component({
   selector: 'app-messages-about',
   standalone: true,
-  imports: [DashPage, MessagesSidebar, ThreadList, UserAvatar, SortControl, AvatarStack],
+  imports: [DashPage, MessagesSidebar, ThreadList, UserAvatar, SortControl, AvatarStack, NewButton],
   templateUrl: './about.html',
   styleUrl: './about.scss',
 })

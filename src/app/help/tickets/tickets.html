@@ -1,0 +1,43 @@
+<div class="dash-grid" app-dash-page>
+  <aside page-info class="info-panel">
+    <app-tickets-sidebar />
+    <section class="help-card">
+      <span class="help-icon" aria-hidden="true">?</span>
+      <span class="help-text">
+        <b>Do you still need our help?</b>
+        <span>Send your request via email</span>
+      </span>
+      <button class="btn btn-primary" type="button">Contact Us</button>
+    </section>
+  </aside>
+
+  <div page-main class="dash-main">
+    <section class="dash-card tickets-card" app-view-card>
+      <app-view-toolbar
+        [mode]="null"
+        [sortValue]="store.sortAsc() ? 'A-Z' : 'Z-A'"
+        (sortToggle)="store.toggleSort()"
+      >
+        <ng-container toolbar-start>
+          <app-new-button label="NEW TICKET" (pressed)="store.openNew()" />
+        </ng-container>
+        <ng-container toolbar-end>
+          <app-actions-button />
+        </ng-container>
+      </app-view-toolbar>
+
+      <app-data-table
+        [columns]="columns"
+        [rows]="rows()"
+        [grid]="grid"
+        (selectChange)="store.toggleCheck($event.id, $event.checked)"
+        (remove)="store.remove($event)"
+      />
+      <app-pagination [active]="store.page()" (pageChange)="store.setPage($event)" />
+
+      <app-fab aria-label="Reload tickets">
+        <svg viewBox="0 0 24 24"><path d="M20 12a8 8 0 1 1-2.3-5.6M20 3.5V8h-4.5" /></svg>
+      </app-fab>
+    </section>
+  </div>
+</div>
