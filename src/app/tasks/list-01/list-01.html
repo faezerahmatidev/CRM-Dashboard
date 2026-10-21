@@ -53,7 +53,7 @@
         <app-filter-tabs
           [options]="filterOptions"
           [active]="store.filter()"
-          (activeChange)="setFilter($any($event))"
+          (activeChange)="setFilter($event)"
           ariaLabel="Task filter"
         />
         </ng-container>

@@ -5,7 +5,7 @@ import { PanelHeader } from '../../shared/panel-header/panel-header';
 import { ConversionBars } from '../../dashboard/widgets/conversion-bars';
 import { ViewToolbar } from '../../shared/view-toolbar/view-toolbar';
 import { ViewCard } from '../../shared/view-card/view-card';
-import { FilterTabs } from '../../shared/filter-tabs/filter-tabs';
+import { FilterOption, FilterTabs } from '../../shared/filter-tabs/filter-tabs';
 import { UserAvatar } from '../../shared/user-avatar/user-avatar';
 import { Fab } from '../../shared/fab/fab';
 import { TASK_OVERVIEW } from '../tasks-data';
@@ -23,10 +23,10 @@ export class TasksList01 {
 
   overview = TASK_OVERVIEW;
   draft = '';
-  filterOptions = [
-    { value: 'ALL', label: 'ALL', icon: 'list' as const },
-    { value: 'DONE', label: 'DONE', icon: 'done' as const },
-    { value: 'PENDING', label: 'PENDING', icon: 'pending' as const },
+  filterOptions: FilterOption<TaskFilter>[] = [
+    { value: 'ALL', label: 'ALL', icon: 'list' },
+    { value: 'DONE', label: 'DONE', icon: 'done' },
+    { value: 'PENDING', label: 'PENDING', icon: 'pending' },
   ];
 
   setFilter(f: TaskFilter): void {

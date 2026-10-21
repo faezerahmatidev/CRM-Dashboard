@@ -2,8 +2,8 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 export type FilterIcon = 'list' | 'done' | 'pending';
 
-export interface FilterOption {
-  value: string;
+export interface FilterOption<T extends string = string> {
+  value: T;
   label: string;
   icon?: FilterIcon;
 }
@@ -63,13 +63,13 @@ export interface FilterOption {
     .filter-tabs button.active { background: var(--primary); color: #fff; }
   `],
 })
-export class FilterTabs {
-  @Input() options: FilterOption[] = [];
-  @Input() active = '';
+export class FilterTabs<T extends string = string> {
+  @Input() options: FilterOption<T>[] = [];
+  @Input() active: T | '' = '';
   @Input() ariaLabel = 'Filter';
-  @Output() activeChange = new EventEmitter<string>();
+  @Output() activeChange = new EventEmitter<T>();
 
-  pick(value: string): void {
+  pick(value: T): void {
     this.active = value;
     this.activeChange.emit(value);
   }
