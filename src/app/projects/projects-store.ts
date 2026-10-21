@@ -1,4 +1,5 @@
 import { Injectable, effect, signal } from '@angular/core';
+import { hasStringKey, loadList, saveList } from '../shared/storage/storage';
 import { LIST_PROJECTS, Project } from './projects-data';
 
 const GRID_EXTRAS: Record<string, { complete: string; progress: number; progressColor: string; gridExtra: number }> = {
@@ -62,24 +63,11 @@ export class ProjectsStore {
   readonly editing = this._editing.asReadonly();
 
   constructor() {
-    effect(() => {
-      try {
-        localStorage.setItem(ProjectsStore.STORAGE_KEY, JSON.stringify(this._projects()));
-      } catch {
-        // Storage unavailable (private mode) — keep in-memory state.
-      }
-    });
+    effect(() => saveList(ProjectsStore.STORAGE_KEY, this._projects()));
   }
 
   private static load(): Project[] {
-    try {
-      const raw = localStorage.getItem(ProjectsStore.STORAGE_KEY);
-      if (!raw) return seed();
-      const parsed = JSON.parse(raw) as Project[];
-      return Array.isArray(parsed) && parsed.length ? parsed : seed();
-    } catch {
-      return seed();
-    }
+    return loadList(ProjectsStore.STORAGE_KEY, seed, hasStringKey('name'));
   }
 
   remove(name: string): void {

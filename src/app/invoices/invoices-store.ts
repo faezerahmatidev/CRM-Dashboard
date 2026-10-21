@@ -1,10 +1,15 @@
 import { Injectable, effect, signal } from '@angular/core';
+import { hasStringKey, loadList, saveList } from '../shared/storage/storage';
 import { INVOICES, Invoice, InvoiceFilter } from './invoices-data';
 
 export type InvoiceSortKey = 'number' | 'date' | 'customer' | 'amount';
 
 function clone(list: Invoice[]): Invoice[] {
   return list.map((i) => ({ ...i, member: { ...i.member } }));
+}
+
+function seedInvoices(): Invoice[] {
+  return clone(INVOICES);
 }
 
 function keyOf(i: Invoice, key: InvoiceSortKey): string {
@@ -36,24 +41,11 @@ export class InvoicesStore {
   readonly selected = this._selected.asReadonly();
 
   constructor() {
-    effect(() => {
-      try {
-        localStorage.setItem(InvoicesStore.STORAGE_KEY, JSON.stringify(this._invoices()));
-      } catch {
-        // Storage unavailable (private mode) — keep in-memory state.
-      }
-    });
+    effect(() => saveList(InvoicesStore.STORAGE_KEY, this._invoices()));
   }
 
   private static load(): Invoice[] {
-    try {
-      const raw = localStorage.getItem(InvoicesStore.STORAGE_KEY);
-      if (!raw) return clone(INVOICES);
-      const parsed = JSON.parse(raw) as Invoice[];
-      return Array.isArray(parsed) && parsed.length ? parsed : clone(INVOICES);
-    } catch {
-      return clone(INVOICES);
-    }
+    return loadList(InvoicesStore.STORAGE_KEY, seedInvoices, hasStringKey('id'));
   }
 
   visible(): Invoice[] {

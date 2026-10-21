@@ -1,8 +1,13 @@
 import { Injectable, effect, signal } from '@angular/core';
+import { hasStringKey, loadList, saveList } from '../shared/storage/storage';
 import { FILES, SharedFile } from './files-data';
 
 function clone(list: SharedFile[]): SharedFile[] {
   return list.map((f) => ({ ...f, badge: { ...f.badge }, shared: f.shared.map((m) => ({ ...m })) }));
+}
+
+function seedFiles(): SharedFile[] {
+  return clone(FILES);
 }
 
 /** Files state shared by the grid/list views and the upload dialog. */
@@ -26,24 +31,11 @@ export class FilesStore {
   readonly selectedId = this._selectedId.asReadonly();
 
   constructor() {
-    effect(() => {
-      try {
-        localStorage.setItem(FilesStore.STORAGE_KEY, JSON.stringify(this._files()));
-      } catch {
-        // Storage unavailable (private mode) — keep in-memory state.
-      }
-    });
+    effect(() => saveList(FilesStore.STORAGE_KEY, this._files()));
   }
 
   private static load(): SharedFile[] {
-    try {
-      const raw = localStorage.getItem(FilesStore.STORAGE_KEY);
-      if (!raw) return clone(FILES);
-      const parsed = JSON.parse(raw) as SharedFile[];
-      return Array.isArray(parsed) && parsed.length ? parsed : clone(FILES);
-    } catch {
-      return clone(FILES);
-    }
+    return loadList(FilesStore.STORAGE_KEY, seedFiles, hasStringKey('id'));
   }
 
   visible(): SharedFile[] {

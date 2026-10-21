@@ -1,10 +1,15 @@
 import { Injectable, effect, signal } from '@angular/core';
+import { hasStringKey, loadList, saveList } from '../shared/storage/storage';
 import { PRODUCTS, Product, ProductGroup } from './products-data';
 
 export type ProductSortKey = 'name' | 'sales' | 'price' | 'rating';
 
 function clone(list: Product[]): Product[] {
   return list.map((p) => ({ ...p }));
+}
+
+function seedProducts(): Product[] {
+  return clone(PRODUCTS);
 }
 
 function keyOf(p: Product, key: ProductSortKey): string {
@@ -38,24 +43,11 @@ export class ProductsStore {
   readonly saleOpen = this._saleOpen.asReadonly();
 
   constructor() {
-    effect(() => {
-      try {
-        localStorage.setItem(ProductsStore.STORAGE_KEY, JSON.stringify(this._products()));
-      } catch {
-        // Storage unavailable (private mode) — keep in-memory state.
-      }
-    });
+    effect(() => saveList(ProductsStore.STORAGE_KEY, this._products()));
   }
 
   private static load(): Product[] {
-    try {
-      const raw = localStorage.getItem(ProductsStore.STORAGE_KEY);
-      if (!raw) return clone(PRODUCTS);
-      const parsed = JSON.parse(raw) as Product[];
-      return Array.isArray(parsed) && parsed.length ? parsed : clone(PRODUCTS);
-    } catch {
-      return clone(PRODUCTS);
-    }
+    return loadList(ProductsStore.STORAGE_KEY, seedProducts, hasStringKey('id'));
   }
 
   visible(group: ProductGroup): Product[] {
