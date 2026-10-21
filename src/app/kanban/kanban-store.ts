@@ -1,4 +1,5 @@
 import { Injectable, effect, signal } from '@angular/core';
+import { hasStringKey, loadList, saveList } from '../shared/storage/storage';
 import { KanbanCard, KanbanColumn, SEED_CARDS, blankCard } from './kanban-data';
 
 function clone(cards: KanbanCard[]): KanbanCard[] {
@@ -7,6 +8,10 @@ function clone(cards: KanbanCard[]): KanbanCard[] {
     members: c.members.map((m) => ({ ...m })),
     checklist: c.checklist.map((x) => ({ ...x })),
   }));
+}
+
+function seedCards(): KanbanCard[] {
+  return clone(SEED_CARDS);
 }
 
 /** Kanban desk state shared by the board view and the card description dialog. */
@@ -28,24 +33,11 @@ export class KanbanStore {
   readonly pendingColumn = this._pendingColumn.asReadonly();
 
   constructor() {
-    effect(() => {
-      try {
-        localStorage.setItem(KanbanStore.STORAGE_KEY, JSON.stringify(this._cards()));
-      } catch {
-        // Storage unavailable (private mode) — keep in-memory state.
-      }
-    });
+    effect(() => saveList(KanbanStore.STORAGE_KEY, this._cards()));
   }
 
   private static load(): KanbanCard[] {
-    try {
-      const raw = localStorage.getItem(KanbanStore.STORAGE_KEY);
-      if (!raw) return clone(SEED_CARDS);
-      const parsed = JSON.parse(raw) as KanbanCard[];
-      return Array.isArray(parsed) && parsed.length ? parsed : clone(SEED_CARDS);
-    } catch {
-      return clone(SEED_CARDS);
-    }
+    return loadList(KanbanStore.STORAGE_KEY, seedCards, hasStringKey('id'));
   }
 
   inColumn(column: KanbanColumn): KanbanCard[] {

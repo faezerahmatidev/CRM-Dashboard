@@ -1,8 +1,13 @@
 import { Injectable, effect, signal } from '@angular/core';
+import { hasStringKey, loadList, saveList } from '../shared/storage/storage';
 import { CONVERSATIONS, Conversation } from './messages-data';
 
 function clone(list: Conversation[]): Conversation[] {
   return list.map((c) => ({ ...c, member: { ...c.member } }));
+}
+
+function seedThreads(): Conversation[] {
+  return clone(CONVERSATIONS);
 }
 
 /** Messages state shared by the list/conversation/media/about views and the compose dialog. */
@@ -26,24 +31,11 @@ export class MessagesStore {
   readonly draft = this._draft.asReadonly();
 
   constructor() {
-    effect(() => {
-      try {
-        localStorage.setItem(MessagesStore.STORAGE_KEY, JSON.stringify(this._threads()));
-      } catch {
-        // Storage unavailable (private mode) — keep in-memory state.
-      }
-    });
+    effect(() => saveList(MessagesStore.STORAGE_KEY, this._threads()));
   }
 
   private static load(): Conversation[] {
-    try {
-      const raw = localStorage.getItem(MessagesStore.STORAGE_KEY);
-      if (!raw) return clone(CONVERSATIONS);
-      const parsed = JSON.parse(raw) as Conversation[];
-      return Array.isArray(parsed) && parsed.length ? parsed : clone(CONVERSATIONS);
-    } catch {
-      return clone(CONVERSATIONS);
-    }
+    return loadList(MessagesStore.STORAGE_KEY, seedThreads, hasStringKey('id'));
   }
 
   visible(): Conversation[] {

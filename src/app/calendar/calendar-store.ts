@@ -1,4 +1,5 @@
 import { Injectable, effect, signal } from '@angular/core';
+import { hasStringKey, loadList, saveList } from '../shared/storage/storage';
 import { CalEvent, CalView, DEMO_TODAY, SEED_EVENTS, blankEvent, toISO } from './calendar-data';
 
 export interface Cursor {
@@ -9,6 +10,10 @@ export interface Cursor {
 
 function clone(events: CalEvent[]): CalEvent[] {
   return events.map((e) => ({ ...e }));
+}
+
+function seedEvents(): CalEvent[] {
+  return clone(SEED_EVENTS);
 }
 
 /** Calendar state shared by the month/week/day views and the event dialog. */
@@ -40,24 +45,11 @@ export class CalendarStore {
   readonly draftDate = this._draftDate.asReadonly();
 
   constructor() {
-    effect(() => {
-      try {
-        localStorage.setItem(CalendarStore.STORAGE_KEY, JSON.stringify(this._events()));
-      } catch {
-        // Storage unavailable (private mode) — keep in-memory state.
-      }
-    });
+    effect(() => saveList(CalendarStore.STORAGE_KEY, this._events()));
   }
 
   private static load(): CalEvent[] {
-    try {
-      const raw = localStorage.getItem(CalendarStore.STORAGE_KEY);
-      if (!raw) return clone(SEED_EVENTS);
-      const parsed = JSON.parse(raw) as CalEvent[];
-      return Array.isArray(parsed) && parsed.length ? parsed : clone(SEED_EVENTS);
-    } catch {
-      return clone(SEED_EVENTS);
-    }
+    return loadList(CalendarStore.STORAGE_KEY, seedEvents, hasStringKey('id'));
   }
 
   setView(v: CalView): void {

@@ -1,7 +1,12 @@
 import { Injectable, effect, signal } from '@angular/core';
+import { hasStringKey, loadList, saveList } from '../shared/storage/storage';
 import { SEED_TASKS, TaskItem, blankTask } from './tasks-data';
 
 export type TaskFilter = 'ALL' | 'DONE' | 'PENDING';
+
+function seedTasks(): TaskItem[] {
+  return SEED_TASKS.map((x) => ({ ...x, checklist: x.checklist.map((c) => ({ ...c })) }));
+}
 
 /** Tasks list state shared by the list view and the description / add-new dialog. */
 @Injectable({ providedIn: 'root' })
@@ -25,26 +30,11 @@ export class TasksStore {
   readonly editing = this._editing.asReadonly();
 
   constructor() {
-    effect(() => {
-      try {
-        localStorage.setItem(TasksStore.STORAGE_KEY, JSON.stringify(this._tasks()));
-      } catch {
-        // Storage unavailable (private mode) — keep in-memory state.
-      }
-    });
+    effect(() => saveList(TasksStore.STORAGE_KEY, this._tasks()));
   }
 
   private static load(): TaskItem[] {
-    try {
-      const raw = localStorage.getItem(TasksStore.STORAGE_KEY);
-      if (!raw) return SEED_TASKS.map((x) => ({ ...x, checklist: x.checklist.map((c) => ({ ...c })) }));
-      const parsed = JSON.parse(raw) as TaskItem[];
-      return Array.isArray(parsed) && parsed.length
-        ? parsed
-        : SEED_TASKS.map((x) => ({ ...x, checklist: x.checklist.map((c) => ({ ...c })) }));
-    } catch {
-      return SEED_TASKS.map((x) => ({ ...x, checklist: x.checklist.map((c) => ({ ...c })) }));
-    }
+    return loadList(TasksStore.STORAGE_KEY, seedTasks, hasStringKey('id'));
   }
 
   setFilter(f: TaskFilter): void {
