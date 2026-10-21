@@ -25,7 +25,7 @@ import { Product } from './products-data';
             <input
               type="checkbox"
               [checked]="selected"
-              (change)="selectChange.emit({ id: product.id, checked: $any($event.target).checked })"
+              (change)="onCheck($event)"
               aria-label="Select product"
             />
           </span>
@@ -39,7 +39,7 @@ import { Product } from './products-data';
           <input
             type="checkbox"
             [checked]="selected"
-            (change)="selectChange.emit({ id: product.id, checked: $any($event.target).checked })"
+            (change)="onCheck($event)"
             aria-label="Select product"
           />
         </span>
@@ -124,4 +124,9 @@ export class ProductCard {
   @Output() selectChange = new EventEmitter<{ id: string; checked: boolean }>();
   @Output() open = new EventEmitter<string>();
   @Output() menu = new EventEmitter<string>();
+
+  onCheck(event: Event): void {
+    const input = event.target as HTMLInputElement | null;
+    this.selectChange.emit({ id: this.product.id, checked: !!input?.checked });
+  }
 }

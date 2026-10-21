@@ -73,6 +73,11 @@ export class DataTable {
     if (col.sortable) this.sortChange.emit(col.key);
   }
 
+  onCheckEvent(id: string, event: Event): void {
+    const input = event.target as HTMLInputElement | null;
+    this.onCheck(id, !!input?.checked);
+  }
+
   onCheck(id: string, checked: boolean): void {
     this.selectChange.emit({ id, checked });
   }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 
 /** Green income line chart with a March $48.200 marker (profile sales Figma). */
 @Component({
@@ -28,6 +28,4 @@ import { Component, Input } from '@angular/core';
     .tip-main { font-size: 12px; font-weight: 900; fill: var(--primary-dark); }
   `],
 })
-export class IncomeChart {
-  @Input() marker = true;
-}
+export class IncomeChart {}

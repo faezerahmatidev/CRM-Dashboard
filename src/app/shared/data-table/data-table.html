@@ -41,7 +41,7 @@
               <input
                 type="checkbox"
                 [checked]="!!r.selected"
-                (change)="onCheck(r.id, $any($event.target).checked)"
+                (change)="onCheckEvent(r.id, $event)"
                 [attr.aria-label]="'Select row'"
               />
             </span>
