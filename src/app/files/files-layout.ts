@@ -1,6 +1,7 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, ActivatedRouteSnapshot, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { AppShell } from '../shared/app-shell/app-shell';
 import { UploadModal } from './upload-modal/upload-modal';
 import { FilesStore } from './files-store';
@@ -27,7 +28,7 @@ export class FilesLayout implements OnInit {
   ngOnInit(): void {
     this.updateTitle();
     this.router.events
-      .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
+      .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd), takeUntilDestroyed())
       .subscribe(() => this.updateTitle());
   }
 

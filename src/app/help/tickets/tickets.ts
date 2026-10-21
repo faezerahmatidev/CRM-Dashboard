@@ -7,7 +7,6 @@ import { ActionsButton } from '../../shared/actions-button/actions-button';
 import { Pagination } from '../../shared/pagination/pagination';
 import { Fab } from '../../shared/fab/fab';
 import { DataTable, TableCell, TableColumn } from '../../shared/data-table/data-table';
-import { CellDef } from '../../shared/data-table/cell-def';
 import { TicketsSidebar } from '../tickets-sidebar';
 import { Ticket } from '../help-data';
 import { HelpStore } from '../help-store';
@@ -15,7 +14,7 @@ import { HelpStore } from '../help-store';
 @Component({
   selector: 'app-help-tickets',
   standalone: true,
-  imports: [DashPage, TicketsSidebar, ViewToolbar, ViewCard, NewButton, ActionsButton, Pagination, Fab, DataTable, CellDef],
+  imports: [DashPage, TicketsSidebar, ViewToolbar, ViewCard, NewButton, ActionsButton, Pagination, Fab, DataTable],
   templateUrl: './tickets.html',
   styleUrl: './tickets.scss',
 })
