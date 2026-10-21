@@ -29,7 +29,8 @@ export class Reports02 {
   salesTab = 'Day';
   salesSets = YOUR_SALES_SETS;
 
-  events = SALES_EVENTS;
+  /** Reports rows are static (no dashboard navigation). */
+  staticEvents = SALES_EVENTS.map((e) => ({ ...e, link: undefined }));
 
   breakdownTab = 'Day';
 

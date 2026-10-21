@@ -5,7 +5,7 @@ export interface DashEvent {
   title: string;
   sub: string;
   value: string;
-  link: string;
+  link?: string;
 }
 
 export interface DonutSet {
