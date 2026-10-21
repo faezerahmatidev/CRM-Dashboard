@@ -20,6 +20,7 @@
           <app-thread-list />
         </div>
 
+        @if (store.selected(); as sel) {
         <div class="thread-panel">
           <h2 class="thread-title">Where To Look For Cheap Brochure Printing Services</h2>
           <p class="thread-sub">Discussion from Dribbble Presentation project</p>
@@ -32,12 +33,12 @@
             @for (m of thread; track $index) {
               @if (m.from === 'typing') {
                 <div class="row them">
-                  <app-user-avatar [initials]="store.selected().member.initials" [color]="store.selected().member.color" [size]="28" />
+                  <app-user-avatar [initials]="sel.member.initials" [color]="sel.member.color" [size]="28" />
                   <span class="typing" aria-label="Someone is typing"><i></i><i></i><i></i></span>
                 </div>
               } @else if (m.from === 'them') {
                 <div class="row them">
-                  <app-user-avatar [initials]="store.selected().member.initials" [color]="store.selected().member.color" [size]="28" />
+                  <app-user-avatar [initials]="sel.member.initials" [color]="sel.member.color" [size]="28" />
                   <span class="bubble grey">{{ m.text }}@if (m.time) {<span class="btime">{{ m.time }}</span>}</span>
                 </div>
               } @else {
@@ -51,7 +52,7 @@
               }
             }
             <div class="row them">
-              <app-user-avatar [initials]="store.selected().member.initials" [color]="store.selected().member.color" [size]="28" />
+              <app-user-avatar [initials]="sel.member.initials" [color]="sel.member.color" [size]="28" />
               <span class="typing" aria-label="Someone is typing"><i></i><i></i><i></i></span>
             </div>
           </div>
@@ -73,6 +74,9 @@
             <button class="send" type="button" (click)="store.sendDraft()">Send</button>
           </div>
         </div>
+        } @else {
+          <p class="gone">No conversations yet. Start a new one with the button above.</p>
+        }
       </div>
     </section>
   </div>

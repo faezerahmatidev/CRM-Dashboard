@@ -16,6 +16,7 @@
           <app-thread-list />
         </div>
 
+        @if (store.selected(); as sel) {
         <div class="about-panel">
           <div class="media-head">
             <button class="back" type="button" aria-label="Back to conversation">
@@ -26,11 +27,11 @@
 
           <div class="profile-hero">
             <app-user-avatar
-              [initials]="store.selected().member.initials"
-              [color]="store.selected().member.color"
+              [initials]="sel.member.initials"
+              [color]="sel.member.color"
               [size]="72"
             />
-            <h2>{{ store.selected().name }}</h2>
+            <h2>{{ sel.name }}</h2>
             <span class="hero-role">UI/UX Designer</span>
             <div class="socials">
               <button type="button" aria-label="Facebook"><b>f</b></button>
@@ -71,7 +72,7 @@
           </ul>
 
           <div class="hero-actions">
-            <a [href]="'mailto:' + store.selected().name">
+            <a [href]="'mailto:' + sel.name">
               <svg viewBox="0 0 24 24"><rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="m4.5 7.5 7.5 6 7.5-6"/></svg>
               SEND EMAIL
             </a>
@@ -85,6 +86,9 @@
             </button>
           </div>
         </div>
+        } @else {
+          <p class="gone">No conversation selected.</p>
+        }
       </div>
     </section>
   </div>

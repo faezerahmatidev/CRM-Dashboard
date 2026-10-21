@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import { DashPage } from '../../shared/dash-page/dash-page';
 import { AvatarStack } from '../../shared/avatar-stack/avatar-stack';
 import { UserAvatar } from '../../shared/user-avatar/user-avatar';
@@ -11,7 +12,7 @@ import { FilesStore } from '../files-store';
 @Component({
   selector: 'app-file-details',
   standalone: true,
-  imports: [FormsModule, DashPage, FilesSidebar, FileBadgeIcon, AvatarStack, UserAvatar],
+  imports: [FormsModule, RouterLink, DashPage, FilesSidebar, FileBadgeIcon, AvatarStack, UserAvatar],
   templateUrl: './details.html',
   styleUrl: './details.scss',
 })

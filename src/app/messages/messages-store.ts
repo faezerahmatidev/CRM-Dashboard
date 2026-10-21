@@ -53,8 +53,9 @@ export class MessagesStore {
     );
   }
 
-  selected(): Conversation {
-    return this._threads().find((c) => c.id === this._selectedId()) ?? this._threads()[0];
+  selected(): Conversation | undefined {
+    const list = this._threads();
+    return list.find((c) => c.id === this._selectedId()) ?? (list.length ? list[0] : undefined);
   }
 
   select(id: string): void {
@@ -72,7 +73,9 @@ export class MessagesStore {
   }
 
   remove(id: string): void {
-    this._threads.update((list) => list.filter((c) => c.id !== id));
+    const next = this._threads().filter((c) => c.id !== id);
+    this._threads.set(next);
+    if (id === this._selectedId() && next.length) this._selectedId.set(next[0].id);
   }
 
   setDraft(text: string): void {

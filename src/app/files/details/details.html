@@ -10,15 +10,16 @@
         <button class="dots-btn" type="button" aria-label="File options">...</button>
       </div>
 
+      @if (store.selected(); as f) {
       <div class="details-grid">
         <div class="preview-panel">
-          <app-file-badge [badge]="store.selected().badge" [size]="72" [radius]="16" [label]="store.selected().name" />
-          <b>{{ store.selected().name }}</b>
-          <span class="psize">{{ store.selected().size }}</span>
-          <app-avatar-stack [members]="store.selected().shared" [extra]="store.selected().extra" [size]="30" />
+          <app-file-badge [badge]="f.badge" [size]="72" [radius]="16" [label]="f.name" />
+          <b>{{ f.name }}</b>
+          <span class="psize">{{ f.size }}</span>
+          <app-avatar-stack [members]="f.shared" [extra]="f.extra" [size]="30" />
           <span class="ftag">
             <svg viewBox="0 0 24 24"><path d="M5 5.5h11.5L20 9l-3.5 3.5H5V5.5Z"/><circle cx="9" cy="9" r="1.2"/></svg>
-            {{ store.selected().tag }}
+            {{ f.tag }}
           </span>
         </div>
 
@@ -36,7 +37,7 @@
             @for (c of comments; track $index) {
               @if (c.from === 'them') {
                 <div class="row them">
-                  <app-user-avatar [initials]="store.selected().shared[0].initials" [color]="store.selected().shared[0].color" [size]="28" />
+                  <app-user-avatar [initials]="f.shared[0].initials" [color]="f.shared[0].color" [size]="28" />
                   <span class="bubble grey">{{ c.text }}<span class="btime">{{ c.time }}</span></span>
                 </div>
               } @else {
@@ -61,6 +62,9 @@
           </div>
         </div>
       </div>
+      } @else {
+        <p class="gone">This file is no longer available. <a routerLink="/files/grid" replaceUrl>Back to files</a></p>
+      }
     </section>
   </div>
 </div>

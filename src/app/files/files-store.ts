@@ -53,8 +53,9 @@ export class FilesStore {
     );
   }
 
-  selected(): SharedFile {
-    return this._files().find((f) => f.id === this._selectedId()) ?? this._files()[0];
+  selected(): SharedFile | undefined {
+    const list = this._files();
+    return list.find((f) => f.id === this._selectedId()) ?? (list.length ? list[0] : undefined);
   }
 
   select(id: string): void {
@@ -70,7 +71,9 @@ export class FilesStore {
   }
 
   remove(id: string): void {
-    this._files.update((list) => list.filter((f) => f.id !== id));
+    const next = this._files().filter((f) => f.id !== id);
+    this._files.set(next);
+    if (id === this._selectedId() && next.length) this._selectedId.set(next[0].id);
   }
 
   openUpload(): void {

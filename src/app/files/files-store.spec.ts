@@ -16,7 +16,7 @@ describe('FilesStore', () => {
 
   it('should seed the demo files when storage is empty', () => {
     expect(store.files().length).toBe(8);
-    expect(store.selected().id).toBe('f1');
+    expect(store.selected()?.id).toBe('f1');
   });
 
   it('should sort files A-Z and Z-A', () => {
@@ -30,12 +30,20 @@ describe('FilesStore', () => {
   it('should select files by id', () => {
     store.select('f6');
     expect(store.selectedId()).toBe('f6');
-    expect(store.selected().name).toBe('Logo and branding.ai');
+    expect(store.selected()?.name).toBe('Logo and branding.ai');
   });
 
   it('should remove files by id', () => {
     store.remove('f1');
     expect(store.files().some((f) => f.id === 'f1')).toBeFalse();
+  });
+
+  it('should reselect when the selected file is removed', () => {
+    store.remove('f1');
+    expect(store.selected()?.id).toBe('f2');
+    for (const f of store.files().map((f) => f.id)) store.remove(f);
+    expect(store.files().length).toBe(0);
+    expect(store.selected()).toBeUndefined();
   });
 
   it('should manage the upload dialog', () => {

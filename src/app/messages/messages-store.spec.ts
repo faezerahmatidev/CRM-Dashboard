@@ -16,7 +16,7 @@ describe('MessagesStore', () => {
 
   it('should seed the demo conversations when storage is empty', () => {
     expect(store.threads().length).toBe(9);
-    expect(store.selected().id).toBe('m2');
+    expect(store.selected()?.id).toBe('m2');
   });
 
   it('should sort conversations A-Z and Z-A', () => {
@@ -30,7 +30,7 @@ describe('MessagesStore', () => {
   it('should select conversations by id', () => {
     store.select('m4');
     expect(store.selectedId()).toBe('m4');
-    expect(store.selected().name).toBe('Blake Howard');
+    expect(store.selected()?.name).toBe('Blake Howard');
   });
 
   it('should toggle the star flag', () => {
@@ -42,6 +42,15 @@ describe('MessagesStore', () => {
   it('should remove conversations by id', () => {
     store.remove('m1');
     expect(store.threads().some((c) => c.id === 'm1')).toBeFalse();
+  });
+
+  it('should reselect when the selected conversation is removed', () => {
+    store.select('m1');
+    store.remove('m1');
+    expect(store.selected()?.id).toBe('m2');
+    for (const t of store.threads().map((t) => t.id)) store.remove(t);
+    expect(store.threads().length).toBe(0);
+    expect(store.selected()).toBeUndefined();
   });
 
   it('should manage the compose dialog and draft', () => {
