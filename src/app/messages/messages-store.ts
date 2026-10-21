@@ -1,4 +1,4 @@
-import { Injectable, effect, signal } from '@angular/core';
+import { Injectable, computed, effect, signal } from '@angular/core';
 import { hasStringKey, loadList, saveList } from '../shared/storage/storage';
 import { CONVERSATIONS, Conversation } from './messages-data';
 
@@ -38,12 +38,12 @@ export class MessagesStore {
     return loadList(MessagesStore.STORAGE_KEY, seedThreads, hasStringKey('id'));
   }
 
-  visible(): Conversation[] {
+  readonly visible = computed((): Conversation[] => {
     const asc = this._sortAsc();
     return [...this._threads()].sort((a, b) =>
       asc ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name),
     );
-  }
+  });
 
   selected(): Conversation | undefined {
     const list = this._threads();

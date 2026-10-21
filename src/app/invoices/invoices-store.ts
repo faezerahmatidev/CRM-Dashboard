@@ -1,4 +1,4 @@
-import { Injectable, effect, signal } from '@angular/core';
+import { Injectable, computed, effect, signal } from '@angular/core';
 import { hasStringKey, loadList, saveList } from '../shared/storage/storage';
 import { INVOICES, Invoice, InvoiceFilter } from './invoices-data';
 
@@ -48,7 +48,7 @@ export class InvoicesStore {
     return loadList(InvoicesStore.STORAGE_KEY, seedInvoices, hasStringKey('id'));
   }
 
-  visible(): Invoice[] {
+  readonly visible = computed((): Invoice[] => {
     const filter = this._filter();
     const asc = this._sortAsc();
     const key = this._sortKey();
@@ -59,7 +59,7 @@ export class InvoicesStore {
           ? keyOf(a, key).localeCompare(keyOf(b, key))
           : keyOf(b, key).localeCompare(keyOf(a, key)),
       );
-  }
+  });
 
   setFilter(f: InvoiceFilter): void {
     this._filter.set(f);

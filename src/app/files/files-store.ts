@@ -1,4 +1,4 @@
-import { Injectable, effect, signal } from '@angular/core';
+import { Injectable, computed, effect, signal } from '@angular/core';
 import { hasStringKey, loadList, saveList } from '../shared/storage/storage';
 import { FILES, SharedFile } from './files-data';
 
@@ -38,12 +38,12 @@ export class FilesStore {
     return loadList(FilesStore.STORAGE_KEY, seedFiles, hasStringKey('id'));
   }
 
-  visible(): SharedFile[] {
+  readonly visible = computed((): SharedFile[] => {
     const asc = this._sortAsc();
     return [...this._files()].sort((a, b) =>
       asc ? a.name.localeCompare(b.name) : b.name.localeCompare(a.name),
     );
-  }
+  });
 
   selected(): SharedFile | undefined {
     const list = this._files();

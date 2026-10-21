@@ -1,4 +1,4 @@
-import { Injectable, effect, signal } from '@angular/core';
+import { Injectable, computed, effect, signal } from '@angular/core';
 import { hasStringKey, loadList, saveList } from '../shared/storage/storage';
 import { SEED_TASKS, TaskItem, blankTask } from './tasks-data';
 
@@ -80,11 +80,11 @@ export class TasksStore {
     if (!open) this._editing.set(null);
   }
 
-  visible(): TaskItem[] {
+  readonly visible = computed((): TaskItem[] => {
     const f = this._filter();
     const asc = this._sortAsc();
     const filtered =
       f === 'ALL' ? [...this._tasks()] : this._tasks().filter((x) => (f === 'DONE' ? x.done : !x.done));
     return filtered.sort((a, b) => (asc ? a.title.localeCompare(b.title) : b.title.localeCompare(a.title)));
-  }
+  });
 }
