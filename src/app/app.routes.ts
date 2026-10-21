@@ -445,5 +445,33 @@ export const routes: Routes = [
       },
     ],
   },
+  {
+    path: 'help',
+    loadComponent: () =>
+      import('./help/help-layout').then((m) => m.HelpLayout),
+    children: [
+      { path: '', pathMatch: 'full', redirectTo: 'home' },
+      {
+        path: 'home',
+        loadComponent: () => import('./help/home/home').then((m) => m.HelpHome),
+        data: { title: 'Help Center' },
+      },
+      {
+        path: 'search',
+        loadComponent: () => import('./help/search/search').then((m) => m.HelpSearch),
+        data: { title: 'Help Center' },
+      },
+      {
+        path: 'tickets',
+        loadComponent: () => import('./help/tickets/tickets').then((m) => m.HelpTickets),
+        data: { title: 'Help Center' },
+      },
+      {
+        path: 'existing',
+        loadComponent: () => import('./help/existing/existing').then((m) => m.HelpExisting),
+        data: { title: 'Help Center' },
+      },
+    ],
+  },
   { path: '**', redirectTo: 'signin' },
 ];
